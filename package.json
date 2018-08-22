@@ -1,24 +1,28 @@
 {
-  "name": "whell-demo",
-  "version": "1.0.0",
-  "description": "这是一个基于vue的ui框架",
-  "main": "index.js",
+  "name": "whell",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bibi941/vue-whell-demo.git"
+  "dependencies": {
+    "vue": "^2.5.17",
+    "vuex": "^3.0.1"
   },
-  "keywords": [
-    "vue",
-    "ui",
-    "bibi"
-  ],
-  "author": "bibi",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bibi941/vue-whell-demo/issues"
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0",
+    "@vue/cli-plugin-eslint": "^3.0.0",
+    "@vue/cli-service": "^3.0.0",
+    "@vue/eslint-config-standard": "^3.0.1",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.5.17"
   },
-  "homepage": "https://github.com/bibi941/vue-whell-demo#readme"
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
