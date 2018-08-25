@@ -1,5 +1,5 @@
 <template>
-  <button class="g-button" :class="{[`icon-${iconPosition}`]:true}">
+  <button class="g-button" :class="{[`icon-${iconPosition}`]: true}">
     <svg v-if="icon" class="icon">
       <use :xlink:href="`#i-${icon}`"></use>
     </svg>
@@ -8,55 +8,26 @@
     </div>
   </button>
 </template>
-
 <script>
   export default {
     props: ['icon', 'iconPosition']
-  };
+  }
 </script>
-<style lang="scss">√
-  .g-button {
-    font-size: var(--font-size);
-    height: var(--button-height);
-    padding: 0 1.1em;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
+<style lang="scss">
+  .g-button { font-size: var(--font-size); height: var(--button-height); padding: 0 1em;
+    border-radius: var(--border-radius); border: 1px solid var(--border-color);
     background: var(--button-bg);
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
+    display: inline-flex; justify-content: center; align-items: center;
     vertical-align: middle;
-    &:hover {
-      border-color: var(--border-color-hover);
-    }
-    &:active {
-      background-color: var(--button-active-bg);
-    }
-    &:focus {
-      outline: none;
-    }
-    > .icon {
-      order: 1;
-      margin-right: 0.2em;
-      margin-left: 0;
-    }
-    > .content {
-      order: 2;
-    }
+    &:hover { border-color: var(--border-color-hover); }
+    &:active { background-color: var(--button-active-bg); }
+    &:focus { outline: none; }
+    > .content { order: 2; }
+    > .icon { order: 1; margin-right: .1em; }
+
     &.icon-right {
-      > .icon {
-        order: 2;
-        margin-left: 0.2em;
-        margin-right: 0;
-      }
-      > .content {
-        order: 1;
-      }
+      > .content { order: 1; }
+      > .icon { order: 2; margin-right: 0; margin-left: .1em;}
     }
-    //  &.icon-left{
-    //   >.icon{
-    //     order: 1;
-    //   }
-    // }
   }
 </style>

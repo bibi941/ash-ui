@@ -1,4 +1,4 @@
-#  whell   - Vue UI 组件
+# whell ——  一个Vue UI 组件
 
 作者：bibi
 
