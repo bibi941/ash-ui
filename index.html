@@ -16,7 +16,6 @@
       --color: #333;
       --border-color: #999;
       --border-color-hover: #666;
-      --border-color-hover: #666;
     }
     #app {
       margin: 20px;
@@ -33,13 +32,13 @@
   <b-button>
     按钮
   </b-button>
-  <b-button icon="settings" icon-position="left">
+  <b-button icon="settings" icon-position="left" :loading="loading1" @click="loading1=!loading1">
     按钮
   </b-button>
-  <b-button icon="settings" icon-position="right">
+  <b-button icon="settings" icon-position="right" :loading="loading2" @click="loading2=!loading2">
     按钮
   </b-button>
-  <b-button icon="download" icon-position="right">
+  <b-button icon="download" icon-position="right" :loading="loading3" @click="loading3=!loading3">
     按钮
   </b-button>
 </div>

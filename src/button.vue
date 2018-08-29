@@ -1,7 +1,7 @@
 <template>
-  <button class="b-button" :class="{[`icon-${iconPosition}`]: true}">
-    <b-icon class="icon" v-if="icon" :name="icon"></b-icon>
-    <b-icon class="loading" v-if="icon" name="loading"></b-icon>
+  <button class="b-button" :class="{[`icon-${iconPosition}`]: true}" @click="$emit('click')">
+    <b-icon class="icon" v-if="icon&&!loading" :name="icon"></b-icon>
+    <b-icon class="loading icon" v-if="loading" name="loading"></b-icon>
     <div class="content">
       <slot></slot>
     </div>
@@ -11,6 +11,10 @@
   export default {
     props: {
       icon: {},
+      loading:{
+        type: Boolean,
+        default: 'false'
+      },
       iconPosition: {
         type: String,
         default: 'left',
@@ -21,7 +25,7 @@
     }
   };
 </script>
-<style lang="scss" scoped>
+<style lang="scss" scoped type="text/scss">
   @keyframes spin {
     0% {
       transform: rotate(0deg);
