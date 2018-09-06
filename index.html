@@ -2,11 +2,17 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>轮子</title>
+  <title>ash</title>
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     html {
       --button-height: 32px;
       --font-size: 14px;
@@ -17,9 +23,11 @@
       --border-color: #999;
       --border-color-hover: #666;
     }
+
     #app {
       margin: 20px;
     }
+
     body {
       font-size: var(--font-size);
     }
@@ -29,18 +37,23 @@
 </head>
 <body>
 <div id="app">
-  <b-button>
+  <b-button :loading="loading1" @click="loading1 = !loading1">
     按钮
   </b-button>
-  <b-button icon="settings" icon-position="left" :loading="loading1" @click="loading1=!loading1">
+  <b-button icon="settings" :loading="loading2"
+            @click="loading2 = !loading2">
     按钮
   </b-button>
-  <b-button icon="settings" icon-position="right" :loading="loading2" @click="loading2=!loading2">
+  <b-button icon="settings" icon-position="right" :loading="loading3"
+            @click="loading3 = !loading3">
     按钮
   </b-button>
-  <b-button icon="download" icon-position="right" :loading="loading3" @click="loading3=!loading3">
-    按钮
-  </b-button>
+  <b-button-group>
+    <b-button icon="left">上一页</b-button>
+    <b-button>更多</b-button>
+    <b-button icon="right" icon-position="right">下一页</b-button>
+  </b-button-group>
+  <!--<div id="test"></div>-->
 </div>
 <script src="./src/app.js"></script>
 <script src="//at.alicdn.com/t/font_807977_7uvg7f7l1gk.js"></script>
