@@ -1,6 +1,6 @@
-# vue-ash - 一个 Vue UI 组件
+# 轱辘 - 一个 Vue UI 组件
 
-作者：bibi
+作者：我
 
 
 ## 安装

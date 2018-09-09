@@ -4,7 +4,7 @@
     <b-icon class="icon" v-if="icon && !loading" :name="icon"/>
     <b-icon class="loading icon" v-if="loading" name="loading"></b-icon>
     <div class="content">
-      <slot></slot>
+      <slot/>
     </div>
   </button>
 </template>
@@ -12,7 +12,7 @@
   import Icon from './icon'
   export default {
     components: {
-      'g-icon': Icon
+      'b-icon': Icon
     },
     props: {
       icon: {},
@@ -36,7 +36,7 @@
     100% { transform: rotate(360deg); }
   }
   .b-button { font-size: var(--font-size); height: var(--button-height); padding: 0 1em;
-    border-radius: var(--border-radius); border: 1px solid var(--border-color);
+    border-rsadius: var(--border-radius); border: 1px solid var(--border-color);
     background: var(--button-bg);
     display: inline-flex; justify-content: center; align-items: center;
     vertical-align: middle;
