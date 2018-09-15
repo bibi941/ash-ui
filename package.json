@@ -1,6 +1,6 @@
 {
-  "name": "gulu",
-  "version": "0.0.1",
+  "name": "ash",
+  "version": "0.0.2",
   "description": "这是一个UI框架",
   "main": "index.js",
   "scripts": {
@@ -9,18 +9,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FrankFang/frank-test-1.git"
+    "url": "git+https://github.com/bibi941/ash-ui"
   },
   "keywords": [
     "vue",
     "ui"
   ],
-  "author": "frankfang",
+  "author": "bibi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FrankFang/frank-test-1/issues"
+    "url": "https://github.com/bibi941/ash-ui/issues"
   },
-  "homepage": "https://github.com/FrankFang/frank-test-1#readme",
+  "homepage": "https://github.com/bibi941/ash-ui#readme",
   "dependencies": {
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0"
