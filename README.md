@@ -1,4 +1,4 @@
-# 灰烬ui - 一个 Vue UI 组件
+# Ash-UI - 一个 Vue UI 组件
 
 作者：bibi
 
