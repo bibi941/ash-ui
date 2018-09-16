@@ -7,6 +7,7 @@
   <title>ash</title>
   <style>
     * {margin: 0; padding: 0; box-sizing: border-box;}
+
     html {
       --button-height: 32px;
       --font-size: 14px;
@@ -16,13 +17,19 @@
       --color: #333;
       --border-color: #999;
       --border-color-hover: #666;
-      /*--border-rsadius:4px;*/
     }
+
     #app {
       margin: 20px;
     }
+
     body {
       font-size: var(--font-size);
+    }
+
+    .box {
+      display: block;
+      margin: 8px 0;
     }
   </style>
   <style>
@@ -30,22 +37,33 @@
 </head>
 <body>
 <div id="app">
-  <b-button :loading="loading1" @click="loading1 = !loading1">
-    按钮
-  </b-button>
-  <b-button icon="settings" :loading="loading2"
-    @click="loading2 = !loading2">
-    按钮
-  </b-button>
-  <b-button icon="settings" icon-position="right" :loading="loading3"
-    @click="loading3 = !loading3">
-    按钮
-  </b-button>
-  <b-button-group>
-    <b-button icon="left">上一页</b-button>
-    <b-button>更多</b-button>
-    <b-button icon="right" icon-position="right">下一页</b-button>
-  </b-button-group>
+  <div class="box">
+    <b-input value="张三" disabled></b-input>
+    <b-input value="李四" readonly></b-input>
+  </div>
+  <div class="box">
+    <b-input value="王五" error="姓名最少两个字"></b-input>
+  </div>
+  <div class="box">
+    <b-input value="六六"></b-input>
+  </div>
+
+  <div style="margin: 20px">
+    <b-button :loading="loading1" @click="loading1 = !loading1">
+      按钮
+    </b-button>
+    <b-button icon="settings" :loading="loading2" @click="loading2 = !loading2">
+      按钮
+    </b-button>
+    <b-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 = !loading3">
+      按钮
+    </b-button>
+    <b-button-group>
+      <b-button icon="left">上一页</b-button>
+      <b-button>更多</b-button>
+      <b-button icon="right" icon-position="right">下一页</b-button>
+    </b-button-group>
+  </div>
 </div>
 <script src="./src/app.js"></script>
 <!--<script src="//at.alicdn.com/t/font_718972_1hhoomwpb69.js"></script>-->

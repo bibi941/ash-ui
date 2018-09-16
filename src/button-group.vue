@@ -5,6 +5,7 @@
 </template>
 <script>
   export default {
+    name:'ash-buttonGroup',
     mounted () {
       for (let node of this.$el.children) {
         let name = node.nodeName.toLowerCase()
@@ -15,7 +16,7 @@
     }
   }
 </script>
-<style lang="scss" type="text/scss">
+<style lang="scss" type="text/scss" scoped>
   .b-button-group {
     display: inline-flex;
     vertical-align: middle;

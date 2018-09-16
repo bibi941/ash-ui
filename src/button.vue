@@ -12,6 +12,7 @@
   import Icon from './icon';
 
   export default {
+    name:'ash-button',
     components: {
       'b-icon': Icon
     },
@@ -31,7 +32,7 @@
     }
   };
 </script>
-<style lang="scss" type="text/scss">
+<style lang="scss" type="text/scss" scoped>
   @keyframes spin {
     0% {
       transform: rotate(0deg);
