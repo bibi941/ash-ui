@@ -65,7 +65,29 @@ describe('Input', () => {
     });
   });
   describe('事件', () => {
-    it('支持change事件');
+    const Constructor = Vue.extend(Input);
+    let vm;
+    afterEach(() => {
+      vm.$destroy();
+    });
+    it('支持change/input/focus/blur事件 ', () => {
+      ['change', 'input', 'focus', 'blur'].map((e) => {
+        vm = new Constructor({}).$mount();
+        const callBack = sinon.fake();
+        vm.$on(e, callBack);
+        //触发input事件
+        let event = new Event(e);
+        Object.defineProperty(event, 'target', {
+          value: {
+            value: 'haha'
+          }, enumerable: true
+        });
+        let inputElement = vm.$el.querySelector('input');
+        console.log(event);
+        inputElement.dispatchEvent(event);
+        expect(callBack).to.have.been.calledWith('haha');
+      });
+    });
   });
 });
 
