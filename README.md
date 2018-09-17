@@ -1,7 +1,7 @@
 # Ash-UI- 一个 Vue UI 组件
 
 ## 介绍
-[![Build Status](https://travis-ci.org/bibi941/vue-whell-demo.svg?branch=master)](https://travis-ci.org/bibi941/vue-whell-demo)
+[![Build Status](https://travis-ci.org/bibi941/ash-ui.svg?branch=master)](https://travis-ci.org/bibi941/ash-ui)
    
 ## 开始使用
 
