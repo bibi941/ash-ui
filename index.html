@@ -15,25 +15,38 @@
     body {font-size: var(--font-size);}
 
     .box {display: block;margin: 8px 0;}
+    .col{
+      height: 100px;
+      background: gainsboro;
+      width: 50%;
+      border: 1px solid red;
+    }
+    .row{
+      display: flex;
+    }
   </style>
   <style>
   </style>
 </head>
 <body>
 <div id="app">
+  <b-row>
+    <b-col span="16">3</b-col>
+    <b-col span="8">4</b-col>
+  </b-row>
+
   <div class="box">
     <b-input value="张三" disabled></b-input>
     <b-input value="李四" readonly></b-input>
   </div>
   <div class="box">
-    <b-input value="王五" ></b-input>
+    <b-input value="王五"></b-input>
     <b-input v-model="mesa"></b-input>
     {{mesa}}
   </div>
   <div class="box">
     <b-input value="六六" error="我错了"></b-input>
   </div>
-
   <div style="margin: 20px">
     <b-button :loading="loading1" @click="loading1 = !loading1">
       按钮
