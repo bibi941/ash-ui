@@ -2,38 +2,53 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ash</title>
   <style>
-    * {margin: 0; padding: 0; box-sizing: border-box;}
-
-    html {--button-height: 32px;--font-size: 14px;--button-bg: white;--button-active-bg: #eee;--border-radius: 4px;--color: #333;--border-color: #999;--border-color-hover: #666;}
-
-    #app {margin: 20px;}
-
-    body {font-size: var(--font-size);}
-
-    .box {display: block;margin: 8px 0;}
-    .col{
-      height: 100px;
-      background: gainsboro;
-      width: 50%;
-      border: 1px solid red;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    .row{
-      display: flex;
+
+    html {
+      --button-height: 32px;
+      --font-size: 14px;
+      --button-bg: white;
+      --button-active-bg: #eee;
+      --border-radius: 4px;
+      --color: #333;
+      --border-color: #999;
+      --border-color-hover: #666;
     }
+
+    #app {
+      margin: 20px;
+    }
+
+    body {
+      font-size: var(--font-size);
+    }
+
+    .box {
+      display: block;
+      margin: 8px 0;
+    }
+
   </style>
   <style>
   </style>
 </head>
 <body>
 <div id="app">
-  <b-row>
-    <b-col span="16">3</b-col>
-    <b-col span="8">4</b-col>
-  </b-row>
+  <div style="border: 1px solid firebrick">
+    <b-row >
+      <b-col span="18">3</b-col>
+      <b-col span="2" offset="4">4</b-col>
+    </b-row>
+  </div>
 
   <div class="box">
     <b-input value="张三" disabled></b-input>
