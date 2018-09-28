@@ -41,7 +41,7 @@
 <style scoped lang='scss' type="text/scss">
   .col {
     height: 100px;
-    width: 50%;
+    /*width: 50%;*/
     $class-prefix: span-;
     @for $i from 1 through 24 {
       &.#{$class-prefix}#{$i} {
