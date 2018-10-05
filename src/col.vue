@@ -39,11 +39,11 @@
         return [
           span && `span-${span}`,
           offset && `offset-${offset}`,
-          (phone && [`phone-span-${phone.span}`]),
-          (ipad && [`ipad-span-${ipad.span}`]),
-          (notebook && [`notebook-span-${notebook.span}`]),
-          (pc2k && [`pc2k-span-${pc2k.span}`]),
-          (pc4k && [`pc4kpan-${pc4k.span}`])
+          ... (phone ? [`phone-span-${phone.span}`] : []),
+          ... (ipad ? [`ipad-span-${ipad.span}`] : []),
+          ... (notebook ? [`notebook-span-${notebook.span}`] : []),
+          ... (pc2k ? [`pc2k-span-${pc2k.span}`] : []),
+          ... (pc4k ? [`pc4kpan-${pc4k.span}`] : [])
         ];
       }
     },
@@ -84,7 +84,7 @@
         }
       }
     }
-    @media (min-width: 577px) and (max-width: 768px) {
+    @media (min-width: 577px)  {
       $class-prefix: ipad-span-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -98,7 +98,7 @@
         }
       }
     }
-    @media (min-width: 769px) and (max-width: 992px) {
+    @media (min-width: 769px)  {
       $class-prefix: notebook-span-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -112,7 +112,7 @@
         }
       }
     }
-    @media (min-width: 1201px) and (max-width: 1600px){
+    @media (min-width: 1201px)  {
       $class-prefix: pc2k-span-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -140,7 +140,6 @@
         }
       }
     }
-
   }
 
 </style>
