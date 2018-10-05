@@ -37,8 +37,8 @@
       margin: 8px 0;
     }
 
-    .b-col {
-      border: 1px solid rebeccapurple;
+    .demo {
+      border: 1px solid black;
     }
   </style>
   <style>
@@ -48,21 +48,12 @@
 <div id="app">
   <div style="border: 1px solid yellow">
     <b-row>
-      <b-col class="b-col" span="2" :phone="{span:24}" :ipad="{span:8}" :notebook="{span:6}" :pc2k="{span:4}">1
-      </b-col>
-      <b-col class="b-col" span="22" :phone="{span:24}" :ipad="{span:16}" :notebook="{span:18}" :pc2k="{span:20}">2
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col class="b-col" span="18">1</b-col>
-      <b-col class="b-col" span="6">2</b-col>
-      <b-col class="b-col" span="6">3</b-col>
-    </b-row>
-    <b-row>
-      <b-col class="b-col" span="18">1</b-col>
-      <b-col class="b-col" span="6">2</b-col>
-      <b-col class="b-col" span="6">3</b-col>
-      <b-col class="b-col" span="6">4</b-col>
+      <b-col class="demo"  :span="24" :notebook="{span:8}" ></b-col>
+      <b-col class="demo"  :span="24" :notebook="{span:8}"></b-col>
+      <b-col class="demo"  :span="24" :notebook="{span:8}"></b-col>
+      <b-col class="demo"  :span="24" :notebook="{span:8}"></b-col>
+      <b-col class="demo"  :span="24" :notebook="{span:8}"></b-col>
+      <b-col class="demo"  :span="24" :notebook="{span:8}"></b-col>
     </b-row>
   </div>
 

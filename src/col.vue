@@ -21,7 +21,7 @@
     props: {
       span: {type: [Number, String]},
       offset: {type: [Number, String]},
-      phone: {type: Object, validator},
+      pc: {type: Object, validator},
       ipad: {type: Object, validator},
       notebook: {type: Object, validator},
       pc2k: {type: Object, validator},
@@ -35,13 +35,13 @@
         };
       },
       propsClass () {
-        let {span, offset, phone, ipad, notebook, pc2k, pc4k} = this;
+        let {span, offset, pc, ipad, notebook, pc2k, pc4k} = this;
         return [
           span && `span-${span}`,
           offset && `offset-${offset}`,
-          ... (phone ? [`phone-span-${phone.span}`] : []),
           ... (ipad ? [`ipad-span-${ipad.span}`] : []),
           ... (notebook ? [`notebook-span-${notebook.span}`] : []),
+          ... (pc ? [`pc-span-${pc.span}`] : []),
           ... (pc2k ? [`pc2k-span-${pc2k.span}`] : []),
           ... (pc4k ? [`pc4kpan-${pc4k.span}`] : [])
         ];
@@ -70,20 +70,6 @@
         margin-left: ($n / 24) * 100%;
       }
     }
-    @media (max-width: 576px) {
-      $class-prefix: phone-span-;
-      @for $n from 1 through 24 {
-        &.#{$class-prefix}#{$n} {
-          width: ($n / 24) * 100%;
-        }
-      }
-      $class-prefix: phone-offset-;
-      @for $n from 1 through 24 {
-        &.#{$class-prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
-      }
-    }
     @media (min-width: 577px)  {
       $class-prefix: ipad-span-;
       @for $n from 1 through 24 {
@@ -106,6 +92,20 @@
         }
       }
       $class-prefix: notebook-offset-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          margin-left: ($n / 24) * 100%;
+        }
+      }
+    }
+    @media (min-width: 993px)  {
+      $class-prefix: pc-span-;
+      @for $n from 1 through 24 {
+        &.#{$class-prefix}#{$n} {
+          width: ($n / 24) * 100%;
+        }
+      }
+      $class-prefix: pc-offset-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
           margin-left: ($n / 24) * 100%;
