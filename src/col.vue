@@ -21,11 +21,26 @@
     props: {
       span: {type: [Number, String]},
       offset: {type: [Number, String]},
-      pc: {type: Object, validator},
       ipad: {type: Object, validator},
       notebook: {type: Object, validator},
+      pc: {type: Object, validator},
       pc2k: {type: Object, validator},
       pc4k: {type: Object, validator}
+    },
+    methods: {
+      creatClasses (obj, str = '') {
+        if (!obj) {
+          return [];
+        }
+        let arr = [];
+        if (obj.span) {
+          arr.push(`${str}span-${obj.span}`);
+        }
+        if (obj.offset) {
+          arr.push(`${str}span-${obj.offset}`);
+        }
+        return arr;
+      }
     },
     computed: {
       propStyle () {
@@ -35,15 +50,14 @@
         };
       },
       propsClass () {
-        let {span, offset, pc, ipad, notebook, pc2k, pc4k} = this;
+        let {span, offset, pc, ipad, notebook, pc2k, pc4k,creatClasses} = this;
         return [
-          span && `span-${span}`,
-          offset && `offset-${offset}`,
-          ... (ipad ? [`ipad-span-${ipad.span}`] : []),
-          ... (notebook ? [`notebook-span-${notebook.span}`] : []),
-          ... (pc ? [`pc-span-${pc.span}`] : []),
-          ... (pc2k ? [`pc2k-span-${pc2k.span}`] : []),
-          ... (pc4k ? [`pc4kpan-${pc4k.span}`] : [])
+          ...creatClasses({span, offset}),
+          ... creatClasses(ipad, 'ipad-'),
+          ... creatClasses(notebook, 'notebook-'),
+          ... creatClasses(pc, 'pc-'),
+          ... creatClasses(pc2k, 'pc2k-'),
+          ... creatClasses(pc4k, 'pc4k-')
         ];
       }
     },
@@ -70,7 +84,7 @@
         margin-left: ($n / 24) * 100%;
       }
     }
-    @media (min-width: 577px)  {
+    @media (min-width: 577px) {
       $class-prefix: ipad-span-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -84,7 +98,7 @@
         }
       }
     }
-    @media (min-width: 769px)  {
+    @media (min-width: 769px) {
       $class-prefix: notebook-span-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -98,7 +112,7 @@
         }
       }
     }
-    @media (min-width: 993px)  {
+    @media (min-width: 993px) {
       $class-prefix: pc-span-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
@@ -112,7 +126,7 @@
         }
       }
     }
-    @media (min-width: 1201px)  {
+    @media (min-width: 1201px) {
       $class-prefix: pc2k-span-;
       @for $n from 1 through 24 {
         &.#{$class-prefix}#{$n} {
