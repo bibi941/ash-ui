@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :style="propGutterStyle" :class="propAlignStyle">
+  <div class="row" :style="propStyle" :class="propClass">
     <slot></slot>
   </div>
 </template>
@@ -19,13 +19,13 @@
       }
     },
     computed: {
-      propGutterStyle() {
+      propStyle() {
         return {
           marginLeft: -this.gutter / 2 + `px`,
           marginRight: -this.gutter / 2 + `px`
         };
       },
-      propAlignStyle() {
+      propClass() {
         let {align} = this;
         return [align && `align-${align}`];
       }
@@ -41,6 +41,7 @@
 <style scoped lang='scss' type="text/scss">
   .row {
     display: flex;
+    flex-wrap: wrap;
     &.align-left {
       justify-content: flex-start;
     }
