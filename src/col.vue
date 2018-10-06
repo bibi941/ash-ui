@@ -37,7 +37,7 @@
           arr.push(`${str}span-${obj.span}`);
         }
         if (obj.offset) {
-          arr.push(`${str}span-${obj.offset}`);
+          arr.push(`${str}offset-${obj.offset}`);
         }
         return arr;
       }
@@ -50,9 +50,9 @@
         };
       },
       propsClass () {
-        let {span, offset, pc, ipad, notebook, pc2k, pc4k,creatClasses} = this;
+        let {span, offset, pc, ipad, notebook, pc2k, pc4k, creatClasses} = this;
         return [
-          ...creatClasses({span, offset}),
+          ... creatClasses({span, offset}),
           ... creatClasses(ipad, 'ipad-'),
           ... creatClasses(notebook, 'notebook-'),
           ... creatClasses(pc, 'pc-'),
