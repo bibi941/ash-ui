@@ -82,7 +82,6 @@ describe('Input', () => {
           }, enumerable: true
         });
         let inputElement = vm.$el.querySelector('input');
-        console.log(event);
         inputElement.dispatchEvent(event);
         expect(callBack).to.have.been.calledWith('haha');
       });
