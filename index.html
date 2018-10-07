@@ -24,21 +24,13 @@
       --border-color-hover: #666;
     }
 
-    #app {
-      margin: 20px;
-    }
-
     body {
       font-size: var(--font-size);
     }
 
-    .box {
-      display: block;
-      margin: 8px 0;
-    }
-
     .demo {
-      border: 1px solid black;
+      border: 1px solid red;
+      min-height: 100px;
     }
   </style>
   <style>
@@ -46,41 +38,14 @@
 </head>
 <body>
 <div id="app">
-  <div style="border: 1px solid yellow">
-    <b-row>
-      <b-col span="10" ></b-col>
-      <b-col span="12" offset="2"> </b-col>
-    </b-row>
-  </div>
-
-  <div class="box">
-    <b-input value="张三" disabled></b-input>
-    <b-input value="李四" readonly></b-input>
-  </div>
-  <div class="box">
-    <b-input value="王五"></b-input>
-    <b-input v-model="mesa"></b-input>
-    {{mesa}}
-  </div>
-  <div class="box">
-    <b-input value="六六" error="我错了"></b-input>
-  </div>
-  <div style="margin: 20px">
-    <b-button :loading="loading1" @click="loading1 = !loading1">
-      按钮
-    </b-button>
-    <b-button icon="settings" :loading="loading2" @click="loading2 = !loading2">
-      按钮
-    </b-button>
-    <b-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 = !loading3">
-      按钮
-    </b-button>
-    <b-button-group>
-      <b-button icon="left">上一页</b-button>
-      <b-button>更多</b-button>
-      <b-button icon="right" icon-position="right">下一页</b-button>
-    </b-button-group>
-  </div>
+  <b-layout  style="height: 100vh; border: 1px solid blue">
+    <b-sider class="demo">sider</b-sider>
+    <b-layout>
+      <b-header class="demo">header</b-header>
+      <b-content class="demo">content</b-content>
+      <b-footer class="demo">footer</b-footer>
+    </b-layout>
+  </b-layout>
 </div>
 <script src="./src/app.js"></script>
 </body>
