@@ -2,8 +2,7 @@
 <html lang="zh-Hans">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ash</title>
   <style>
@@ -28,24 +27,13 @@
       font-size: var(--font-size);
     }
 
-    .demo {
-      border: 1px solid red;
-      min-height: 100px;
-    }
   </style>
   <style>
   </style>
 </head>
 <body>
 <div id="app">
-  <b-layout  style="height: 100vh; border: 1px solid blue">
-    <b-sider class="demo">sider</b-sider>
-    <b-layout>
-      <b-header class="demo">header</b-header>
-      <b-content class="demo">content</b-content>
-      <b-footer class="demo">footer</b-footer>
-    </b-layout>
-  </b-layout>
+<b-button @click="showToast"> 点我</b-button>
 </div>
 <script src="./src/app.js"></script>
 </body>

@@ -7,15 +7,15 @@
 
 <script>
   let validator = (val) => {
-    let keys = Object.keys(val);
-    let valid = true;
+    let keys = Object.keys(val)
+    let valid = true
     keys.map(key => {
       if (!['span', 'offset'].includes(key)) {
-        valid = false;
+        valid = false
       }
-    });
-    return valid;
-  };
+    })
+    return valid
+  }
   export default {
     name: 'ash-col',
     props: {
@@ -30,16 +30,16 @@
     methods: {
       creatClasses (obj, str = '') {
         if (!obj) {
-          return [];
+          return []
         }
-        let arr = [];
+        let arr = []
         if (obj.span) {
-          arr.push(`${str}span-${obj.span}`);
+          arr.push(`${str}span-${obj.span}`)
         }
         if (obj.offset) {
-          arr.push(`${str}offset-${obj.offset}`);
+          arr.push(`${str}offset-${obj.offset}`)
         }
-        return arr;
+        return arr
       }
     },
     computed: {
@@ -47,10 +47,10 @@
         return {
           paddingLeft: this.gutter / 2 + `px`,
           paddingRight: this.gutter / 2 + `px`
-        };
+        }
       },
       propsClass () {
-        let {span, offset, pc, ipad, notebook, pc2k, pc4k, creatClasses} = this;
+        let {span, offset, pc, ipad, notebook, pc2k, pc4k, creatClasses} = this
         return [
           ... creatClasses({span, offset}),
           ... creatClasses(ipad, 'ipad-'),
@@ -58,15 +58,15 @@
           ... creatClasses(pc, 'pc-'),
           ... creatClasses(pc2k, 'pc2k-'),
           ... creatClasses(pc4k, 'pc4k-')
-        ];
+        ]
       }
     },
     data () {
       return {
         gutter: 0
-      };
+      }
     }
-  };
+  }
 </script>
 
 <style scoped lang='scss' type="text/scss">

@@ -5,7 +5,7 @@
 </template>
 <script>
   export default {
-    name:'ash-buttonGroup',
+    name: 'ash-buttonGroup',
     mounted () {
       for (let node of this.$el.children) {
         let name = node.nodeName.toLowerCase()
