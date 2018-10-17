@@ -36,10 +36,19 @@ new Vue({
     mesa: ''
   },
   created () {
+    this.$toast('<b>吃我压路机</b>,吃', {
+      closeButton: {
+        text: '关关哦',
+        callback (toast) {
+          // toast实例
+          console.log('插件知道了')
+        },
+      },
+      enableHtml:false
+    })
   },
   methods: {
-    showToast(){
-      this.$toast('的撒旦杀的杀都是大是的是的')
+    showToast () {
     }
   }
 })
