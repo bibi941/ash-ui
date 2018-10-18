@@ -37,14 +37,14 @@ new Vue({
   },
   created () {
     this.$toast('<b>吃我压路机</b>,吃', {
+      position: 'middle',
       closeButton: {
         text: '关关哦',
         callback (toast) {
           // toast实例
           console.log('插件知道了')
-        },
-      },
-      enableHtml:false
+        }
+      }
     })
   },
   methods: {

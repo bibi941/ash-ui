@@ -13,29 +13,29 @@
       },
       align: {
         type: String,
-        validator(value) {
-          return ['left', 'center', 'right'].includes(value);
+        validator (value) {
+          return ['left', 'center', 'right'].indexOf(value) >= 0
         }
       }
     },
     computed: {
-      propStyle() {
+      propStyle () {
         return {
           marginLeft: -this.gutter / 2 + `px`,
           marginRight: -this.gutter / 2 + `px`
-        };
+        }
       },
-      propClass() {
-        let {align} = this;
-        return [align && `align-${align}`];
+      propClass () {
+        let {align} = this
+        return [align && `align-${align}`]
       }
     },
-    mounted() {
+    mounted () {
       this.$children.forEach((vm) => {
-        vm.gutter = this.gutter;
-      });
+        vm.gutter = this.gutter
+      })
     }
-  };
+  }
 </script>
 
 <style scoped lang='scss' type="text/scss">
