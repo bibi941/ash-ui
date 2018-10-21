@@ -4,9 +4,7 @@ let currentToast
 export default {
   install (Vue, options) {
     Vue.prototype.$toast = (message, toastOptions) => {
-      if (currentToast) {
-        currentToast.close()
-      }
+      currentToast && currentToast.close()
       currentToast = createToast({Vue, message, propsData: toastOptions})
     }
   }

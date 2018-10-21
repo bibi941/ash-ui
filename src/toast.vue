@@ -43,10 +43,10 @@
         default: false
       }
     },
-    computed:{
-      toastPosition(){
+    computed: {
+      toastPosition () {
         return {
-          [`position-${this.position}`]:true
+          [`position-${this.position}`]: true
         }
       }
     },
@@ -101,15 +101,15 @@
     border-radius: $toast-radius;
     color: #ffffff;
     padding: 0 8px;
-    &.position-top{
+    &.position-top {
       top: 0;
       transform: translateX(-50%);
     }
-    &.position-middle{
+    &.position-middle {
       top: 50%;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
     }
-    &.position-bottom{
+    &.position-bottom {
       bottom: 0;
       transform: translateX(-50%);
     }
