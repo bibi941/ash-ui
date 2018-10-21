@@ -89,7 +89,12 @@
   $toast-bg: rgba(0, 0, 0, 0.75);
   $toast-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
   $toast-radius: 4px;
+  @keyframes fade-in {
+    0%{opacity: 0;}
+    100%{opacity: 1}
+  }
   .toast {
+    animation: fade-in .5s;
     font-size: $font-size;
     min-height: $toast-height;
     line-height: 1.8;
