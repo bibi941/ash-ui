@@ -17,6 +17,7 @@ export default {
   }
 }
 
+
 function createToast ({Vue, message, propsData, onclose}) {
   let Cunsturctor = Vue.extend(Toast)
   let toast = new Cunsturctor({propsData})
