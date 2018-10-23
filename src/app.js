@@ -41,6 +41,7 @@ new Vue({
     showToast () {
       this.$toast(`吃我压路机`, {
         position: 'middle',
+        autoClose: false,
         closeButton: {
           text: '关关哦',
           callback (toast) {

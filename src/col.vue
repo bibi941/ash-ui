@@ -10,7 +10,7 @@
     let keys = Object.keys(val)
     let valid = true
     keys.map(key => {
-      if (!['span', 'offset'].indexOf(key) >= 0) {
+      if (!(['span', 'offset'].indexOf(key) >= 0)) {
         valid = false
       }
     })

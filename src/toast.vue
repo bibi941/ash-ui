@@ -18,11 +18,7 @@
     name: 'ash-toast',
     props: {
       autoClose: {
-        type: Boolean,
-        default: false
-      },
-      autoCloseDelay: {
-        type: Number,
+        type: [Boolean,Number],
         default: 5
       },
       position: {
@@ -67,7 +63,7 @@
         if (this.autoClose) {
           setTimeout(() => {
             this.close()
-          }, this.autoCloseDelay * 1000)
+          }, this.autoClose * 1000)
         }
       },
       onClickClose () {
