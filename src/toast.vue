@@ -131,12 +131,12 @@
   .toast {
     font-size: $font-size;
     min-height: $toast-height;
-    line-height: 1.8;
-    display: flex;
-    align-items: center;
     background: $toast-bg;
     box-shadow: $toast-shadow;
     border-radius: $toast-radius;
+    line-height: 1.8;
+    display: flex;
+    align-items: center;
     color: #ffffff;
     padding: 0 8px;
 

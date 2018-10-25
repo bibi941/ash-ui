@@ -33,11 +33,22 @@
 </head>
 <body>
 <div id="app">
-  <b-button @click="showToast"> 点我</b-button>
-  <b-row >
-    <b-col :pc="{span:'12'}">1</b-col>
-    <b-col :pc="{span:'12'}">2</b-col>
-  </b-row>
+  <b-tabs :selected.sync="selectedTab">
+    <b-tabs-head>
+      <b-tabs-item name="sport" disabled>体育</b-tabs-item>
+      <b-tabs-item name="news">新闻</b-tabs-item>
+      <b-tabs-item name="woman">
+        <b-icon name="settings"></b-icon>
+        美女
+      </b-tabs-item>
+      <template slot="button"><b-button>按钮</b-button></template>
+    </b-tabs-head>
+    <b-tabs-body>
+      <b-tabs-pane name="sport">我是体育 balalalba</b-tabs-pane>
+      <b-tabs-pane name="news">我是新闻~~~~~~</b-tabs-pane>
+      <b-tabs-pane name="woman">我是美女~~~~~~</b-tabs-pane>
+    </b-tabs-body>
+  </b-tabs>
 </div>
 <script src="./src/app.js"></script>
 </body>

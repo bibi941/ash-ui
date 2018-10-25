@@ -12,6 +12,11 @@ import Content from './content'
 import Footer from './footer'
 import Toast from './toast'
 import plugin from './plugin'
+import Tabs from './tabs'
+import TabsHead from './tabs-head'
+import TabsItem from './tabs-item'
+import TabsBody from './tabs-body'
+import TabsPane from './tabs-pane'
 
 Vue.component('b-button', Button)
 Vue.component('b-icon', Icon)
@@ -25,15 +30,17 @@ Vue.component('b-footer', Footer)
 Vue.component('b-sider', Sider)
 Vue.component('b-layout', Layout)
 Vue.component('b-toast', Toast)
+Vue.component('b-tabs', Tabs)
+Vue.component('b-tabs-head', TabsHead)
+Vue.component('b-tabs-item', TabsItem)
+Vue.component('b-tabs-body', TabsBody)
+Vue.component('b-tabs-pane', TabsPane)
 Vue.use(plugin)
 
 new Vue({
   el: '#app',
   data: {
-    loading1: false,
-    loading2: true,
-    loading3: false,
-    mesa: ''
+    selectedTab:'sport'
   },
   created () {
   },
@@ -46,7 +53,7 @@ new Vue({
           text: '关关哦',
           callback (toast) {
             // toast实例
-            console.log('插件知道了')
+            console.log('这就是你最后的波纹吗？JOJO')
           }
         }
       })
