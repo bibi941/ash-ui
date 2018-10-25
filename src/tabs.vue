@@ -5,6 +5,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   export default {
     name: 'ash-tabs',
     props: {
@@ -19,6 +20,12 @@
           return ['horizontal', 'vertical'].indexOf(value) >= 0
         }
       }
+    },
+    provide () {
+      return {eventBus: this.eventBus}
+    },
+    data () {
+      return {eventBus: new Vue()}
     },
     mounted () {
 

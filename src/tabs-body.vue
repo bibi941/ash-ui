@@ -6,7 +6,8 @@
 
 <script>
   export default {
-    name: 'ash-tabs-body'
+    name: 'ash-tabs-body',
+    inject:['eventBus']
   }
 </script>
 

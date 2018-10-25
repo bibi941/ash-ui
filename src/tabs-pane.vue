@@ -6,7 +6,13 @@
 
 <script>
   export default {
-    name: 'ash-tabs-pane'
+    name: 'ash-tabs-pane',
+    inject:['eventBus'],
+    mounted () {
+      this.eventBus.$on('update:selected',(name)=>{
+        console.log(name)
+      })
+    }
   }
 </script>
 

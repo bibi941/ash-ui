@@ -10,6 +10,9 @@
     name: 'ash-tabs-head',
     props:{
 
+    },
+    inject:['eventBus'],
+    mounted(){
     }
   }
 </script>
