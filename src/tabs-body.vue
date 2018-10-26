@@ -12,5 +12,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-
+.tabs-body{
+  margin-top: .5em;
+}
 </style>
