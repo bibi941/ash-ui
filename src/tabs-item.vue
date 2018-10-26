@@ -18,24 +18,24 @@
       }
     },
     inject: ['eventBus'],
-    data () {
+    data() {
       return {
         active: false
       }
     },
     computed: {
-      classes () {
+      classes() {
         return {
           active: this.active
         }
       }
     },
     methods: {
-      onclick () {
-        this.eventBus.$emit('update:selected', this.name)
+      onclick() {
+        this.eventBus.$emit('update:selected', this.name, this)
       }
     },
-    mounted () {
+    mounted() {
       this.eventBus.$on('update:selected', (name) => {
         this.active = name === this.name
       })
@@ -44,6 +44,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  $purple-lv3: #8640FF;
   .tabs-item {
     cursor: pointer;
     height: 100%;
@@ -51,8 +52,9 @@
     justify-content: center;
     align-items: center;
     padding: 1em;
-    &.active{
-      background: red;
+    &.active {
+      color: $purple-lv3;
+      font-weight: bold;
     }
   }
 

@@ -6,6 +6,7 @@
 
 <script>
   import Vue from 'vue'
+
   export default {
     name: 'ash-tabs',
     props: {
@@ -16,19 +17,28 @@
       direction: {
         type: String,
         default: 'horizontal',
-        validator (value) {
+        validator(value) {
           return ['horizontal', 'vertical'].indexOf(value) >= 0
         }
       }
     },
-    data () {
+    data() {
       return {eventBus: new Vue()}
     },
-    provide () {
+    provide() {
       return {eventBus: this.eventBus}
     },
-    mounted () {
-      this.eventBus.$emit('update:selected',this.selected)
+    mounted() {
+      //找到选择的 item 并发送事件
+      this.$children.forEach((vm) => {
+        if (vm.$options.name === 'ash-tabs-head') {
+          vm.$children.forEach((childVm) => {
+            if (childVm.$options.name === 'ash-tabs-item' && childVm.name === this.selected) {
+              this.eventBus.$emit('update:selected', this.selected, childVm)
+            }
+          })
+        }
+      })
     }
   }
 </script>

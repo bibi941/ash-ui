@@ -33,7 +33,7 @@
 </head>
 <body>
 <div id="app">
-  <b-tabs :selected.sync="selectedTab">
+  <b-tabs selected="news">
     <b-tabs-head>
       <b-tabs-item name="sport" disabled>体育</b-tabs-item>
       <b-tabs-item name="news">新闻</b-tabs-item>
@@ -41,7 +41,9 @@
         <b-icon name="settings"></b-icon>
         美女
       </b-tabs-item>
-      <template slot="button"><b-button>按钮</b-button></template>
+      <template slot="button">
+        <b-button>按钮</b-button>
+      </template>
     </b-tabs-head>
     <b-tabs-body>
       <b-tabs-pane name="sport">我是体育 balalalba</b-tabs-pane>
