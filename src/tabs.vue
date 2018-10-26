@@ -34,7 +34,7 @@
     },
     methods: {
       emitSelected() {
-        //找到选择的 item 并发送事件
+        //找到selected 对应的 vm 并发送事件
         this.$children.forEach((vm) => {
           if (vm.$options.name === 'ash-tabs-head') {
             vm.$children.forEach((childVm) => {
