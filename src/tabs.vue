@@ -29,16 +29,27 @@
       return {eventBus: this.eventBus}
     },
     mounted() {
-      //找到选择的 item 并发送事件
-      this.$children.forEach((vm) => {
-        if (vm.$options.name === 'ash-tabs-head') {
-          vm.$children.forEach((childVm) => {
-            if (childVm.$options.name === 'ash-tabs-item' && childVm.name === this.selected) {
-              this.eventBus.$emit('update:selected', this.selected, childVm)
-            }
-          })
+      this.emitSelected()
+      this.throwError()
+    },
+    methods: {
+      emitSelected() {
+        //找到选择的 item 并发送事件
+        this.$children.forEach((vm) => {
+          if (vm.$options.name === 'ash-tabs-head') {
+            vm.$children.forEach((childVm) => {
+              if (childVm.$options.name === 'ash-tabs-item' && childVm.name === this.selected) {
+                this.eventBus.$emit('update:selected', this.selected, childVm)
+              }
+            })
+          }
+        })
+      },
+      throwError() {
+        if (this.$children.length === 0) {
+          throw new Error('tabs的子组件必须是tabs-head和tabs-body，但你为空')
         }
-      })
+      }
     }
   }
 </script>
