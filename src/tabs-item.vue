@@ -26,12 +26,17 @@
     computed: {
       classes() {
         return {
-          active: this.active
+          active: this.active,
+          disabled: this.disabled
+
         }
       }
     },
     methods: {
       onclick() {
+        if (this.disabled) {
+          return
+        }
         this.eventBus.$emit('update:selected', this.name, this)
       }
     },
@@ -55,6 +60,10 @@
     &.active {
       color: $purple-lv3;
       font-weight: bold;
+    }
+    &.disabled{
+      color: grey;
+      cursor: not-allowed;
     }
   }
 
