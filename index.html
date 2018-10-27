@@ -31,27 +31,26 @@
   <style>
   </style>
 </head>
+
 <body>
-<div id="app">
-  <b-tabs selected="news">
-    <b-tabs-head>
-      <b-tabs-item name="sport" disabled>体育</b-tabs-item>
-      <b-tabs-item name="news">新闻</b-tabs-item>
-      <b-tabs-item name="woman">
-        <b-icon name="settings"></b-icon>
-        美女
-      </b-tabs-item>
-      <template slot="button">
-        <b-button>按钮</b-button>
-      </template>
-    </b-tabs-head>
-    <b-tabs-body>
-      <b-tabs-pane name="sport">我是体育 balalalba</b-tabs-pane>
-      <b-tabs-pane name="news">我是新闻~~~~~~</b-tabs-pane>
-      <b-tabs-pane name="woman">我是美女~~~~~~</b-tabs-pane>
-    </b-tabs-body>
-  </b-tabs>
+
+<div id="app" style="padding: 350px">
+  <b-popover>
+    <template slot="content">
+      <div>是否规划建设对干活</div>
+    </template>
+    <button>点我</button>
+  </b-popover>
+
+  <b-popover>
+    <template slot="content">
+      <div>popover内容</div>
+    </template>
+    <button>点我</button>
+  </b-popover>
 </div>
+
 <script src="./src/app.js"></script>
 </body>
+
 </html>
