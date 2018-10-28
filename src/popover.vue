@@ -1,9 +1,11 @@
 <template>
-  <div class="popover" @click.stop="xxx">
-    <div class="content-wrapper" v-if="visible" @click.stop>
+  <div class="popover" @click.stop="popoverListener">
+    <div class="content-wrapper" ref="content" v-if="visible" @click.stop>
       <slot name="content"></slot>
     </div>
-    <slot></slot>
+    <span ref="button">
+      <slot></slot>
+    </span>
   </div>
 </template>
 
@@ -14,21 +16,29 @@
       return {visible: false}
     },
     methods: {
-      xxx() {
+      popoverListener() {
         this.visible = !this.visible
         let eventHandler = () => {
           this.visible = false
           document.removeEventListener('click', eventHandler)
-          console.log('隐藏了')
         }
         if (this.visible) {
           this.$nextTick(() => {
+            this.setPopoverPosition()
+            //把 popover 放在 body中 而不是组件内部
+            document.body.appendChild(this.$refs.content)
             document.addEventListener('click', eventHandler)
           })
-        }else{
-          console.log('隐藏了-else')
         }
+      },
+      setPopoverPosition() {
+        let content = this.$refs.content
+        let {width, height, top, left} = this.$refs.button.getBoundingClientRect()
+        content.style.left = left + window.scrollX + 'px'
+        content.style.top = top + window.scrollY + 'px'
       }
+    },
+    mounted() {
     }
   }
 </script>
@@ -38,13 +48,11 @@
     display: inline-block;
     vertical-align: top;
     position: relative;
-    .content-wrapper {
-      white-space: nowrap;
-      position: absolute;
-      bottom: 100%;
-      left: 0;
-      border: 1px solid green;
-      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-    }
+  }
+
+  .content-wrapper {
+    white-space: nowrap;
+    position: absolute;
+    transform: translateY(-100%);
   }
 </style>

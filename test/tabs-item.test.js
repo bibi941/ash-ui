@@ -27,11 +27,11 @@ describe('TabsItem', () => {
     const Constructor = Vue.extend(TabsItem)
     const vm = new Constructor({
       propsData: {
-        name: 'xxx'
+        name: 'popoverListener'
       }
     }).$mount()
     const element = vm.$el
-    expect(element.getAttribute('data-name')).to.eq('xxx')
+    expect(element.getAttribute('data-name')).to.eq('popoverListener')
   })
 
   it('接受disabled属性 ', () => {
