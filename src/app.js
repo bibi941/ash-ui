@@ -41,24 +41,12 @@ Vue.use(plugin)
 
 new Vue({
   el: '#app',
-  data: {
-    selectedTab:'sport'
-  },
-  created () {
+  data: {},
+  created() {
   },
   methods: {
-    showToast () {
-      this.$toast(`吃我压路机`, {
-        position: 'middle',
-        autoClose: false,
-        closeButton: {
-          text: '关关哦',
-          callback (toast) {
-            // toast实例
-            console.log('这就是你最后的波纹吗？JOJO')
-          }
-        }
-      })
+    yyy() {
+      // console.log('yyy')
     }
   }
 })

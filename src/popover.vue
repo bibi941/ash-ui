@@ -1,6 +1,6 @@
 <template>
-  <div class="popover" @click.stop="popoverListener">
-    <div class="content-wrapper" ref="content" v-if="visible" @click.stop>
+  <div class="popover" @click="onclick" ref="popover">
+    <div class="content-wrapper" ref="content" v-if="visible">
       <slot name="content"></slot>
     </div>
     <span ref="button">
@@ -16,29 +16,45 @@
       return {visible: false}
     },
     methods: {
-      popoverListener() {
-        this.visible = !this.visible
-        let eventHandler = () => {
-          this.visible = false
-          document.removeEventListener('click', eventHandler)
+      onclick(e) {
+        //点击按钮
+        if (this.$refs.button.contains(e.target)) {
+          if (this.visible) {
+            this.close()
+          } else {
+            this.open()
+          }
         }
-        if (this.visible) {
-          this.$nextTick(() => {
-            this.setPopoverPosition()
-            //把 popover 放在 body中 而不是组件内部
-            document.body.appendChild(this.$refs.content)
-            document.addEventListener('click', eventHandler)
-          })
+      },
+      open() {
+        this.visible = true
+        this.$nextTick(() => {
+          this.setPopoverPosition()
+          document.addEventListener('click', this.onclickContent)
+
+        })
+      },
+      close() {
+        this.visible = false
+        document.removeEventListener('click', this.onclickContent)
+        console.log('结束监听')
+        console.log('visible=false关闭')
+      },
+      onclickContent(e) {
+        // TODO:点击内容不退出
+        if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))) {
+          return
+        } else {
+          this.close()
         }
       },
       setPopoverPosition() {
+        document.body.appendChild(this.$refs.content)
         let content = this.$refs.content
         let {width, height, top, left} = this.$refs.button.getBoundingClientRect()
         content.style.left = left + window.scrollX + 'px'
         content.style.top = top + window.scrollY + 'px'
       }
-    },
-    mounted() {
     }
   }
 </script>
