@@ -3,7 +3,7 @@
     <div class="content-wrapper" ref="content" v-if="visible">
       <slot name="content"></slot>
     </div>
-    <span ref="button">
+    <span class="button" ref="button">
       <slot></slot>
     </span>
   </div>
@@ -13,7 +13,9 @@
   export default {
     name: 'ash-popover',
     data() {
-      return {visible: false}
+      return {
+        visible: false
+      }
     },
     methods: {
       onclick(e) {
@@ -31,7 +33,6 @@
         this.$nextTick(() => {
           this.setPopoverPosition()
           document.addEventListener('click', this.onclickContent)
-
         })
       },
       close() {
@@ -41,12 +42,13 @@
         console.log('visible=false关闭')
       },
       onclickContent(e) {
-        // TODO:点击内容不退出
         if (this.$refs.popover && (this.$refs.popover === e.target || this.$refs.popover.contains(e.target))) {
           return
-        } else {
-          this.close()
         }
+        if (this.$refs.content && (this.$refs.content === e.target || this.$refs.content.contains(e.target))) {
+          return
+        }
+          this.close()
       },
       setPopoverPosition() {
         document.body.appendChild(this.$refs.content)
@@ -60,15 +62,45 @@
 </script>
 
 <style scoped lang="scss" type="text/scss">
+  $border-radius: 4px;
+  $border-color: #e8e2ff;
   .popover {
     display: inline-block;
     vertical-align: top;
     position: relative;
+    .button {
+      display: inline-block;
+    }
   }
 
   .content-wrapper {
-    white-space: nowrap;
     position: absolute;
     transform: translateY(-100%);
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    padding: 0.5em 1em;
+    margin-top: -5px;
+    max-width: 20em;
+    /*box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.10);*/
+    filter:drop-shadow(0 0 4px rgba(0, 0, 0, 0.1));
+    background: white;
+    word-break: break-all;
+    &::before, &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 10px;
+      border: 5px solid transparent;
+    }
+    &::after {
+      top: calc(100% - 1px);
+      border-top-color: white;
+    }
+    &::before {
+      top: 100%;
+      border-top-color: $border-color;
+    }
   }
 </style>
