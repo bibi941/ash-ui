@@ -1,5 +1,5 @@
 <template>
-  <div class="popover" @click="onclick" ref="popover">
+  <div class="popover"  ref="popover">
     <div class="content-wrapper" :class="{[`position-${position}`]:true}" ref="content" v-if="visible">
       <slot name="content"></slot>
     </div>
@@ -24,6 +24,45 @@
         validator(val) {
           return ['top', 'bottom', 'left', 'right'].indexOf(val) >= 0
         }
+      },
+      trigger: {
+        type: String,
+        default: 'click',
+        validator(val) {
+          return ['click', 'hover'].indexOf(val) >= 0
+        }
+      }
+    },
+    computed:{
+      // openEvent(){
+      //   if(this.trigger==='click'){
+      //     return 'click'
+      //   }else{
+      //     return 'mouseenter'
+      //   }
+      // },
+      // closeEvent(){
+      //   if(this.trigger==='click'){
+      //     return 'click'
+      //   }else{
+      //     return 'mouseleave'
+      //   }
+      // }
+    },
+    mounted () {
+      if (this.trigger === 'click') {
+        this.$refs.popover.addEventListener('click', this.onclick)
+      } else {
+        this.$refs.popover.addEventListener('mouseenter', this.open)
+        this.$refs.popover.addEventListener('mouseleave', this.close)
+      }
+    },
+    destroyed () {
+      if (this.trigger === 'click') {
+        this.$refs.popover.removeEventListener('click', this.onclick)
+      } else {
+        this.$refs.popover.removeEventListener('mouseenter', this.open)
+        this.$refs.popover.removeEventListener('mouseleave', this.close)
       }
     },
     methods: {
@@ -62,20 +101,14 @@
         let {content, button} = this.$refs
         let {width, height, top, left} = button.getBoundingClientRect()
         let {height: height2} = content.getBoundingClientRect()
-        if (this.position === 'top') {
-          content.style.left = left + window.scrollX + 'px'
-          content.style.top = top + window.scrollY + 'px'
-        } else if (this.position === 'bottom') {
-          content.style.left = left + window.scrollX + 'px'
-          content.style.top = top + height + window.scrollY + 'px'
-        } else if (this.position === 'left') {
-          content.style.left = left + window.scrollX + 'px'
-          content.style.top = top + (height - height2) / 2 + window.scrollY + 'px'
-        } else if (this.position === 'right') {
-          console.log('top',top)
-          content.style.left = left + width + window.scrollX + 'px'
-          content.style.top = top + (height - height2) / 2 + window.scrollY + 'px'
+        let position = {
+          top: {top: top + window.scrollY, left: left + window.scrollX},
+          bottom: {top: top + height + window.scrollY, left: left + window.scrollX},
+          left: {top: top + (height - height2) / 2 + window.scrollY, left: left + window.scrollX},
+          right: {top: top + (height - height2) / 2 + window.scrollY, left: left + width + window.scrollX}
         }
+        content.style.top = position[this.position].top + 'px'
+        content.style.left = position[this.position].left + 'px'
       }
     }
   }
