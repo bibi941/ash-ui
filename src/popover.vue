@@ -149,6 +149,7 @@
       transform: translateY(-100%);
       &::before, &::after {
         left: 5px;
+        border-bottom: none;
       }
       &::after {
         top: calc(100% - 1px);
@@ -164,6 +165,7 @@
       margin-top: 5px;
       &::before, &::after {
         left: 5px;
+        border-top: none;
       }
       &::after {
         bottom: calc(100% - 1px);
@@ -180,6 +182,7 @@
       &::before, &::after {
         top: 50%;
         transform: translateY(-50%);
+        border-right: none;
       }
       &::after {
         border-left-color: white;
@@ -196,6 +199,7 @@
       &::before, &::after {
         top: 50%;
         transform: translateY(-50%);
+        border-left: none;
       }
       &::after {
         right: calc(100% - 1px);
