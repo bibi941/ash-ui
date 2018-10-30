@@ -1,7 +1,7 @@
 <template>
   <div class="popover"  ref="popover">
     <div class="content-wrapper" :class="{[`position-${position}`]:true}" ref="content" v-if="visible">
-      <slot name="content"></slot>
+      <slot name="content" :close="close"></slot>
     </div>
     <span class="button" ref="button">
       <slot></slot>
@@ -12,11 +12,6 @@
 <script>
   export default {
     name: 'ash-popover',
-    data() {
-      return {
-        visible: false
-      }
-    },
     props: {
       position: {
         type: String,
@@ -31,6 +26,11 @@
         validator(val) {
           return ['click', 'hover'].indexOf(val) >= 0
         }
+      }
+    },
+    data() {
+      return {
+        visible: false
       }
     },
     computed:{
