@@ -1,18 +1,68 @@
 <template>
-<div class="collapse">
-<slot></slot>
-</div>
+  <div class="collapse">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
+  import Vue from 'vue'
+
   export default {
-    name: 'ash-collapse'
+    name: 'ash-collapse',
+    props: {
+      selected: {
+        type: Array
+      },
+      single: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        eventBus: new Vue()
+      }
+    },
+    provide() {
+      return {
+        eventBus: this.eventBus
+      }
+    },
+    mounted() {
+      this.eventBus.$emit('update:selected', this.selected)//第一次通知给子元素以显示正确状态
+      this.listenAddSelected()
+      this.listenRemoveSelected()
+    },
+    methods: {
+      listenAddSelected() {
+        this.eventBus.$on('update:addSelected', (name) => {
+          let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+          if (this.single) {
+            selectedCopy = [name]
+          } else {
+            selectedCopy.push(name)
+          }
+          this.eventBus.$emit('update:selected', selectedCopy)
+          this.$emit('update:selected', selectedCopy)
+        })
+      },
+      listenRemoveSelected() {
+        this.eventBus.$on('update:removeSelected', (name) => {
+          let selectedCopy = JSON.parse(JSON.stringify(this.selected))
+          let index = selectedCopy.indexOf(name)
+          selectedCopy.splice(index, 1)
+          this.eventBus.$emit('update:selected', selectedCopy)
+          this.$emit('update:selected', selectedCopy)
+        })
+      }
+    }
   }
 </script>
 
 <style scoped lang='scss' type="text/scss">
-.collapse{
-  border: 1px solid #999999;
-  border-radius: 4px;
-}
+  .collapse {
+    border: 1px solid #c3c3c3;
+    /*border-bottom: none;*/
+    border-radius: 4px;
+  }
 </style>

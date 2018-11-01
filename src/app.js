@@ -45,7 +45,9 @@ Vue.use(plugin)
 
 new Vue({
   el: '#app',
-  data: {},
+  data: {
+    select:['2','1']
+  },
   created() {
   },
   methods: {
