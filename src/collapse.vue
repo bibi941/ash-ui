@@ -29,7 +29,7 @@
       }
     },
     mounted() {
-      this.eventBus.$emit('update:selected', this.selected)//第一次通知给子元素以显示正确状态
+      this.emitSonComponents(this.selected)
       this.listenAddSelected()
       this.listenRemoveSelected()
     },
@@ -42,8 +42,8 @@
           } else {
             selectedCopy.push(name)
           }
-          this.eventBus.$emit('update:selected', selectedCopy)
           this.$emit('update:selected', selectedCopy)
+          this.emitSonComponents(selectedCopy)
         })
       },
       listenRemoveSelected() {
@@ -51,9 +51,12 @@
           let selectedCopy = JSON.parse(JSON.stringify(this.selected))
           let index = selectedCopy.indexOf(name)
           selectedCopy.splice(index, 1)
-          this.eventBus.$emit('update:selected', selectedCopy)
           this.$emit('update:selected', selectedCopy)
+          this.emitSonComponents(selectedCopy)
         })
+      },
+      emitSonComponents(selected) {
+        this.eventBus.$emit('update:selected', selected)
       }
     }
   }
