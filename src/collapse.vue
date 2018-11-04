@@ -42,7 +42,7 @@
           } else {
             selectedCopy.push(name)
           }
-          this.$emit('update:selected', selectedCopy)
+          this.$emit('update:selected', selectedCopy)//通知自己（外层））
           this.emitSonComponents(selectedCopy)
         })
       },
@@ -51,7 +51,7 @@
           let selectedCopy = JSON.parse(JSON.stringify(this.selected))
           let index = selectedCopy.indexOf(name)
           selectedCopy.splice(index, 1)
-          this.$emit('update:selected', selectedCopy)
+          this.$emit('update:selected', selectedCopy)//通知自己（外层））
           this.emitSonComponents(selectedCopy)
         })
       },
