@@ -3,7 +3,7 @@
     <div class="title" @click="toggle">
       {{title}}
     </div>
-    <div class="content" v-show="open">
+    <div class="contents" v-show="open">
       <slot></slot>
     </div>
   </div>

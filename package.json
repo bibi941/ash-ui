@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/bibi941/ash-ui#readme",
   "dependencies": {
+    "sass-loader": "^7.1.0",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0"
   },

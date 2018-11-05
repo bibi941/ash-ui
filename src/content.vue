@@ -11,7 +11,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-.content{
+.contents{
   flex-grow: 1;
 }
 </style>
