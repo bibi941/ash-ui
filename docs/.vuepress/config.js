@@ -1,4 +1,5 @@
 module.exports = {
+  base: '/ash-ui/',
   title: 'Ash-UI',
   description: '一个基于 vue2.0的 看得过去你就用的 UI 组件',
   themeConfig: {
@@ -11,7 +12,7 @@ module.exports = {
       },
       {
         title: '组件',
-        children: ['/components/button'],
+        children: ['/components/button']
         // collapsable: false
       }
     ]

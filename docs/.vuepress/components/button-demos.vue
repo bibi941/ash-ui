@@ -6,8 +6,7 @@
       <b-button icon="settings">默认按钮</b-button>
       <b-button icon="settings" iconPosition="right">默认按钮</b-button>
     </div>
-    <pre>
-      <code>{{content}}</code>
+    <pre><code>{{content}}</code>
     </pre>
   </div>
 </template>
@@ -24,10 +23,11 @@
     data() {
       return {
         content: `
-      <b-button>默认按钮</b-button>
-      <b-button loading>默认按钮</b-button>
-      <b-button icon="settings">默认按钮</b-button>
-      <b-button icon="settings" iconPosition="right">默认按钮</b-button>`
+        <b-button>默认按钮</b-button>
+        <b-button loading>默认按钮</b-button>
+        <b-button icon="settings">默认按钮</b-button>
+        <b-button icon="settings" iconPosition="right">默认按钮</b-button>
+`.replace(/^ {8}/gm, '').trim()
       }
     }
   }
