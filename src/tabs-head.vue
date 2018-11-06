@@ -24,8 +24,8 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  $purple-lv3: #8640FF;
-  $grey-lv1: #E4E7ED;
+  @import "base";
+
   .tabs-head {
     display: flex;
     height: 40px;
@@ -43,7 +43,7 @@
     .line {
       position: absolute;
       bottom: 0;
-      border-bottom: 2px solid $purple-lv3;
+      border-bottom: 2px solid $purple-lv4;
       transition: all 350ms linear;
     }
   }

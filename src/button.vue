@@ -34,13 +34,8 @@
   }
 </script>
 <style lang="scss" type="text/scss" scoped>
-  $font-size: 14px;
-  $button-height: 32px;
-  $button-bg: white;
-  $button-active-bg: #eee;
-  $border-radius: 4px;
-  $border-color: #999;
-  $border-color-hover: #666;
+  @import "base";
+
   @keyframes spin {
     0% {
       transform: rotate(0deg);
@@ -55,22 +50,22 @@
     height: $button-height;
     padding: 0 1em;
     border-radius: $border-radius;
-    border: 1px solid $border-color;
-    background: $button-bg;
+    border: 1px solid $grey-lv3;
+    background: $white;
     display: inline-flex;
     justify-content: center;
     align-items: center;
     vertical-align: middle;
     /*&[disabled] {*/
-      /*cursor: not-allowed;*/
-      /*border-color: #c3c3c3;*/
-      /*color: #c3c3c3;*/
+    /*cursor: not-allowed;*/
+    /*border-color: #c3c3c3;*/
+    /*color: #c3c3c3;*/
     /*}*/
     &:hover {
-      border-color: $border-color-hover;
+      border-color: $grey-lv4;
     }
     &:active {
-      background-color: $button-active-bg;
+      background-color: $grey-lv1;
     }
     &:focus {
       outline: none;

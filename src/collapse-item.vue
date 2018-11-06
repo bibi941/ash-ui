@@ -51,9 +51,10 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  @import "base";
   .collapse-item {
     .title {
-      border: 1px solid #c3c3c3;
+      border: 1px solid $grey-lv3;
       margin-top: -1px;
       margin-left: -1px;
       margin-right: -1px;
@@ -62,7 +63,7 @@
       align-items: center;
       padding: 0 8px;
       cursor: pointer;
-      background: #eaeaea;
+      background: $grey-lv2;
     }
     &:first-child {
       .title {

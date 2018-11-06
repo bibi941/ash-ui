@@ -51,7 +51,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  $purple-lv3: #8640FF;
+  @import "base";
   .tabs-item {
     cursor: pointer;
     height: 100%;
@@ -60,7 +60,7 @@
     align-items: center;
     padding: 1em;
     &.active {
-      color: $purple-lv3;
+      color: $purple-lv4;
       font-weight: bold;
     }
     &.disabled {

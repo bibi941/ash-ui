@@ -82,12 +82,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  $font-size: 14px;
-  $toast-height: 40px;
-  $toast-bg: rgba(0, 0, 0, 0.75);
-  $toast-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
-  $toast-radius: 4px;
-  $animation-time:500ms;
+  @import "base";
   @keyframes slide-up {
     0% {opacity: 0;transform: translateY(100%)}
     100% {opacity: 1;transform: translateY(0)}
@@ -133,18 +128,18 @@
     min-height: $toast-height;
     background: $toast-bg;
     box-shadow: $toast-shadow;
-    border-radius: $toast-radius;
+    border-radius: $border-radius;
     line-height: 1.8;
     display: flex;
     align-items: center;
-    color: #ffffff;
+    color: $white;
     padding: 0 8px;
 
     .message {
       padding: 8px 8px 8px 0;
     }
     .line {
-      border: 1px solid #666666;
+      border: 1px solid $grey-lv4;
     }
     .button {
       padding-left: 8px;

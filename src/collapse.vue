@@ -63,9 +63,9 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  @import "base";
   .collapse {
-    border: 1px solid #c3c3c3;
-    /*border-bottom: none;*/
+    border: 1px solid $grey-lv4;
     border-radius: 4px;
   }
 </style>

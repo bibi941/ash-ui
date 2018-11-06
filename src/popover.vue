@@ -99,8 +99,7 @@
 </script>
 
 <style scoped lang="scss" type="text/scss">
-  $border-radius: 4px;
-  $border-color: #e8e2ff;
+  @import "base";
   .popover {
     display: inline-block;
     vertical-align: top;
@@ -113,12 +112,12 @@
   .content-wrapper {
     position: absolute;
     border-radius: $border-radius;
-    border: 1px solid $border-color;
+    border: 1px solid $purple-lv1;
     padding: 0.5em 1em;
     margin-top: -5px;
     max-width: 20em;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
-    background: white;
+    background: $white;
     word-break: break-all;
     &::before, &::after {
       content: '';
@@ -137,11 +136,11 @@
       }
       &::after {
         top: calc(100% - 1px);
-        border-top-color: white;
+        border-top-color: $white;
       }
       &::before {
         top: 100%;
-        border-top-color: $border-color;
+        border-top-color: $purple-lv1;
       }
     }
 
@@ -153,11 +152,11 @@
       }
       &::after {
         bottom: calc(100% - 1px);
-        border-bottom-color: white;
+        border-bottom-color: $white;
       }
       &::before {
         bottom: 100%;
-        border-bottom-color: $border-color;
+        border-bottom-color: $purple-lv1;
       }
     }
     &.position-left {
@@ -169,11 +168,11 @@
         border-right: none;
       }
       &::after {
-        border-left-color: white;
+        border-left-color: $white;
         left: calc(100% - 1px);
       }
       &::before {
-        border-left-color: $border-color;
+        border-left-color: $purple-lv1;
         left: 100%;
       }
     }
@@ -187,10 +186,10 @@
       }
       &::after {
         right: calc(100% - 1px);
-        border-right-color: white;
+        border-right-color: $white;
       }
       &::before {
-        border-right-color: $border-color;
+        border-right-color: $purple-lv1;
         right: 100%;
       }
     }
