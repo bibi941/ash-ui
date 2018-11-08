@@ -41,7 +41,6 @@ Vue.component('b-tabs-pane', TabsPane)
 Vue.component('b-popover', popOver)
 Vue.component('b-collapse', Collapse)
 Vue.component('b-collapse-item', CollapseItem)
-Vue.use(plugin)
 
 new Vue({
   el: '#app',
