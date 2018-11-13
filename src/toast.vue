@@ -127,7 +127,7 @@
     font-size: $font-size;
     min-height: $toast-height;
     background: $toast-bg;
-    box-shadow: $toast-shadow;
+    box-shadow: $box-shadow;
     border-radius: $border-radius;
     line-height: 1.8;
     display: flex;

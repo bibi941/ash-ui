@@ -20,5 +20,5 @@ $input-height: 32px;
 $box-shadow-color: rgba(0, 0, 0, 0.5);
 $toast-height: 40px;
 $toast-bg: rgba(0, 0, 0, 0.75);
-$toast-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
-$animation-time:500ms;
+$box-shadow: 0 0 3px 0 $box-shadow-color;
+$animation-time: 500ms;
