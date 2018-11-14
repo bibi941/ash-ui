@@ -1,6 +1,6 @@
-<template >
+<template>
   <div style="padding: 100px;">
-    <b-cascader :source="source"></b-cascader>
+    <b-cascader :source="source" :selected="selected" @update:selected="selected = $event"></b-cascader>
   </div>
 </template>
 
@@ -8,7 +8,6 @@
   import Button from './button'
   import ButtonGroup from './button-group'
   import Cascader from './cascader'
-  import CascaderItem from './cascader-item'
   import Col from './col'
   import Collapse from './collapse'
   import CollapseItem from './collapse-item'
@@ -38,7 +37,6 @@
       'b-button': Button,
       'b-button-group': ButtonGroup,
       'b-cascader': Cascader,
-      'b-cascader-item': CascaderItem,
       'b-col': Col,
       'b-collapse': Collapse,
       'b-collapse-item': CollapseItem,
@@ -60,6 +58,7 @@
     },
     data() {
       return {
+        selected: [],
         source: [
           {
             name: '四川',
@@ -95,6 +94,7 @@
             ]
           }
         ]
+
       }
     }
   }
