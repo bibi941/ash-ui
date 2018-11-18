@@ -2,7 +2,7 @@
   <div class="cascader-item" :style="{height}">
     <div class="left">
       <div  class="label" v-for="item in items" @click="onClickLabel(item)">
-        {{item.name}}
+          {{item.name}}
         <icon v-if="item.children" class="icon" name="right"></icon>
       </div>
     </div>
@@ -75,8 +75,12 @@
         display: flex;
         padding: .3em 0.5em;
         align-items: center;
+        cursor: pointer;
         .icon{
-          fill: $purple-lv2;
+          fill: $grey-lv3;
+        }
+        &:hover{
+          background: $purple-lv0;
         }
       }
     }
