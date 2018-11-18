@@ -64,6 +64,7 @@
 <style scoped lang='scss' type="text/scss">
   @import "base";
   .cascader-item {
+    color: $font-color;
     display: flex;
     .left {
       border: 1px solid $border-color-light;
