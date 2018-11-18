@@ -1,3 +1,4 @@
+//基础色
 $white: #ffffff;
 $grey-lv1: #EEEEEE;
 $grey-lv2: #CECDCE;
@@ -11,14 +12,18 @@ $purple-lv4: #9A60FF;
 $purple-lv5: #5E2DB6;
 $red-error: #f1453D;
 
-$font-size: 14px;
-
-$button-height: 32px;
-$border-radius: 4px;
-
-$input-height: 32px;
-$box-shadow-color: rgba(0, 0, 0, 0.5);
-$toast-height: 40px;
-$toast-bg: rgba(0, 0, 0, 0.75);
-$box-shadow: 0 0 3px 0 $box-shadow-color;
 $animation-time: 500ms;
+$border-color:$grey-lv2;
+$border-color-light:$grey-lv1;
+$border-radius: 4px;
+$box-shadow-color: rgba(0, 0, 0, 0.5);
+$box-shadow-light:0 2px 2px 0 rgba(0,0,0,0.1);
+$box-shadow: 0 0 3px 0 $box-shadow-color;
+%box-shadow{
+  box-shadow: $box-shadow;
+}
+$button-height: 32px;
+$font-size: 14px;
+$input-height: 32px;
+$toast-bg: rgba(0, 0, 0, 0.75);
+$toast-height: 40px;

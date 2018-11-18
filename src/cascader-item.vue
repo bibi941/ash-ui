@@ -1,21 +1,27 @@
 <template>
-  <div class="cascader-item">
+  <div class="cascader-item" :style="{height}">
     <div class="left">
-      <!--{{selected}}}-->
-      <div v-for="item in items" @click="onClickLabel(item)">
+      <div  class="label" v-for="item in items" @click="onClickLabel(item)">
         {{item.name}}
+        <icon v-if="item.children" class="icon" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <ash-cascader-items :items="rightItems" :selected="selected" :level="level+1" @update:selected="onUpdateSelected"></ash-cascader-items>
+      <ash-cascader-items :height="height" :items="rightItems" :selected="selected" :level="level+1" @update:selected="onUpdateSelected"></ash-cascader-items>
     </div>
   </div>
 </template>
 
 <script>
+  import icon from './icon'
   export default {
     name: 'ash-cascader-items',
+    components:{icon},
     props: {
+      height:{
+        type:String,
+        default:'100px'
+      },
       selected: {
         type: Array,
         default: () => []
@@ -56,13 +62,24 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  @import "base";
   .cascader-item {
     display: flex;
     .left {
-      border: 1px solid forestgreen;
+      border: 1px solid $border-color-light;
+      box-shadow: $box-shadow-light;
+      padding: 0.3em 0;
+      height: 100%;
+      .label{
+        display: flex;
+        padding: .3em 0.5em;
+        align-items: center;
+        .icon{
+          fill: $purple-lv2;
+        }
+      }
     }
     .right {
-      border: 1px solid mediumpurple;
     }
   }
 </style>

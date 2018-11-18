@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 100px;">
-    <b-cascader :source="source" :selected="selected" @update:selected="selected = $event"></b-cascader>
+    <b-cascader  :source="source" :selected="selected" @update:selected="selected = $event"></b-cascader>
   </div>
 </template>
 
