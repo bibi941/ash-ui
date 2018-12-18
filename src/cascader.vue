@@ -1,10 +1,15 @@
 <template>
   <div class="cascader">
-    <div class="trigger" @click="popoverVisible=!popoverVisible">
-      {{result||'&nbsp'}}
+    <div class="trigger" @click="popoverVisible =! popoverVisible">
+      {{result || '&nbsp'}}
     </div>
-    <div class="popover-wrapper">
-      <cascader-items class="popover" :height="popoverHeight" :items="source" :selected="selected" @update:selected="onUpdateSelected"></cascader-items>
+    <div class="popover-wrapper" v-show="popoverVisible">
+      <cascader-items class="popover"
+        :height="popoverHeight"
+        :source="source"
+        :selected="selected"
+        @update:selected="onUpdateSelected">
+      </cascader-items>
     </div>
   </div>
 </template>
@@ -23,8 +28,8 @@
       source: {
         type: Array
       },
-      popoverHeight:{
-        type:String,
+      popoverHeight: {
+        type: String
       }
     },
     data() {
@@ -58,8 +63,9 @@
       border: 1px solid $grey-lv2;
       border-radius: $border-radius-light;
       color: $font-color;
+      cursor: pointer;
     }
-    .popover-wrapper{
+    .popover-wrapper {
       margin-top: 8px;
     }
   }
