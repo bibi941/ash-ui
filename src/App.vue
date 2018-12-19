@@ -78,13 +78,6 @@
           upDateSource(result)
         )
       },
-      xxx() {
-        console.log(111)
-        ajax(this.selected[0].id).then(res => {
-          let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0]
-          this.$set(lastLevelSelected, 'children', res)
-        })
-      }
     },
     created() {
       ajax(0).then(res => {
