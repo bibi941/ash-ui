@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 100px;">
-    <b-cascader :source="source" :selected.sync="selected" @update:selected="xxx" :load-data="loadData"></b-cascader>
+    <b-cascader :source.sync="source" :selected.sync="selected"  :load-data="loadData"></b-cascader>
   </div>
 </template>
 
@@ -37,7 +37,7 @@
       let result = db.filter((item) => item.parent_id === parentId)
       setTimeout(() => {
         resolve(result)
-      }, 1000)
+      }, 500)
     })
   }
 
@@ -79,6 +79,7 @@
         )
       },
       xxx() {
+        console.log(111)
         ajax(this.selected[0].id).then(res => {
           let lastLevelSelected = this.source.filter(item => item.id === this.selected[0].id)[0]
           this.$set(lastLevelSelected, 'children', res)

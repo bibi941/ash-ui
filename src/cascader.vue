@@ -78,10 +78,12 @@
           }
         }
         let upDateSource = (result) => {
-          // let copySource = JSON.parse(JSON.stringify(this.source))
-          let toUpdateItem = complex(this.source, lastItem.id)
-          console.log(toUpdateItem)
-          this.$set(toUpdateItem, 'children', result)
+          let copy = JSON.parse(JSON.stringify(this.source))
+          let toUpdateItem = complex(copy, lastItem.id)
+          toUpdateItem.children = result
+          // this.$set(toUpdateItem, 'children', result)
+          this.$emit('update:source',copy)
+
         }
         this.loadData(lastItem, upDateSource)  //callback
       }
