@@ -30,6 +30,9 @@
       },
       popoverHeight: {
         type: String
+      },
+      loadData: {
+        type: Function
       }
     },
     data() {
@@ -40,6 +43,47 @@
     methods: {
       onUpdateSelected(newSelected) {
         this.$emit('update:selected', newSelected)
+        let lastItem = newSelected[newSelected.length - 1]  //用户点的那一项
+
+        let simplest = (children, id) => {
+          return children.filter(item => item.id === id)[0]
+        }
+        let complex = (children, id) => {
+          let hasChildren = []
+          let noChildren = []
+          children.forEach(item => {
+            if (item.children) {
+              hasChildren.push(item)
+            } else {
+              noChildren.push(item)
+            }
+          })
+          let found = simplest(noChildren, id)
+          if (found) {
+            return found
+          } else {
+            found = simplest(hasChildren, id)
+            if (found) {
+              return found
+            } else {
+              //hasChildren全部找一遍
+              for (let i = 0; i < hasChildren.length; i++) {
+                found = complex(hasChildren[i].children, id)  //递归
+                if (found) {
+                  return found
+                }
+              }
+              return null
+            }
+          }
+        }
+        let upDateSource = (result) => {
+          // let copySource = JSON.parse(JSON.stringify(this.source))
+          let toUpdateItem = complex(this.source, lastItem.id)
+          console.log(toUpdateItem)
+          this.$set(toUpdateItem, 'children', result)
+        }
+        this.loadData(lastItem, upDateSource)  //callback
       }
     },
     computed: {

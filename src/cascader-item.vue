@@ -77,7 +77,7 @@
     .left {
       border: 1px solid $border-color-light;
       box-shadow: $box-shadow-light;
-      padding: 0 0 0.3em 0;
+      padding: 0.3em 0;
       height: 100%;
       overflow: auto;
       .label {
