@@ -62,6 +62,7 @@
         copy.splice(this.level + 1) // 精髓,删除后面
         this.$emit('update:selected', copy)
       },
+
       onUpdateSelected(newSelected) {
         this.$emit('update:selected', newSelected)
       }

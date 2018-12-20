@@ -82,9 +82,11 @@
           let toUpdateItem = complex(copy, lastItem.id)
           toUpdateItem.children = result
           // this.$set(toUpdateItem, 'children', result)
-          this.$emit('update:source',copy)
+          this.$emit('update:source', copy)
         }
-        this.loadData(lastItem, upDateSource)  //callback
+        if (!lastItem.isLeaf) {
+          this.loadData(lastItem, upDateSource)  //callback
+        }
       }
     },
     computed: {
