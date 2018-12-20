@@ -8,6 +8,7 @@
         :height="popoverHeight"
         :source="source"
         :selected="selected"
+        :loadData="loadData"
         @update:selected="onUpdateSelected">
       </cascader-items>
     </div>
@@ -85,7 +86,7 @@
           this.$emit('update:source', copy)
         }
         if (!lastItem.isLeaf) {
-          this.loadData(lastItem, upDateSource)  //callback
+          this.loadData && this.loadData(lastItem, upDateSource)  //callback
         }
       }
     },
@@ -112,7 +113,7 @@
       color: $font-color;
       cursor: pointer;
     }
-    .trigger.active{
+    .trigger.active {
       border: 1px solid $purple-lv1;
     }
     .popover-wrapper {
