@@ -7,12 +7,7 @@
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <ash-cascader-items
-        :height="height"
-        :source="rightItems"
-        :selected="selected"
-        :level="level+1"
-        @update:selected="onUpdateSelected">
+      <ash-cascader-items :height="height" :source="rightItems" :selected="selected" :level="level+1" @update:selected="onUpdateSelected">
       </ash-cascader-items>
     </div>
   </div>
@@ -53,15 +48,14 @@
             return item[0].children
           }
         }
-      },
-
+      }
     },
     data() {
       return {}
     },
     methods: {
-      rightArrowVisible(item){
-        return this.loadData ? !item.isLeaf :item.children
+      rightArrowVisible(item) {
+        return this.loadData ? !item.isLeaf : item.children
       },
       onClickLabel(item) {
         let copy = JSON.parse(JSON.stringify(this.selected))
@@ -92,11 +86,11 @@
       overflow: auto;
       .label {
         display: flex;
-        padding: .3em 0.5em;
+        padding: 0.3em 0.5em;
         align-items: center;
         cursor: pointer;
-        >.name{
-          margin-left: .5em;
+        > .name {
+          margin-left: 0.5em;
         }
         .icon {
           fill: $grey-lv3;

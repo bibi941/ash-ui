@@ -1,6 +1,6 @@
 <template>
-  <div class="cascader">
-    <div class="trigger" :class="{ active: popoverVisible }" @click="popoverVisible =! popoverVisible">
+  <div class="cascader" v-click-outside="close">
+    <div class="trigger" :class="{ active: popoverVisible }" @click="toggle">
       {{result || '&nbsp'}}
     </div>
     <div class="popover-wrapper" v-show="popoverVisible">
@@ -17,10 +17,12 @@
 
 <script>
   import cascaderItems from './cascader-item'
+  import ClickOutside from './click-outside'
 
   export default {
     name: 'ash-cascader',
     components: {cascaderItems},
+    directives: {ClickOutside},
     props: {
       selected: {
         type: Array,
@@ -42,6 +44,19 @@
       }
     },
     methods: {
+      toggle() {
+        if (this.popoverVisible) {
+          this.close()
+        } else {
+          this.open()
+        }
+      },
+      close() {
+        this.popoverVisible = false
+      },
+      open() {
+        this.popoverVisible = true
+      },
       onUpdateSelected(newSelected) {
         this.$emit('update:selected', newSelected)
         let lastItem = newSelected[newSelected.length - 1]  //用户点的那一项
@@ -102,6 +117,8 @@
   @import "base";
 
   .cascader {
+    display: inline-block;
+    position: relative;
     .trigger {
       height: $input-height;
       min-width: 10em;
@@ -117,7 +134,14 @@
       border: 1px solid $purple-lv1;
     }
     .popover-wrapper {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      display: flex;
       margin-top: 8px;
+      z-index: 1;
+
     }
   }
 </style>

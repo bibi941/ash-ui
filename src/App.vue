@@ -1,6 +1,8 @@
 <template>
   <div style="padding: 100px;">
     <b-cascader :source.sync="source" :selected.sync="selected"  ></b-cascader>
+    <span>dadas</span>
+    <b-cascader :source.sync="source" :selected.sync="selected"  ></b-cascader>
   </div>
 </template>
 
@@ -108,6 +110,7 @@
           },
           {
             name: '安徽',
+            disabled:true,
             children: [
               {
                 name: '合肥',
