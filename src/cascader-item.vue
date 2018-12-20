@@ -2,7 +2,7 @@
   <div class="cascader-item" :style="{height}">
     <div class="left">
       <div class="label" v-for="item in source" @click="onClickLabel(item)">
-        {{item.name}}
+        <span class="name">{{item.name}}</span>
         <icon v-if="!item.isLeaf" class="icon" name="right"></icon>
       </div>
     </div>
@@ -27,7 +27,7 @@
     props: {
       height: {
         type: String,
-        default: '150px'
+        default: '160px'
       },
       selected: {
         type: Array,
@@ -77,6 +77,7 @@
     color: $font-color;
     display: flex;
     .left {
+      min-width: 140px;
       border: 1px solid $border-color-light;
       box-shadow: $box-shadow-light;
       padding: 0.3em 0;
@@ -87,8 +88,12 @@
         padding: .3em 0.5em;
         align-items: center;
         cursor: pointer;
+        >.name{
+          margin-left: .5em;
+        }
         .icon {
           fill: $grey-lv3;
+          margin-left: auto;
         }
         &:hover {
           background: $purple-lv0;

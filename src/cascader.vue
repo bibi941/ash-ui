@@ -1,6 +1,6 @@
 <template>
   <div class="cascader">
-    <div class="trigger" @click="popoverVisible =! popoverVisible">
+    <div class="trigger" :class="{ active: popoverVisible }" @click="popoverVisible =! popoverVisible">
       {{result || '&nbsp'}}
     </div>
     <div class="popover-wrapper" v-show="popoverVisible">
@@ -111,6 +111,9 @@
       border-radius: $border-radius-light;
       color: $font-color;
       cursor: pointer;
+    }
+    .trigger.active{
+      border: 1px solid $purple-lv1;
     }
     .popover-wrapper {
       margin-top: 8px;
