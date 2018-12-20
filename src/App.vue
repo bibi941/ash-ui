@@ -34,7 +34,10 @@
 
   function ajax(parentId = 0) {
     return new Promise((resolve, reject) => {
-      let result = db.filter((item) => item.parent_id === parentId)
+      let result = db.filter(item => item.parent_id === parentId)
+      result.forEach(node=>{
+        node.isLeaf = db.filter(item => item.parent_id === node.id).length <= 0;
+      })
       setTimeout(() => {
         resolve(result)
       }, 500)

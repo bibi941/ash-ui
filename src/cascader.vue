@@ -68,7 +68,7 @@
             } else {
               //hasChildren全部找一遍
               for (let i = 0; i < hasChildren.length; i++) {
-                found = complex(hasChildren[i].children, id)  //递归
+                found = complex(hasChildren[i].children, id)  //递归 精髓！！
                 if (found) {
                   return found
                 }
@@ -83,7 +83,6 @@
           toUpdateItem.children = result
           // this.$set(toUpdateItem, 'children', result)
           this.$emit('update:source',copy)
-
         }
         this.loadData(lastItem, upDateSource)  //callback
       }

@@ -3,7 +3,7 @@
     <div class="left">
       <div class="label" v-for="item in source" @click="onClickLabel(item)">
         {{item.name}}
-        <icon v-if="item.children" class="icon" name="right"></icon>
+        <icon v-if="!item.isLeaf" class="icon" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -50,12 +50,6 @@
             return item[0].children
           }
         }
-        // let currentSelected = this.selected[this.level]
-        // if (currentSelected && currentSelected.children) {
-        //   return currentSelected.children
-        // } else {
-        //   return null
-        // }
       }
     },
     data() {
