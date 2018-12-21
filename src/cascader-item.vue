@@ -3,11 +3,25 @@
     <div class="left">
       <div class="label" v-for="item in source" @click="onClickLabel(item)">
         <span class="name">{{item.name}}</span>
-        <icon v-if="rightArrowVisible(item)" class="icon" name="right"></icon>
+        <span class="icons">
+          <template v-if="item.name === loadingItem.name">
+            <icon class="loading" name="loading1"></icon>
+          </template>
+          <template v-else>
+            <icon v-if="rightArrowVisible(item)" class="arrow" name="right"></icon>
+          </template>
+        </span>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <ash-cascader-items :height="height" :source="rightItems" :selected="selected" :level="level+1" @update:selected="onUpdateSelected">
+      <ash-cascader-items
+        :height="height"
+        :source="rightItems"
+        :selected="selected"
+        :level="level+1"
+        :loadingItem="loadingItem"
+        :loadData="loadData"
+        @update:selected="onUpdateSelected">
       </ash-cascader-items>
     </div>
   </div>
@@ -37,6 +51,10 @@
       },
       loadData: {
         type: Function
+      },
+      loadingItem: {
+        type: Object,
+        default:() => ({})
       }
     },
     computed: {
@@ -92,10 +110,16 @@
         > .name {
           margin-left: 0.5em;
         }
-        .icon {
+        > .icons {
           fill: $grey-lv3;
           margin-left: auto;
+          .arrow {
+          }
+          .loading {
+            animation: spin 2s infinite linear;
+          }
         }
+
         &:hover {
           background: $purple-lv0;
         }

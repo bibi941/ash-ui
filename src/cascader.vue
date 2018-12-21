@@ -9,6 +9,7 @@
         :source="source"
         :selected="selected"
         :loadData="loadData"
+        :loadingItem="loadingItem"
         @update:selected="onUpdateSelected">
       </cascader-items>
     </div>
@@ -40,16 +41,13 @@
     },
     data() {
       return {
-        popoverVisible: false
+        popoverVisible: false,
+        loadingItem: {}
       }
     },
     methods: {
       toggle() {
-        if (this.popoverVisible) {
-          this.close()
-        } else {
-          this.open()
-        }
+        this.popoverVisible ? this.close() : this.open()
       },
       close() {
         this.popoverVisible = false
@@ -94,14 +92,15 @@
           }
         }
         let upDateSource = (result) => {
+          this.loadingItem = {}
           let copy = JSON.parse(JSON.stringify(this.source))
           let toUpdateItem = complex(copy, lastItem.id)
           toUpdateItem.children = result
-          // this.$set(toUpdateItem, 'children', result)
           this.$emit('update:source', copy)
         }
-        if (!lastItem.isLeaf) {
-          this.loadData && this.loadData(lastItem, upDateSource)  //callback
+        if (!lastItem.isLeaf && this.loadData) {
+          this.loadData(lastItem, upDateSource)  //callback
+          this.loadingItem = lastItem
         }
       }
     },
