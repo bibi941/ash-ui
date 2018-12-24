@@ -1,10 +1,8 @@
-// noinspection ES6CheckImport
 import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import Button from '@/button.vue'
 import { mount } from '@vue/test-utils'
-
 chai.use(sinonChai)
 
 
