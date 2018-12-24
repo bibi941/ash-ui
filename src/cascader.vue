@@ -1,7 +1,8 @@
 <template>
   <div class="cascader" v-click-outside="close">
     <div class="trigger" :class="{ active: popoverVisible }" @click="toggle">
-      {{result || '&nbsp'}}
+      <span>{{result || '&nbsp'}}</span>
+      <icon name="down" class="arrow"></icon>
     </div>
     <div class="popover-wrapper" v-show="popoverVisible">
       <cascader-items class="popover"
@@ -19,10 +20,11 @@
 <script>
   import cascaderItems from './cascader-item'
   import ClickOutside from './click-outside'
+  import icon from './icon'
 
   export default {
     name: 'ash-cascader',
-    components: {cascaderItems},
+    components: {cascaderItems, icon},
     directives: {ClickOutside},
     props: {
       selected: {
@@ -128,10 +130,23 @@
       border-radius: $border-radius-light;
       color: $font-color;
       cursor: pointer;
+      .arrow {
+        fill: $grey-lv4;
+        position: absolute;
+        top: 25%;
+        right: 2%;
+        transition: transform .3s;
+        transform: rotate(180deg);
+
+      }
     }
     .trigger.active {
       border: 1px solid $purple-lv1;
+      .arrow {
+        transform: rotate(0deg);
+      }
     }
+
     .popover-wrapper {
       position: absolute;
       top: 100%;

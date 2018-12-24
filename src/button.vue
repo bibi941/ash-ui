@@ -47,11 +47,6 @@
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-    /*&[disabled] {*/
-    /*cursor: not-allowed;*/
-    /*border-color: #c3c3c3;*/
-    /*color: #c3c3c3;*/
-    /*}*/
     &:hover {
       border-color: $grey-lv4;
     }
