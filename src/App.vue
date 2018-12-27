@@ -1,6 +1,8 @@
 <template>
   <div style="padding: 100px;">
-    <b-cascader :source.sync="source" :selected.sync="selected"  :load-data="loadData"></b-cascader>
+    <b-slides>
+
+    </b-slides>
   </div>
 </template>
 
@@ -21,6 +23,7 @@
   import PopOver from './popover'
   import Row from './row'
   import Sider from './sider'
+  import Slides from './slides'
   import Tabs from './tabs'
   import TabsBody from './tabs-body'
   import TabsHead from './tabs-head'
@@ -30,19 +33,6 @@
   import Vue from 'vue'
 
   Vue.use(plugin)
-  import db from './db'
-
-  function ajax(parentId = 0) {
-    return new Promise((resolve, reject) => {
-      let result = db.filter(item => item.parent_id === parentId)
-      result.forEach(node=>{
-        node.isLeaf = db.filter(item => item.parent_id === node.id).length <= 0;
-      })
-      setTimeout(() => {
-        resolve(result)
-      }, 500)
-    })
-  }
 
   export default {
     name: 'app',
@@ -67,7 +57,8 @@
       'b-tabs-head': TabsHead,
       'b-tabs-item': TabsItem,
       'b-tabs-pane': TabsPane,
-      'b-toast': Toast
+      'b-toast': Toast,
+      'b-slides': Slides
     },
     data() {
       return {
@@ -76,16 +67,10 @@
       }
     },
     methods: {
-      loadData({id}, upDateSource) {
-        ajax(id).then(result =>
-          upDateSource(result)
-        )
-      },
+
     },
     created() {
-      ajax(0).then(res => {
-        this.source = res
-      })
+
     }
   }
 </script>
