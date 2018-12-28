@@ -3,17 +3,32 @@
 * @author : fangXinRui
 */
 <template>
-
+  <transition name="slide">
+    <div class="b-slides-item" v-if="visible">
+      <slot></slot>
+    </div>
+  </transition>
 </template>
 
 <script>
   export default {
     name: 'ash-slides-item',
-    props: {},
-    data() {
-      return {}
+    props: {
+      name: {
+        type: String,
+        required: true
+      }
     },
-    computed: {},
+    data() {
+      return {
+        selected: null
+      }
+    },
+    computed: {
+      visible() {
+        return this.name === this.selected
+      }
+    },
     methods: {},
     created() {
     },
@@ -23,5 +38,22 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  .slide-leave-active {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+  }
+  .slide-enter-active, .slide-leave-active {
+    transition: all 2s;
+  }
+
+  .slide-enter {
+    transform: translateX(100%);
+  }
+
+  .slide-leave-to {
+    transform: translateX(-100%);
+  }
 
 </style>
