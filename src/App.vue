@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-slides class="wrapper" :selected='selected'>
+    <b-slides class="wrapper" :selected.sync='selected'>
       <b-slides-item name="1">
         <div class="box">1</div>
       </b-slides-item>
@@ -77,14 +77,6 @@
     },
     methods: {},
     created() {
-      let n = 1
-      setInterval(() => {
-        if(n ===4){
-          n =1
-        }
-        this.selected = n+''
-        n += 1
-      }, 2000)
     }
   }
 </script>
