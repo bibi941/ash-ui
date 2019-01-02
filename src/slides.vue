@@ -3,7 +3,9 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-slides">
+  <div class="b-slides"
+    @mouseleave="onMouseLeave"
+    @mouseenter="onMouseEnter">
     <div class="b-slides-window">
       <div class="b-slides-wrapper">
         <slot></slot>
@@ -33,7 +35,8 @@
     data() {
       return {
         childrenLength: 0,
-        lastSelectedIndex:null
+        lastSelectedIndex:null,
+        timeId:null
       }
     },
     computed: {
@@ -50,15 +53,28 @@
     },
     methods: {
       playAutomatic() {
+        if(this.timeId){
+          return
+        }
         let run = () => {
         let index = this.names.indexOf(this.getSelected)
           let newIndex = index - 1
           if (newIndex === -1) {newIndex = this.names.length - 1}
           if (newIndex === this.names.length) {newIndex = 0}
           this.select(newIndex)
-          setTimeout(run, 3000)
+          this.timeId = setTimeout(run, 3000)
         }
-        setTimeout(run, 3000)
+        this.timeId = setTimeout(run, 3000)
+      },
+      pause(){
+        window.clearTimeout(this.timeId)
+      },
+      onMouseEnter(){
+        this.pause()
+        this.timeId = null
+      },
+      onMouseLeave(){
+        this.playAutomatic()
       },
       updateChildren() {
         this.$children.forEach(vm => {
