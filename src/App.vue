@@ -91,8 +91,12 @@
   .box {
     width: 100%;
     height: 300px;
-    background: #999;
-    border: 1px solid red;
+    background: #000;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 100px;
+    color: white;
   }
 
   .wrapper {

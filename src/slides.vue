@@ -50,15 +50,15 @@
     },
     methods: {
       playAutomatic() {
-        let index = this.names.indexOf(this.getSelected)
         let run = () => {
+        let index = this.names.indexOf(this.getSelected)
           let newIndex = index - 1
           if (newIndex === -1) {newIndex = this.names.length - 1}
           if (newIndex === this.names.length) {newIndex = 0}
           this.select(newIndex)
           setTimeout(run, 3000)
         }
-        // setTimeout(run, 3000)
+        setTimeout(run, 3000)
       },
       updateChildren() {
         this.$children.forEach(vm => {

@@ -47,7 +47,7 @@
     height: 100%;
   }
   .slide-enter-active, .slide-leave-active {
-    transition: all 1s;
+    transition: all 0.5s;
   }
 
   .slide-enter {
