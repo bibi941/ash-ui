@@ -72,7 +72,7 @@
     },
     data() {
       return {
-        selected: '2'
+        selected: '1'
       }
     },
     methods: {},

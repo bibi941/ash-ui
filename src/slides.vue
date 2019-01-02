@@ -35,8 +35,8 @@
     data() {
       return {
         childrenLength: 0,
-        lastSelectedIndex:null,
-        timeId:null
+        lastSelectedIndex: null,
+        timeId: null
       }
     },
     computed: {
@@ -46,47 +46,59 @@
       names() {
         return this.$children.map(vm => vm.name)
       },
-      getSelected(){
+      getSelected() {
         let first = this.$children[0]
         return this.selected || first.name
       }
     },
     methods: {
       playAutomatic() {
-        if(this.timeId){
+        if (this.timeId) {
           return
         }
         let run = () => {
-        let index = this.names.indexOf(this.getSelected)
-          let newIndex = index - 1
-          if (newIndex === -1) {newIndex = this.names.length - 1}
-          if (newIndex === this.names.length) {newIndex = 0}
+          let index = this.names.indexOf(this.getSelected)
+          let newIndex = index + 1
+          if (newIndex === -1) {
+            newIndex = this.names.length + 1
+          }
+          if (newIndex === this.names.length) {
+            newIndex = 0
+          }
           this.select(newIndex)
           this.timeId = setTimeout(run, 3000)
         }
         this.timeId = setTimeout(run, 3000)
       },
-      pause(){
+      pause() {
         window.clearTimeout(this.timeId)
       },
-      onMouseEnter(){
+      onMouseEnter() {
         this.pause()
         this.timeId = null
       },
-      onMouseLeave(){
+      onMouseLeave() {
         this.playAutomatic()
       },
       updateChildren() {
         this.$children.forEach(vm => {
-          vm.reverse = this.selectedIndex - this.lastSelectedIndex <= 0
-          this.$nextTick(()=>{
-          vm.selected = this.getSelected
+          let reverse = this.selectedIndex - this.lastSelectedIndex <= 0
+          if(this.timeId){
+            if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+              reverse = false
+            } else if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+              reverse = true
+            }
+          }
+          vm.reverse = reverse
+          this.$nextTick(() => {
+            vm.selected = this.getSelected
           })
         })
       },
-      select(index){
+      select(index) {
         this.lastSelectedIndex = this.selectedIndex
-        this.$emit('update:selected',this.names[index])
+        this.$emit('update:selected', this.names[index])
       }
     },
     created() {
