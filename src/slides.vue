@@ -14,7 +14,7 @@
     <div class="b-slides-dots">
       <span v-for="n in childrenLength" :class="{active:selectedIndex === n-1}"
         @click="select(n-1)">
-        {{n-1}}
+        {{n}}
       </span>
     </div>
   </div>
@@ -125,10 +125,27 @@
       position: relative;
     }
     &-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 0;
       > span {
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        background: $grey-lv1;
+        color: $grey-lv4;
+        border-radius: 50%;
         cursor: pointer;
+        margin: 0 4px;
+        font-size: 12px;
         &.active {
-          color: $red-error;
+          color: $white;
+          background: $purple-lv1;
+          font-weight:600;
+          cursor: default;
         }
       }
     }
