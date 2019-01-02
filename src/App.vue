@@ -72,7 +72,7 @@
     },
     data() {
       return {
-        selected: null
+        selected: '2'
       }
     },
     methods: {},
@@ -89,7 +89,7 @@
   }
 
   .box {
-    width: 400px;
+    width: 100%;
     height: 300px;
     background: #999;
     border: 1px solid red;
