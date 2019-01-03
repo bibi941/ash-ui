@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import BIcon from './icon'
+  import BIcon from '../icon'
 
   export default {
     name: 'ash-slides',
