@@ -14,17 +14,26 @@
       </div>
     </div>
     <div class="b-slides-dots">
+      <span @click="onClickPrev">
+        <b-icon name="left" ></b-icon>
+      </span>
       <span v-for="n in childrenLength" :class="{active:selectedIndex === n-1}"
         @click="select(n-1)">
         {{n}}
+      </span>
+      <span @click="onClickNext">
+        <b-icon name="right" ></b-icon>
       </span>
     </div>
   </div>
 </template>
 
 <script>
+  import BIcon from './icon'
+
   export default {
     name: 'ash-slides',
+    components: {BIcon},
     props: {
       selected: {
         type: String
@@ -48,11 +57,14 @@
         return index === -1 ? 0 : index
       },
       names() {
-        return this.$children.map(vm => vm.name)
+        return this.items.map(vm => vm.name)
       },
       getSelected() {
-        let first = this.$children[0]
+        let first = this.items[0]
         return this.selected || first.name
+      },
+      items() {
+        return this.$children.filter(vm => vm.$options._componentTag === 'b-slides-item')
       }
     },
     methods: {
@@ -103,13 +115,19 @@
           this.playAutomatic()
         })
       },
+      onClickPrev() {
+        this.select(this.selectedIndex-1)
+      },
+      onClickNext() {
+        this.select(this.selectedIndex+1)
+      },
       updateChildren() {
-        this.$children.forEach(vm => {
+        this.items.forEach(vm => {
           let reverse = this.selectedIndex - this.lastSelectedIndex <= 0
           if (this.timeId) {
-            if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+            if (this.lastSelectedIndex === this.items.length - 1 && this.selectedIndex === 0) {
               reverse = false
-            } else if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+            } else if (this.lastSelectedIndex === 0 && this.selectedIndex === this.items.length - 1) {
               reverse = true
             }
           }
@@ -135,7 +153,7 @@
     mounted() {
       this.updateChildren()
       this.playAutomatic()
-      this.childrenLength = this.$children.length
+      this.childrenLength = this.items.length
     },
     updated() {
       this.updateChildren()
