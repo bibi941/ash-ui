@@ -15,8 +15,8 @@
 </template>
 
 <script>
-  import Button from './button'
-  import ButtonGroup from './button-group'
+  import Button from './button/button'
+  import ButtonGroup from './button/button-group'
   import Cascader from './cascader'
   import Col from './col'
   import Collapse from './collapse'
