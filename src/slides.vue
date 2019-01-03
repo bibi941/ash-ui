@@ -5,7 +5,9 @@
 <template>
   <div class="b-slides"
     @mouseleave="onMouseLeave"
-    @mouseenter="onMouseEnter">
+    @mouseenter="onMouseEnter"
+    @touchstart="onTouchStart"
+    @touchend="onTouchEnd">
     <div class="b-slides-window">
       <div class="b-slides-wrapper">
         <slot></slot>
@@ -36,12 +38,14 @@
       return {
         childrenLength: 0,
         lastSelectedIndex: null,
-        timeId: null
+        timeId: null,
+        startTouch: null
       }
     },
     computed: {
       selectedIndex() {
-        return this.names.indexOf(this.selected) || 0
+        let index = this.names.indexOf(this.selected)
+        return index === -1 ? 0 : index
       },
       names() {
         return this.$children.map(vm => vm.name)
@@ -59,12 +63,6 @@
         let run = () => {
           let index = this.names.indexOf(this.getSelected)
           let newIndex = index + 1
-          if (newIndex === -1) {
-            newIndex = this.names.length + 1
-          }
-          if (newIndex === this.names.length) {
-            newIndex = 0
-          }
           this.select(newIndex)
           this.timeId = setTimeout(run, 3000)
         }
@@ -72,18 +70,43 @@
       },
       pause() {
         window.clearTimeout(this.timeId)
+        this.timeId = null
       },
       onMouseEnter() {
         this.pause()
-        this.timeId = null
       },
       onMouseLeave() {
         this.playAutomatic()
       },
+      onTouchStart(e) {
+        if (e.touches.length > 1) {
+          return
+        }
+        this.startTouch = e.touches[0]
+        this.pause()
+      },
+      onTouchEnd(e) {
+        let endTouch = e.changedTouches[0]
+        let {clientX: x1, clientY: y1} = this.startTouch
+        let {clientX: x2, clientY: y2} = endTouch
+        let distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+        let deltaY = Math.abs(y2 - y1)
+        let rate = distance / deltaY
+        if (rate > 2) {
+          if (endTouch.clientX > this.startTouch.clientX) {
+            this.select(this.selectedIndex - 1)
+          } else {
+            this.select(this.selectedIndex + 1)
+          }
+        }
+        this.$nextTick(() => {
+          this.playAutomatic()
+        })
+      },
       updateChildren() {
         this.$children.forEach(vm => {
           let reverse = this.selectedIndex - this.lastSelectedIndex <= 0
-          if(this.timeId){
+          if (this.timeId) {
             if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
               reverse = false
             } else if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
@@ -98,6 +121,12 @@
       },
       select(index) {
         this.lastSelectedIndex = this.selectedIndex
+        if (index === -1) {
+          index = this.names.length - 1
+        }
+        if (index === this.names.length) {
+          index = 0
+        }
         this.$emit('update:selected', this.names[index])
       }
     },
@@ -144,7 +173,7 @@
         &.active {
           color: $white;
           background: $purple-lv1;
-          font-weight:600;
+          font-weight: 600;
           cursor: default;
         }
       }
