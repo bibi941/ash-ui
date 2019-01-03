@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import icon from './icon'
+  import icon from '../icon'
 
   export default {
     name: 'ash-cascader-items',

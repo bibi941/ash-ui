@@ -17,7 +17,7 @@
 <script>
   import Button from './button/button'
   import ButtonGroup from './button/button-group'
-  import Cascader from './cascader'
+  import Cascader from './cascader/cascader'
   import Col from './col'
   import Collapse from './collapse'
   import CollapseItem from './collapse-item'

@@ -19,8 +19,8 @@
 
 <script>
   import cascaderItems from './cascader-item'
-  import ClickOutside from './click-outside'
-  import icon from './icon'
+  import ClickOutside from '../click-outside'
+  import icon from '../icon'
 
   export default {
     name: 'ash-cascader',
