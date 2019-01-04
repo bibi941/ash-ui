@@ -1,7 +1,6 @@
 import chai, { expect } from 'chai'
-import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import PopOver from '@/popover.vue'
+import PopOver from '../../src/popover.vue'
 import { mount } from '@vue/test-utils'
 
 chai.use(sinonChai)
