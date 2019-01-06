@@ -51,7 +51,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "base";
+  @import "_base";
   .collapse-item {
     .title {
       border: 1px solid $grey-lv3;

@@ -17,7 +17,7 @@
   }
 </script>
 <style lang="scss" type="text/scss" scoped>
-  @import "base";
+  @import "_base";
 
   .b-button-group {
     display: inline-flex;

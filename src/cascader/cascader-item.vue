@@ -90,7 +90,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "base";
+  @import "_base";
 
   .cascader-item {
     color: $font-color;
