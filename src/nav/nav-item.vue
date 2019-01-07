@@ -3,25 +3,44 @@
 * @author : fangXinRui
 */
 <template>
-
+  <div class="b-nav-item" :class="{selected}" @click="onClick">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
   export default {
-    name: 'ash-nav-item',
-    props: {},
+    name: 'Ash-nav-item',
+    props: {
+      name: {
+        type: String,
+        required: true
+      },
+    },
     data() {
-      return {}
+      return {
+        selected:false
+      }
     },
     created() {
     },
     mounted() {
     },
     computed: {},
-    methods: {}
+    methods: {
+      onClick(){
+        this.$emit('add:selected',this.name)
+      }
+    }
   }
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  .b-nav-item {
+    padding: 10px 20px;
+    &.selected{
+      color: red;
+    }
+  }
 
 </style>
