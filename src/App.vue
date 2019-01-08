@@ -1,10 +1,15 @@
 <template>
   <div>
-      <b-nav :selected.sync="selected">
-        <b-nav-item name="home">首页</b-nav-item>
-        <b-nav-item name="email">邮箱</b-nav-item>
-        <b-nav-item name="about">关于</b-nav-item>
-      </b-nav>
+    <b-nav :selected.sync="selected">
+      <b-nav-item name="home">首页</b-nav-item>
+      <b-nav-item name="email">邮箱</b-nav-item>
+      <b-sub-nav>
+        <template slot="title">关于</template>
+        <b-nav-item name="culture">企业文化</b-nav-item>
+        <b-nav-item name="contact">联系方式</b-nav-item>
+        <b-nav-item name="devTeam">开发团队</b-nav-item>
+      </b-sub-nav>
+    </b-nav>
   </div>
 </template>
 
@@ -18,12 +23,12 @@
     components: {
       'b-nav': Nav,
       'b-nav-item': NavItem,
-      'b-sub-nav': SubNav,
+      'b-sub-nav': SubNav
 
     },
     data() {
       return {
-        selected: ['home']
+        selected: ['culture']
       }
     },
     methods: {},

@@ -11,35 +11,38 @@
 <script>
   export default {
     name: 'Ash-nav-item',
+    inject: ['root'],
     props: {
       name: {
         type: String,
         required: true
-      },
+      }
     },
     data() {
       return {
-        selected:false
+        selected: false
       }
     },
     created() {
+      this.root.addItem(this)
     },
     mounted() {
     },
     computed: {},
     methods: {
-      onClick(){
-        this.$emit('add:selected',this.name)
+      onClick() {
+        this.$emit('add:selected', this.name)
       }
     }
   }
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  @import "_base";
   .b-nav-item {
     padding: 10px 20px;
-    &.selected{
-      color: red;
+    &.selected {
+      background: $purple-lv2;
     }
   }
 

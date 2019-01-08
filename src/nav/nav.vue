@@ -11,6 +11,11 @@
 <script>
   export default {
     name: 'ash-nav',
+    provide() {
+      return {
+        root: this
+      }
+    },
     props: {
       selected: {
         type: Array,
@@ -22,7 +27,9 @@
       }
     },
     data() {
-      return {}
+      return {
+        items: []
+      }
     },
     created() {
     },
@@ -33,12 +40,11 @@
     updated() {
       this.updateChildren()
     },
-    computed: {
-      items() {
-        return this.$children.filter(vm => vm.$options._componentTag === 'b-nav-item')
-      }
-    },
+    computed: {},
     methods: {
+      addItem(vm) {
+        this.items.push(vm)
+      },
       updateChildren() {
         this.items.forEach(vm => {
             vm.selected = this.selected.indexOf(vm.name) >= 0
@@ -66,8 +72,9 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  @import "_base";
   .b-nav {
     display: flex;
-    border: 1px solid red;
+    border: 1px solid $grey-lv2;
   }
 </style>
