@@ -42,8 +42,7 @@
     position: relative;
     > span {
       padding: 10px 20px;
-      display: inline-block;
-      vertical-align: top;
+      display: block;
     }
     &-popover {
       position: absolute;
@@ -52,5 +51,11 @@
       white-space: nowrap;
       border: 1px solid black;
     }
+  }
+  //非第一层
+  .b-sub-nav .b-sub-nav .b-sub-nav-popover {
+    top: 0;
+    left: 100%;
+    margin-left: 8px;
   }
 </style>
