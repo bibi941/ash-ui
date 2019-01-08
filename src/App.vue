@@ -27,13 +27,15 @@
   import Nav from './nav/nav'
   import NavItem from './nav/nav-item'
   import SubNav from './nav/sub-nav'
+  import Button from './button/button'
 
   export default {
     name: 'app',
     components: {
       'b-nav': Nav,
       'b-nav-item': NavItem,
-      'b-sub-nav': SubNav
+      'b-sub-nav': SubNav,
+      'b-button': Button
 
     },
     data() {

@@ -38,8 +38,10 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  @import "var";
   .b-sub-nav {
     position: relative;
+    color: $grey-lv3;
     > span {
       padding: 10px 20px;
       display: block;
@@ -49,7 +51,8 @@
       top: 100%;
       left: 0;
       white-space: nowrap;
-      border: 1px solid black;
+      border: 1px solid $grey-lv1;
+      border-radius: $border-radius;
     }
   }
   //非第一层

@@ -29,7 +29,7 @@
 </script>
 
 <style lang="scss" type="text/scss" scoped>
-  @import "_base";
+  @import "var";
 
   .wrapper {
     font-size: $font-size;

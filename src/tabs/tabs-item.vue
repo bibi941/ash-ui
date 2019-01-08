@@ -51,7 +51,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "_base";
+  @import "var";
   .tabs-item {
     cursor: pointer;
     height: 100%;

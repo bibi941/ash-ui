@@ -38,11 +38,22 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "_base";
+  @import "var";
+
   .b-nav-item {
+    color: $grey-lv3;
     padding: 10px 20px;
     &.selected {
-      background: $purple-lv2;
+      position: relative;
+      color: $grey-lv6;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        border-bottom: 2px solid $purple-lv2;
+      }
     }
   }
 

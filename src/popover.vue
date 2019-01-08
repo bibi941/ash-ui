@@ -99,7 +99,7 @@
 </script>
 
 <style scoped lang="scss" type="text/scss">
-  @import "_base";
+  @import "var";
   .popover {
     display: inline-block;
     vertical-align: top;

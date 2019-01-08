@@ -72,9 +72,10 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "_base";
+  @import "var";
+
   .b-nav {
     display: flex;
-    border: 1px solid $grey-lv2;
+    border-bottom: 1px solid $grey-lv1;
   }
 </style>
