@@ -31,6 +31,8 @@
     computed: {},
     methods: {
       onClick() {
+        this.root.namePath = []
+        this.$parent.updateNamePath && this.$parent.updateNamePath()
         this.$emit('add:selected', this.name)
       }
     }
@@ -49,11 +51,19 @@
       &::after {
         content: '';
         position: absolute;
-        bottom: 0px;
+        bottom: 0;
         left: 0;
         width: 100%;
         border-bottom: 2px solid $purple-lv2;
       }
+    }
+  }
+
+  .b-sub-nav .b-nav-item.selected {
+    color: $grey-lv6;
+    &::after {
+      content: '';
+      border-bottom: none;
     }
   }
 

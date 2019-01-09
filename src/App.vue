@@ -1,17 +1,17 @@
 <template>
   <div>
     <b-nav :selected.sync="selected">
-      <b-nav-item name="home">首页</b-nav-item>
+      <b-nav-item name="home">处理中心</b-nav-item>
       <b-nav-item name="you">优势</b-nav-item>
-      <b-sub-nav>
+      <b-sub-nav name="about">
         <template slot="title">关于</template>
         <b-nav-item name="culture">企业文化</b-nav-item>
         <b-nav-item name="devTeam">开发团队</b-nav-item>
-        <b-sub-nav>
+        <b-sub-nav name="concat">
           <template slot="title">联系方式</template>
           <b-nav-item name="email">邮箱</b-nav-item>
           <b-nav-item name="wechat">微信</b-nav-item>
-          <b-sub-nav>
+          <b-sub-nav name="phone">
             <template slot="title">手机</template>
             <b-nav-item name="cd">电信</b-nav-item>
             <b-nav-item name="cm">移动</b-nav-item>

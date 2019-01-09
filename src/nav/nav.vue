@@ -28,7 +28,8 @@
     },
     data() {
       return {
-        items: []
+        items: [],
+        namePath:[]
       }
     },
     created() {
@@ -75,7 +76,10 @@
   @import "var";
 
   .b-nav {
+    font-family: $font-family;
+    font-size: $font-size;
     display: flex;
     border-bottom: 1px solid $grey-lv1;
+    cursor: pointer;
   }
 </style>
