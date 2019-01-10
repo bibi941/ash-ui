@@ -4,21 +4,29 @@
 */
 <template>
   <div class="b-sub-nav" :class="{active}" v-click-outside="close">
-    <span class="b-sub-nav-title" @click="onClick">
+    <span class="b-sub-nav-label" @click="onClick">
       <slot name="title"></slot>
+      <span class="b-sub-nav-icon" :class="{open}">
+        <icon  name="left"></icon>
+      </span>
     </span>
-    <div class="b-sub-nav-popover" v-show="open">
-      <slot></slot>
-    </div>
+    <transition name="fade">
+      <div class="b-sub-nav-popover" v-show="open">
+        <slot></slot>
+      </div>
+    </transition>
   </div>
 </template>
 
 <script>
+  import Icon from '../icon'
   import ClickOutside from '../click-outside'
+
   export default {
     name: 'ash-sub-nav',
     inject: ['root'],
-    directives:{ClickOutside},
+    components: {Icon},
+    directives: {ClickOutside},
     props: {
       name: {
         type: String,
@@ -44,8 +52,7 @@
       onClick() {
         this.open = !this.open
       },
-      close(){
-        console.log(1111)
+      close() {
         this.open = false
       },
       updateNamePath() {
@@ -76,12 +83,9 @@
         width: 100%;
         border-bottom: 2px solid $purple-lv2;
       }
-
     }
-    > span {
-      padding: 10px 20px;
-      display: block;
-    }
+    &-icon {display: none;}
+    &-label {padding: 10px 20px;display: block;width: 100%;}
     &-popover {
       margin-top: 4px;
       background: white;
@@ -97,9 +101,38 @@
   }
 
   //非第一层
-  .b-sub-nav .b-sub-nav .b-sub-nav-popover {
-    top: 0;
-    left: 100%;
-    margin-left: 8px;
+  .b-sub-nav .b-sub-nav {
+    &.active{
+      &::after{
+        display: none;
+      }
+    }
+    display: flex;
+    .b-sub-nav-label{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .b-sub-nav-popover {
+      top: 0;
+      left: 100%;
+      margin-left: 8px;
+    }
+    .b-sub-nav-icon {
+      transition: all 300ms;
+      display: inline-flex;
+      svg{
+        fill:$grey-lv3
+      }
+      &.open{
+        transform: rotate(180deg);
+      }
+    }
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .3s;
+  }
+  .fade-enter, .fade-leave-to  {
+    opacity: 0;
   }
 </style>

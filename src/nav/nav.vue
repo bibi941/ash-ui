@@ -80,6 +80,7 @@
     font-size: $font-size;
     display: flex;
     border-bottom: 1px solid $grey-lv1;
+    user-select: none;
     cursor: pointer;
   }
 </style>

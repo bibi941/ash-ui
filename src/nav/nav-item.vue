@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    name: 'Ash-nav-item',
+    name: 'ash-nav-item',
     inject: ['root'],
     props: {
       name: {
