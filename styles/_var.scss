@@ -1,0 +1,45 @@
+//基础色
+$white: #ffffff;
+$grey-lv1: #EEEEEE;
+$grey-lv2: #CECDCE;
+$grey-lv3: #A9A9AA;
+$grey-lv4: #79797A;
+$grey-lv5: #656566;
+$grey-lv6: #424243;
+$purple-lv0: #f3e5f5;
+$purple-lv1: #e1bee7;
+$purple-lv2: #ce93d8;
+$purple-lv3: #ba68c8;
+$purple-lv4: #ab47bc;
+$purple-lv5: #7b1fa2;
+$red-error: #ef5350;
+
+$animation-time: 500ms;
+$border-color-light:$grey-lv1;
+$border-color:$grey-lv2;
+$border-radius-light: 4px;
+$border-radius: 4px;
+$box-shadow-color: rgba(0, 0, 0, 0.5);
+$box-shadow-light:0 0px 2px 0 rgba(0,0,0,0.1);
+$box-shadow: 0 0 3px 0 $box-shadow-color;
+$button-height: 32px;
+$font-size: 14px;
+$font-size-small:12px;
+$font-color: #656566;
+$font-family:'Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif';
+$input-height: 32px;
+$toast-bg: rgba(0, 0, 0, 0.75);
+$toast-height: 40px;
+
+%box-shadow{
+  box-shadow: $box-shadow-light;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

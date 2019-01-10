@@ -40,7 +40,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "var";
+  @import "_var";
 
   .b-nav-item {
     color: $grey-lv3;

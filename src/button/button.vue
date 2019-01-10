@@ -34,7 +34,7 @@
   }
 </script>
 <style lang="scss" type="text/scss" scoped>
-  @import "var";
+  @import "_var";
 
   .b-button {
     font-size: $font-size;
