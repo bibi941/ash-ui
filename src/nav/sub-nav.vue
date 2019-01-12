@@ -10,11 +10,20 @@
         <icon name="left"></icon>
       </span>
     </span>
-    <transition @enter="enter" @after-enter="afterEnter" @leave="leave">
-      <div class="b-sub-nav-popover" :class="{vertical}" v-show="open">
-        <slot></slot>
-      </div>
-    </transition>
+    <template v-if="vertical">
+      <transition @enter="enter" @after-enter="afterEnter" @leave="leave">
+        <div class="b-sub-nav-popover" :class="{vertical}" v-show="open">
+          <slot></slot>
+        </div>
+      </transition>
+    </template>
+    <template v-else>
+      <transition name="slide-fade">
+        <div class="b-sub-nav-popover" v-show="open">
+          <slot></slot>
+        </div>
+      </transition>
+    </template>
   </div>
 </template>
 
@@ -90,7 +99,17 @@
 
 <style scoped lang='scss' type="text/scss">
   @import "var";
-
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active for below version 2.1.8 */ {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
   .b-sub-nav {
     position: relative;
     color: $grey-lv3;
@@ -129,9 +148,9 @@
       width: 100%;
     }
     &-popover {
+      transition: all 300ms;
       &.vertical {
         overflow: hidden;
-        transition: height 300ms;
         position: static;
         box-shadow: none;
         border-radius: 0;
