@@ -3,15 +3,15 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-sub-nav" :class="{active}" v-click-outside="close">
+  <div class="b-sub-nav" :class="{active,vertical}" v-click-outside="close">
     <span class="b-sub-nav-label" @click="onClick">
       <slot name="title"></slot>
       <span class="b-sub-nav-icon" :class="{open}">
-        <icon  name="left"></icon>
+        <icon name="left"></icon>
       </span>
     </span>
-    <transition name="fade">
-      <div class="b-sub-nav-popover" v-show="open">
+    <transition @enter="enter" @after-enter="afterEnter" @leave="leave">
+      <div class="b-sub-nav-popover" :class="{vertical}" v-show="open">
         <slot></slot>
       </div>
     </transition>
@@ -24,7 +24,7 @@
 
   export default {
     name: 'ash-sub-nav',
-    inject: ['root'],
+    inject: ['root', 'vertical'],
     components: {Icon},
     directives: {ClickOutside},
     props: {
@@ -49,6 +49,28 @@
       }
     },
     methods: {
+      enter(el, done) {
+        el.style.height = 'auto'
+        let {height} = el.getBoundingClientRect()
+        el.style.height = '0'
+        el.getBoundingClientRect()
+        el.style.height = `${height}px`
+        el.addEventListener('transitionend', () => {
+          done()
+        })
+      },
+      afterEnter(el) {
+        el.style.height = 'auto'
+      },
+      leave(el, done) {
+        let {height} = el.getBoundingClientRect()
+        el.style.height = `${height}px`
+        el.getBoundingClientRect()
+        el.style.height = '0'
+        el.addEventListener('transitionend', () => {
+          done()
+        })
+      },
       onClick() {
         this.open = !this.open
       },
@@ -72,9 +94,23 @@
   .b-sub-nav {
     position: relative;
     color: $grey-lv3;
+    &.vertical {
+      color: $grey-lv6;
+      .b-sub-nav-label {
+        &:hover {
+          background: $purple-lv0;
+        }
+      }
+
+    }
     &.active {
       position: relative;
       color: $grey-lv6;
+      &.vertical {
+        &::after {
+          border: none;
+        }
+      }
       &::after {
         content: '';
         position: absolute;
@@ -84,13 +120,33 @@
         border-bottom: 2px solid $purple-lv2;
       }
     }
-    &-icon {display: none;}
-    &-label {padding: 10px 20px;display: block;width: 100%;}
+    &-icon {
+      display: none;
+    }
+    &-label {
+      padding: 10px 20px;
+      display: block;
+      width: 100%;
+    }
     &-popover {
+      &.vertical {
+        overflow: hidden;
+        transition: height 300ms;
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        border: none;
+        margin-top: 0;
+        & .b-nav-item {
+          padding-left: 2em;
+        }
+        & .b-sub-nav-label {
+          padding-left: 2em;
+        }
+      }
       margin-top: 4px;
       background: white;
       position: absolute;
-      min-width: 150px;
       top: 100%;
       left: 0;
       white-space: nowrap;
@@ -102,13 +158,12 @@
 
   //非第一层
   .b-sub-nav .b-sub-nav {
-    &.active{
-      &::after{
+    &.active {
+      &::after {
         display: none;
       }
     }
-    display: flex;
-    .b-sub-nav-label{
+    .b-sub-nav-label {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -117,22 +172,20 @@
       top: 0;
       left: 100%;
       margin-left: 8px;
+      &.vertical {
+        margin-left: 0;
+      }
     }
     .b-sub-nav-icon {
       transition: all 300ms;
       display: inline-flex;
-      svg{
-        fill:$grey-lv3
+      svg {
+        fill: $grey-lv3
       }
-      &.open{
+      &.open {
         transform: rotate(180deg);
       }
     }
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .3s;
-  }
-  .fade-enter, .fade-leave-to  {
-    opacity: 0;
-  }
+
 </style>

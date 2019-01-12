@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-nav">
+  <div class="b-nav" :class="{vertical}" >
     <slot></slot>
   </div>
 </template>
@@ -13,7 +13,8 @@
     name: 'ash-nav',
     provide() {
       return {
-        root: this
+        root: this,
+        vertical:this.vertical
       }
     },
     props: {
@@ -24,6 +25,10 @@
       multiple: {
         type: Boolean,
         default: false
+      },
+      vertical:{
+        type:Boolean,
+        default:false
       }
     },
     data() {
@@ -76,10 +81,14 @@
   @import "_var";
 
   .b-nav {
+    &.vertical{
+      flex-direction: column;
+    }
     font-family: $font-family;
     font-size: $font-size;
+    font-weight: 300;
     display: flex;
-    border-bottom: 1px solid $grey-lv1;
+    border: 1px solid $grey-lv1;
     user-select: none;
     cursor: pointer;
   }

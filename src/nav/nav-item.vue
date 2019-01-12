@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-nav-item" :class="{selected}" @click="onClick">
+  <div class="b-nav-item" :class="{selected,vertical}" @click="onClick">
     <slot></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@
 <script>
   export default {
     name: 'ash-nav-item',
-    inject: ['root'],
+    inject: ['root', 'vertical'],
     props: {
       name: {
         type: String,
@@ -45,7 +45,19 @@
   .b-nav-item {
     color: $grey-lv3;
     padding: 10px 20px;
+    &.vertical {
+      color: $grey-lv6;
+      &:hover {
+        background: $purple-lv0;
+      }
+    }
     &.selected {
+      &.vertical {
+        color:$purple-lv2;
+        &::after {
+          border: none;
+        }
+      }
       position: relative;
       color: $grey-lv6;
       &::after {
@@ -60,7 +72,12 @@
   }
 
   .b-sub-nav .b-nav-item.selected {
+    &.vertical{
+        background:$white;
+        color: $purple-lv1;
+    }
     color: $grey-lv6;
+    background: $grey-lv0;
     &::after {
       content: '';
       border-bottom: none;
