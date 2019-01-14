@@ -6,7 +6,7 @@
   <div class="b-sub-nav" :class="{active,vertical}" v-click-outside="close">
     <span class="b-sub-nav-label" @click="onClick">
       <slot name="title"></slot>
-      <span class="b-sub-nav-icon" :class="{open}">
+      <span class="b-sub-nav-icon" :class="{open,vertical}">
         <icon name="left"></icon>
       </span>
     </span>
@@ -150,18 +150,13 @@
     &-popover {
       transition: all 300ms;
       &.vertical {
+        padding-left: 1em;
         overflow: hidden;
         position: static;
         box-shadow: none;
         border-radius: 0;
         border: none;
         margin-top: 0;
-        & .b-nav-item {
-          padding-left: 2em;
-        }
-        & .b-sub-nav-label {
-          padding-left: 2em;
-        }
       }
       margin-top: 4px;
       background: white;
@@ -198,6 +193,12 @@
     .b-sub-nav-icon {
       transition: all 300ms;
       display: inline-flex;
+      &.vertical{
+        transform: rotate(90deg);
+        &.open {
+          transform: rotate(270deg);
+        }
+      }
       svg {
         fill: $grey-lv3
       }

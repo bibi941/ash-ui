@@ -66,7 +66,7 @@
     },
     data() {
       return {
-        selected: ['culture']
+        selected: 'culture'
       }
     },
     methods: {},
