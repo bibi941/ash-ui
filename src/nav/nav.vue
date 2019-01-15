@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-nav" :class="{vertical}" >
+  <div class="b-nav" :class="{vertical}">
     <slot></slot>
   </div>
 </template>
@@ -14,22 +14,22 @@
     provide() {
       return {
         root: this,
-        vertical:this.vertical
+        vertical: this.vertical
       }
     },
     props: {
       selected: {
-        type: String,
+        type: String
       },
-      vertical:{
-        type:Boolean,
-        default:false
+      vertical: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
       return {
         items: [],
-        namePath:[]
+        namePath: []
       }
     },
     created() {
@@ -48,17 +48,13 @@
       },
       updateChildren() {
         this.items.forEach(vm => {
-            vm.selected = this.selected ===vm.name
+            vm.selected = this.selected === vm.name
           }
         )
       },
       listenToChildren() {
         this.items.forEach(vm => {
-          vm.$on('update:selected', (name) => {
-            //多个展开
-              this.$emit('update:selected', name)
-
-          })
+          vm.$on('update:selected', name => this.$emit('update:selected', name))
         })
       }
     }
@@ -69,7 +65,7 @@
   @import "_var";
 
   .b-nav {
-    &.vertical{
+    &.vertical {
       flex-direction: column;
     }
     font-family: $font-family;
