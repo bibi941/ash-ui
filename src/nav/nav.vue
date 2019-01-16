@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-nav" :class="{vertical}">
+  <div class="ash-nav" :class="{vertical}">
     <slot></slot>
   </div>
 </template>
@@ -64,7 +64,7 @@
 <style scoped lang='scss' type="text/scss">
   @import "_var";
 
-  .b-nav {
+  .ash-nav {
     &.vertical {
       flex-direction: column;
     }

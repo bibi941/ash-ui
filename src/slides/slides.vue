@@ -3,26 +3,26 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-slides"
+  <div class="ash-slides"
     @mouseleave="onMouseLeave"
     @mouseenter="onMouseEnter"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd">
-    <div class="b-slides-window">
-      <div class="b-slides-wrapper">
+    <div class="ash-slides-window">
+      <div class="ash-slides-wrapper">
         <slot></slot>
       </div>
     </div>
-    <div class="b-slides-dots">
+    <div class="ash-slides-dots">
       <span @click="onClickPrev">
-        <b-icon name="left" ></b-icon>
+        <ash-icon name="left" ></ash-icon>
       </span>
       <span v-for="n in childrenLength" :class="{active:selectedIndex === n-1}"
         @click="select(n-1)">
         {{n}}
       </span>
       <span @click="onClickNext">
-        <b-icon name="right" ></b-icon>
+        <ash-icon name="right" ></ash-icon>
       </span>
     </div>
   </div>
@@ -64,7 +64,7 @@
         return this.selected || first.name
       },
       items() {
-        return this.$children.filter(vm => vm.$options._componentTag === 'b-slides-item')
+        return this.$children.filter(vm => vm.$options._componentTag === 'ash-slides-item')
       }
     },
     methods: {
@@ -164,7 +164,7 @@
 <style scoped lang='scss' type="text/scss">
   @import "_var";
 
-  .b-slides {
+  .ash-slides {
     &-window {
       overflow: hidden;
     }

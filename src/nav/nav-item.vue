@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-nav-item" :class="{selected,vertical}" @click="onClick">
+  <div class="ash-nav-item" :class="{selected,vertical}" @click="onClick">
     <slot></slot>
   </div>
 </template>
@@ -42,7 +42,7 @@
 <style scoped lang='scss' type="text/scss">
   @import "_var";
 
-  .b-nav-item {
+  .ash-nav-item {
     color: $grey-lv3;
     padding: 10px 20px;
     &.vertical {
@@ -71,7 +71,7 @@
     }
   }
 
-  .b-sub-nav .b-nav-item.selected {
+  .ash-suash-nav .ash-nav-item.selected {
     &.vertical{
         background:$white;
         color: $purple-lv1;

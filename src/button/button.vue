@@ -1,8 +1,8 @@
 <template>
-  <button class="b-button" :class="{[`icon-${iconPosition}`]: true}"
+  <button class="ash-button" :class="{[`icon-${iconPosition}`]: true}"
     @click="$emit('click')" :disabled="disabled">
-    <b-icon class="icon" v-if="icon && !loading" :name="icon"></b-icon>
-    <b-icon class="loading icon" v-if="loading" name="loading"></b-icon>
+    <ash-icon class="icon" v-if="icon && !loading" :name="icon"></ash-icon>
+    <ash-icon class="loading icon" v-if="loading" name="loading"></ash-icon>
     <div class="contents">
       <slot></slot>
     </div>
@@ -14,7 +14,7 @@
   export default {
     name: 'ash-button',
     components: {
-      'b-icon': Icon
+      'ash-icon': Icon
     },
     props: {
       icon: {},
@@ -36,7 +36,7 @@
 <style lang="scss" type="text/scss" scoped>
   @import "_var";
 
-  .b-button {
+  .ash-button {
     font-size: $font-size;
     height: $button-height;
     padding: 0 1em;

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div>
-      <b-button>默认按钮</b-button>
-      <b-button loading>默认按钮</b-button>
-      <b-button icon="settings">默认按钮</b-button>
-      <b-button icon="settings" iconPosition="right">默认按钮</b-button>
+      <ash-button>默认按钮</ash-button>
+      <ash-button loading>默认按钮</ash-button>
+      <ash-button icon="settings">默认按钮</ash-button>
+      <ash-button icon="settings" iconPosition="right">默认按钮</ash-button>
     </div>
     <pre><code>{{content}}</code>
     </pre>
@@ -16,17 +16,17 @@
 
   export default {
     components: {
-      'b-button': Button
+      'ash-button': Button
     },
     name: '',
     props: {},
     data() {
       return {
         content: `
-        <b-button>默认按钮</b-button>
-        <b-button loading>默认按钮</b-button>
-        <b-button icon="settings">默认按钮</b-button>
-        <b-button icon="settings" iconPosition="right">默认按钮</b-button>
+        <ash-button>默认按钮</ash-button>
+        <ash-button loading>默认按钮</ash-button>
+        <ash-button icon="settings">默认按钮</ash-button>
+        <ash-button icon="settings" iconPosition="right">默认按钮</ash-button>
 `.replace(/^ {8}/gm, '').trim()
       }
     }

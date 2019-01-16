@@ -4,7 +4,7 @@
 */
 <template>
   <transition name="slide">
-    <div class="b-slides-item" v-if="visible" :class="{reverse}">
+    <div class="ash-slides-item" v-if="visible" :class="{reverse}">
       <slot></slot>
     </div>
   </transition>

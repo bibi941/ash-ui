@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="b-pager">
+  <div class="ash-pager">
     <span v-for=""></span>
   </div>
 </template>

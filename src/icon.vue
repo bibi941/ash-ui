@@ -1,5 +1,5 @@
 <template>
-  <svg class="b-icon">
+  <svg class="ash-icon">
     <use :xlink:href="`#i-${name}`"></use>
   </svg>
 </template>
@@ -12,7 +12,7 @@
   };
 </script>
 <style lang="scss" scoped>
-  .b-icon {
+  .ash-icon {
     width: 1em;
     height: 1em;
   }

@@ -1,21 +1,16 @@
 <template>
   <div>
+    <ash-pager ></ash-pager>
   </div>
 </template>
 
 <script>
-  import Nav from './nav/nav'
-  import NavItem from './nav/nav-item'
-  import SubNav from './nav/sub-nav'
-  import Button from './button/button'
+  import pager from 'pager'
 
   export default {
     name: 'app',
     components: {
-      'b-nav': Nav,
-      'b-nav-item': NavItem,
-      'b-sub-nav': SubNav,
-      'b-button': Button
+      'ash-pager': pager,
 
     },
     data() {
