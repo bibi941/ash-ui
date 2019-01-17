@@ -1,11 +1,11 @@
 <template>
   <div>
-    <ash-pager ></ash-pager>
+    <ash-pager :total-page="20" :current-page="3"></ash-pager>
   </div>
 </template>
 
 <script>
-  import pager from 'pager'
+  import pager from './pager'
 
   export default {
     name: 'app',

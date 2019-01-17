@@ -4,7 +4,9 @@
 */
 <template>
   <div class="ash-pager">
-    <span v-for=""></span>
+    <span v-for="page in pages">
+      {{page}}
+    </span>
   </div>
 </template>
 
@@ -26,16 +28,37 @@
       }
     },
     data() {
+      let pages = [
+        1, this.currentPage - 2,
+        this.currentPage - 1, this.currentPage,
+        this.currentPage + 1, this.currentPage + 2, this.totalPage
+      ]
+      pages = pages.sort((a, b) => a - b)
+      pages = this.unique(pages)
+      let u = pages.reduce((prev, current, index) => {
+        if (pages[index + 1] && pages[index + 1] - pages[index] > 1) {
+          prev.push(current)
+          prev.push('...')
+        } else {
+          prev.push(current)
+        }
+        return prev
+      }, [])
       return {
-        pages:[]
+        pages:u
       }
     },
+    computed: {},
     created() {
     },
     mounted() {
+
     },
-    computed: {},
-    methods: {}
+    methods: {
+      unique(arr) {
+        return [...new Set(arr)]
+      }
+    }
   }
 </script>
 
