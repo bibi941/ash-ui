@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 100px">
-    <ash-pager :total-page="20" :current-page="20"></ash-pager>
+    <ash-pager :total-page="3" :current-page.sync="currentPage"></ash-pager>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
     },
     data() {
       return {
-        selected: 'culture'
+        currentPage: 4
       }
     },
     methods: {},
