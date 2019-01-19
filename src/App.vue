@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <ash-pager :total-page="20" :current-page="3"></ash-pager>
+  <div style="padding: 100px">
+    <ash-pager :total-page="20" :current-page="20"></ash-pager>
   </div>
 </template>
 
