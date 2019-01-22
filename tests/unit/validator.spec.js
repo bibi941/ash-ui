@@ -1,43 +1,48 @@
 import chai, { expect } from 'chai'
-import validator from '../../src/validator'
+import Validator from '../../src/validator'
 
-describe('validator', () => {
+describe('Validator', () => {
   it('存在.', () => {
-    expect(validator).to.exist
+    expect(Validator).to.exist
   })
 
   it('required true 报错.', () => {
     let data = {email: ''}
     let rules = [{key: 'email', required: true}]
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validate(data, rules)
     expect(errors.email.required).to.eq('必填')
   })
 
   it('required true 不报错', () => {
     let data = {email: 0}
     let rules = [{key: 'email', required: true}]
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validate(data, rules)
     expect(errors.email).to.not.exist
   })
 
   it('test pattern 报错', () => {
     let data = {email: '@b.com'}
     let rules = [{key: 'email', pattern: 'email'}]
-    let errors = validator(data, rules)
-    expect(errors.email.pattern).to.eq('格式不正确')
+    let validator = new Validator()
+    let errors = validator.validate(data, rules)
+    expect(errors.email.pattern).to.eq('邮箱格式不正确')
   })
 
   it('test pattern 不报错', () => {
     let data = {email: '1@b.com'}
     let rules = [{key: 'email', pattern: 'email'}]
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validate(data, rules)
     expect(errors.email).to.not.exist
   })
 
   it('test required & pattern 优先且有且只有一个 error', () => {
     let data = {email: ''}
     let rules = [{key: 'email', pattern: 'email', required: true}]
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validate(data, rules)
     expect(errors.email.required).to.exist
     expect(errors.email.pattern).to.not.exist
   })
@@ -45,8 +50,75 @@ describe('validator', () => {
   it('test minLength & pattern', () => {
     let data = {email: ''}
     let rules = [{key: 'email', pattern: 'email', minLength: 4}]
-    let errors = validator(data, rules)
+    let validator = new Validator()
+    let errors = validator.validate(data, rules)
     expect(errors.email.minLength).to.exist
     expect(errors.email.pattern).to.exist
+  })
+  it('many keys', () => {
+    let data = {
+      email: '123123123123'
+    }
+    let rules = [
+      {
+        key: 'email', required: true, minLength: 5, maxLength: 10,
+        hasNumber: true, hasLowerCaseAndUpperCase: true, hasDot: true, hasUnderscore: true,
+        hasFrank: true
+      }
+    ]
+    let fn = () => {
+      let validator = new Validator()
+      validator.validate(data, rules)
+    }
+    expect(fn).to.throw()
+  })
+  it('自定义测试规则 hasNumber', () => {
+    let data = {
+      email: 'abcabcabcabc'
+    }
+    let validator = new Validator()
+    validator.hasNumber = (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    }
+    let rules = [{key: 'email', required: true, hasNumber: true}]
+    let errors
+    let fn = () => {
+      errors = validator.validate(data, rules)
+    }
+    expect(fn).to.not.throw()
+    expect(errors.email.hasNumber).to.eq('必须含有数字')
+  })
+  it('两个 validator 互相不影响', () => {
+    let data = {
+      email: 'abcabcabcabc'
+    }
+    let validator1 = new Validator()
+    let validator2 = new Validator()
+    validator1.hasNumber = (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    }
+    let rules = [{key: 'email', required: true, hasNumber: true}]
+    let errors
+    expect(() => {validator1.validate(data, rules)}).to.not.throw()
+    expect(() => {validator2.validate(data, rules)}).to.throw()
+  })
+
+  it('可以全局添加新规则', () => {
+    let data = {
+      email: 'abcabcabcabc'
+    }
+    let validator = new Validator()
+    Validator.add('hasNumber', (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    })
+    let rules = [{key: 'email', required: true, hasNumber: true}]
+    let errors
+    expect(() => {validator.validate(data, rules)}).to.not.throw()
   })
 })
