@@ -1,21 +1,33 @@
 <template>
   <div style="padding: 100px">
-    <ash-pager :total-page="3" :current-page.sync="currentPage"></ash-pager>
+    <ash-table :columns="columns" :dataSource="dataSource"></ash-table>
   </div>
 </template>
 
 <script>
-  import pager from './pager'
+  import table from './table'
 
   export default {
     name: 'app',
     components: {
-      'ash-pager': pager,
+      'ash-table': table
 
     },
     data() {
       return {
-        currentPage: 4
+        columns: [
+          {text: '姓名', field: 'name'},
+          {text: '分数', field: 'score'}
+        ],
+        dataSource: [
+          {id: 1, name: 'bibi', score: 99},
+          {id: 2, name: '小张', score: 23},
+          {id: 3, name: '小王', score: 44},
+          {id: 4, name: '孙哥', score: 43},
+          {id: 5, name: '卡哥', score: 64},
+          {id: 6, name: '牛哥', score: 83},
+          {id: 7, name: '屁屁', score: 100}
+        ]
       }
     },
     methods: {},
