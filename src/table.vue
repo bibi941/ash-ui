@@ -14,20 +14,20 @@
             ref="allChecked">
         </th>
         <th v-if="numberVisible">Order</th>
-        <th v-for="column in columns">
+        <th v-for="column in columns" :key="column.field">
           {{column.text}}
         </th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item,index) in dataSource">
+      <tr v-for="(item,index) in dataSource" :key="item.id">
         <td>
           <input type="checkbox"
             :checked="inSelectedItems(item)"
             @change="onChangeItem(item,index,$event)">
         </td>
         <td v-if="numberVisible">{{index+1}}</td>
-        <td v-for="column in columns"> {{item[column.field]}}</td>
+        <td v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
       </tr>
       </tbody>
     </table>
@@ -84,7 +84,7 @@
     },
     watch: {
       selectedItems() {
-        this.$refs.allChecked.indeterminate = !(this.selectedItems.length === this.dataSource.length || this.selectedItems.length === 0);
+        this.$refs.allChecked.indeterminate = !(this.selectedItems.length === this.dataSource.length || this.selectedItems.length === 0)
       }
     },
     methods: {
@@ -97,7 +97,7 @@
         if (selected) {
           copy.push(item)
         } else {
-          copy.splice(copy.indexOf(item), 1)
+          copy = copy.filter(i => i.id !== item.id)
         }
         this.$emit('update:selectedItems', copy)
       },
