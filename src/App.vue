@@ -1,6 +1,11 @@
 <template>
   <div style="padding: 100px">
-    <ash-table :columns="columns" :dataSource="dataSource" bordered @changeItem="x"></ash-table>
+    <ash-table
+      :columns="columns"
+      :dataSource="dataSource"
+      bordered
+      :selectedItems.sync="selectedItems">
+    </ash-table>
   </div>
 </template>
 
@@ -27,14 +32,11 @@
           {id: 5, name: '卡哥', score: 64},
           {id: 6, name: '牛哥', score: 83},
           {id: 7, name: '屁屁', score: 100}
-        ]
+        ],
+        selectedItems: []
       }
     },
     methods: {
-      x(obj) {
-        let {selected, item, index} = obj
-        console.log(selected, item, index)
-      }
     },
     created() {
     }

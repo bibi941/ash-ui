@@ -7,7 +7,12 @@
     <table class="ash-table" :class="{bordered,compact,striped}">
       <thead>
       <tr>
-        <th><input type="checkbox"></th>
+        <th>
+          <input type="checkbox"
+            :checked="allCheckedItems"
+            @change="onchangeAllItems"
+            ref="allChecked">
+        </th>
         <th v-if="numberVisible">Order</th>
         <th v-for="column in columns">
           {{column.text}}
@@ -16,7 +21,11 @@
       </thead>
       <tbody>
       <tr v-for="(item,index) in dataSource">
-        <td><input type="checkbox" @change="onChangeItem(item,index,$event)"></td>
+        <td>
+          <input type="checkbox"
+            :checked="inSelectedItems(item)"
+            @change="onChangeItem(item,index,$event)">
+        </td>
         <td v-if="numberVisible">{{index+1}}</td>
         <td v-for="column in columns"> {{item[column.field]}}</td>
       </tr>
@@ -35,7 +44,14 @@
       },
       dataSource: {
         type: Array,
-        required: true
+        required: true,
+        validator(array) {
+          return !array.filter(i => i.id === undefined).length > 0
+        }
+      },
+      selectedItems: {  //选中项
+        type: Array,
+        default: () => []
       },
       numberVisible: {  //显示 order
         type: Boolean,
@@ -61,10 +77,33 @@
     },
     mounted() {
     },
-    computed: {},
+    computed: {
+      allCheckedItems() {
+        return this.selectedItems.length === this.dataSource.length
+      }
+    },
+    watch: {
+      selectedItems() {
+        this.$refs.allChecked.indeterminate = !(this.selectedItems.length === this.dataSource.length || this.selectedItems.length === 0);
+      }
+    },
     methods: {
-      onChangeItem(item,index,e){
-        this.$emit('changeItem',{selected:e.target.checked,item,index})
+      inSelectedItems(item) {
+        return this.selectedItems.filter(e => e.id === item.id).length > 0
+      },
+      onChangeItem(item, index, e) {
+        let selected = e.target.checked
+        let copy = JSON.parse(JSON.stringify(this.selectedItems))
+        if (selected) {
+          copy.push(item)
+        } else {
+          copy.splice(copy.indexOf(item), 1)
+        }
+        this.$emit('update:selectedItems', copy)
+      },
+      onchangeAllItems(e) {
+        let selected = e.target.checked
+        this.$emit('update:selectedItems', selected ? this.dataSource : [])
       }
     }
   }
