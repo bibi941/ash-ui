@@ -1,6 +1,6 @@
 <template>
   <div style="padding: 100px">
-    <ash-table :columns="columns" :dataSource="dataSource"></ash-table>
+    <ash-table :columns="columns" :dataSource="dataSource" bordered @changeItem="x"></ash-table>
   </div>
 </template>
 
@@ -30,7 +30,12 @@
         ]
       }
     },
-    methods: {},
+    methods: {
+      x(obj) {
+        let {selected, item, index} = obj
+        console.log(selected, item, index)
+      }
+    },
     created() {
     }
   }
