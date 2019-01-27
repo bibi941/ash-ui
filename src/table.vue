@@ -9,7 +9,7 @@
       <tr>
         <th>
           <input type="checkbox"
-            :checked="allCheckedItems"
+            :checked="areAllItemsSelected"
             @change="onchangeAllItems"
             ref="allChecked">
         </th>
@@ -78,13 +78,23 @@
     mounted() {
     },
     computed: {
-      allCheckedItems() {
-        return this.selectedItems.length === this.dataSource.length
+      areAllItemsSelected() {
+        let a = this.selectedItems.map(item => item.id).sort()
+        let b = this.dataSource.map(item => item.id).sort()
+        if (a.length !== b.length) {return false}
+        let equal = true
+        for (let i = 0; i < b.length; i++) {
+          if (a[i] !== b[i]) {
+            equal = false
+            break
+          }
+        }
+        return equal
       }
     },
     watch: {
       selectedItems() {
-        this.$refs.allChecked.indeterminate = !(this.selectedItems.length === this.dataSource.length || this.selectedItems.length === 0)
+        this.$refs.allChecked.indeterminate = this.selectedItems.length !== this.dataSource.length && this.selectedItems.length !== 0
       }
     },
     methods: {
