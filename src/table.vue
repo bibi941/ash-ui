@@ -15,7 +15,13 @@
         </th>
         <th v-if="numberVisible">Order</th>
         <th v-for="column in columns" :key="column.field">
-          {{column.text}}
+          <div class="ash-table-header">
+            {{column.text}}
+            <span class="ash-table-sort" v-if="column.field in orderBy" @click="changeOrderBy(column.field)">
+              <ash-icon name="asc" :class="{active:orderBy[column.field]==='asc'}"></ash-icon>
+              <ash-icon name="desc" :class="{active:orderBy[column.field]==='desc'}"></ash-icon>
+            </span>
+          </div>
         </th>
       </tr>
       </thead>
@@ -35,8 +41,11 @@
 </template>
 
 <script>
+  import ashIcon from './icon'
+
   export default {
     name: 'ash-table',
+    components: {ashIcon},
     props: {
       columns: {
         type: Array,
@@ -48,6 +57,10 @@
         validator(array) {
           return !array.filter(i => i.id === undefined).length > 0
         }
+      },
+      orderBy: {  //排序顺序-true 开启排序不确认是 asc 还是 desc
+        type: Object,
+        default: () => ({})
       },
       selectedItems: {  //选中项
         type: Array,
@@ -81,7 +94,9 @@
       areAllItemsSelected() {
         let a = this.selectedItems.map(item => item.id).sort()
         let b = this.dataSource.map(item => item.id).sort()
-        if (a.length !== b.length) {return false}
+        if (a.length !== b.length) {
+          return false
+        }
         let equal = true
         for (let i = 0; i < b.length; i++) {
           if (a[i] !== b[i]) {
@@ -98,6 +113,18 @@
       }
     },
     methods: {
+      changeOrderBy(key) {
+        let copy = JSON.parse(JSON.stringify(this.orderBy))
+        let oldValue = copy[key]
+        if (oldValue === 'asc') {
+          copy[key] = 'desc'
+        } else if (oldValue === 'desc') {
+          copy[key] = true
+        } else {
+          copy[key] = 'asc'
+        }
+        this.$emit('update:orderBy', copy)
+      },
       inSelectedItems(item) {
         return this.selectedItems.filter(e => e.id === item.id).length > 0
       },
@@ -156,6 +183,23 @@
         }
       }
 
+    }
+    &-sort {
+      display: inline-flex;
+      flex-direction: column;
+      cursor: pointer;
+      svg {
+        width: 10px;
+        height: 10px;
+        fill: $grey-lv2;
+        &.active {
+          fill: $purple-lv2;
+        }
+      }
+    }
+    &-header {
+      display: flex;
+      align-items: center;
     }
   }
 </style>

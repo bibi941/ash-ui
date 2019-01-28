@@ -3,8 +3,9 @@
     <ash-table
       :columns="columns"
       :dataSource="dataSource"
-      bordered
-      :selectedItems.sync="selectedItems">
+      :selectedItems.sync="selectedItems"
+      :orderBy.sync="orderBy"
+      bordered>
     </ash-table>
   </div>
 </template>
@@ -33,7 +34,11 @@
           {id: 6, name: '牛哥', score: 83},
           {id: 7, name: '屁屁', score: 100}
         ],
-        selectedItems: []
+        selectedItems: [],
+        orderBy:{
+          score:'desc',
+          name:true
+        }
       }
     },
     methods: {
