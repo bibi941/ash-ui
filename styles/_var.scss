@@ -36,13 +36,17 @@ $toast-height: 40px;
   box-shadow: $box-shadow-light;
 }
 
-@keyframes spin {
+@keyframes rorate {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
   }
+}
+
+@mixin spin{
+  animation: rorate 2s infinite linear;
 }
 
 @keyframes slide-up {

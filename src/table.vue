@@ -37,6 +37,9 @@
       </tr>
       </tbody>
     </table>
+    <div class="ash-table-loading" v-if="loading">
+      <ash-icon name="loading1"></ash-icon>
+    </div>
   </div>
 </template>
 
@@ -81,6 +84,10 @@
       striped: {  //斑马纹
         type: Boolean,
         default: true
+      },
+      loading:{  //加载中
+        type:Boolean,
+        default:false
       }
     },
     data() {
@@ -200,6 +207,26 @@
     &-header {
       display: flex;
       align-items: center;
+    }
+    &-wrapper{
+      position: relative;
+    }
+    &-loading{
+      background: rgba(255,255,255,0.7);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg{
+        width: 40px;
+        height: 40px;
+        fill: $grey-lv5;
+        @include spin
+      }
     }
   }
 </style>
