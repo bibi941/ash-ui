@@ -5,6 +5,7 @@
       :dataSource="dataSource"
       :selectedItems.sync="selectedItems"
       :orderBy.sync="orderBy"
+      :height="400"
       bordered>
     </ash-table>
   </div>
@@ -32,17 +33,30 @@
           {id: 4, name: '孙哥', score: 43},
           {id: 5, name: '卡哥', score: 64},
           {id: 6, name: '牛哥', score: 83},
-          {id: 7, name: '屁屁', score: 100}
+          {id: 7, name: '屁屁', score: 100},
+          {id: 8, name: '卡哥', score: 64},
+          {id: 9, name: '牛哥', score: 83},
+          {id: 10,name: '屁屁', score: 100},
+          {id: 11,name: '卡哥', score: 64},
+          {id: 12,name: '牛哥', score: 83},
+          {id: 13,name: '屁屁', score: 100},
+          {id: 14,name: '卡哥', score: 64},
+          {id: 15,name: '牛哥', score: 83},
+          {id: 16,name: '牛哥', score: 83},
+          {id: 17,name: '牛哥', score: 83},
+          {id: 18,name: '牛哥', score: 83},
+          {id: 19,name: '牛哥', score: 83},
+          {id: 20,name: '牛哥', score: 83},
+          {id: 21,name: '屁屁', score: 100}
         ],
         selectedItems: [],
-        orderBy:{
-          score:'desc',
-          name:true
+        orderBy: {
+          score: 'desc',
+          name: true
         }
       }
     },
-    methods: {
-    },
+    methods: {},
     created() {
     }
   }

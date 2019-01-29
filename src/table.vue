@@ -3,42 +3,44 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="ash-table-wrapper">
-    <table class="ash-table" :class="{bordered,compact,striped}">
-      <thead>
-      <tr>
-        <th>
-          <input type="checkbox"
-            :checked="areAllItemsSelected"
-            @change="onchangeAllItems"
-            ref="allChecked">
-        </th>
-        <th v-if="numberVisible">Order</th>
-        <th v-for="column in columns" :key="column.field">
-          <div class="ash-table-header">
-            {{column.text}}
-            <span class="ash-table-sort" v-if="column.field in orderBy" @click="changeOrderBy(column.field)">
+  <div class="ash-table-wrapper" ref="wrapper">
+    <div :style="{height:height+'px',overflow:'auto'}">
+      <table class="ash-table" :class="{bordered,compact,striped}" ref="table">
+        <thead>
+        <tr>
+          <th>
+            <input type="checkbox"
+              :checked="areAllItemsSelected"
+              @change="onchangeAllItems"
+              ref="allChecked">
+          </th>
+          <th v-if="numberVisible">Order</th>
+          <th v-for="column in columns" :key="column.field">
+            <div class="ash-table-header">
+              {{column.text}}
+              <span class="ash-table-sort" v-if="column.field in orderBy" @click="changeOrderBy(column.field)">
               <ash-icon name="asc" :class="{active:orderBy[column.field]==='asc'}"></ash-icon>
               <ash-icon name="desc" :class="{active:orderBy[column.field]==='desc'}"></ash-icon>
             </span>
-          </div>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="(item,index) in dataSource" :key="item.id">
-        <td>
-          <input type="checkbox"
-            :checked="inSelectedItems(item)"
-            @change="onChangeItem(item,index,$event)">
-        </td>
-        <td v-if="numberVisible">{{index+1}}</td>
-        <td v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="ash-table-loading" v-if="loading">
-      <ash-icon name="loading1"></ash-icon>
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item,index) in dataSource" :key="item.id">
+          <td>
+            <input type="checkbox"
+              :checked="inSelectedItems(item)"
+              @change="onChangeItem(item,index,$event)">
+          </td>
+          <td v-if="numberVisible">{{index+1}}</td>
+          <td v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="ash-table-loading" v-if="loading">
+        <ash-icon name="loading1"></ash-icon>
+      </div>
     </div>
   </div>
 </template>
@@ -85,9 +87,12 @@
         type: Boolean,
         default: true
       },
-      loading:{  //加载中
-        type:Boolean,
-        default:false
+      loading: {  //加载中
+        type: Boolean,
+        default: false
+      },
+      height: {  //固定表头-高度
+        type: Number
       }
     },
     data() {
@@ -96,6 +101,17 @@
     created() {
     },
     mounted() {
+      let tableCopy = this.$refs.table.cloneNode(true)
+      tableCopy.classList.add('ash-table-copy')
+      this.tableCopy = tableCopy
+      this.$refs.wrapper.appendChild(tableCopy)
+      this.updateHeaderWidth()
+      this.onWindowResize = () => this.updateHeaderWidth()
+      addEventListener('resize', this.onWindowResize)
+    },
+    beforeDestroy() {
+      removeEventListener('resize', this.onWindowResize)
+      tthis.tableCopy.remove()
     },
     computed: {
       areAllItemsSelected() {
@@ -120,6 +136,21 @@
       }
     },
     methods: {
+      updateHeaderWidth() {
+        let tableHeader = this.$refs.table.querySelector('thead')
+        let tableHeaderCopy
+        Array.from(this.tableCopy.children).map(node => {
+          if (node.tagName.toLowerCase() !== 'thead') {
+            node.remove()
+          } else {
+            tableHeaderCopy = node
+          }
+        })
+        Array.from(tableHeader.children[0].children).map((th, i) => {
+          let {width} = th.getBoundingClientRect()
+          tableHeaderCopy.children[0].children[i].style.width = width + 'px'
+        })
+      },
       changeOrderBy(key) {
         let copy = JSON.parse(JSON.stringify(this.orderBy))
         let oldValue = copy[key]
@@ -155,6 +186,10 @@
 
 <style scoped lang='scss' type="text/scss">
   @import "var";
+
+  .ash-table-wrapper {
+    position: relative;
+  }
 
   .ash-table {
     &.bordered {
@@ -208,11 +243,8 @@
       display: flex;
       align-items: center;
     }
-    &-wrapper{
-      position: relative;
-    }
-    &-loading{
-      background: rgba(255,255,255,0.7);
+    &-loading {
+      background: rgba(255, 255, 255, 0.7);
       position: absolute;
       top: 0;
       left: 0;
@@ -221,12 +253,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      svg{
+      svg {
         width: 40px;
         height: 40px;
         fill: $grey-lv5;
         @include spin
       }
     }
+  }
+
+  .ash-table-copy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: $white;
   }
 </style>
