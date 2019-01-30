@@ -8,8 +8,9 @@
       <table class="ash-table" :class="{bordered,compact,striped}" ref="table">
         <thead>
         <tr>
-          <th class="ash-table-fix"><input type="checkbox" :checked="areAllItemsSelected" @change="onchangeAllItems" ref="allChecked"></th>
-          <th class="ash-table-fix" v-if="numberVisible">Order</th>
+          <th class="ash-table-center" v-if="expendField"></th>
+          <th class="ash-table-center" v-if="checkAble"><input type="checkbox" :checked="areAllItemsSelected" @change="onchangeAllItems" ref="allChecked"></th>
+          <th class="ash-table-center" v-if="numberVisible">Order</th>
           <th :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field">
             <div class="ash-table-header">
               {{column.text}}
@@ -22,11 +23,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item,index) in dataSource" :key="item.id">
-          <td class="ash-table-fix"><input type="checkbox" :checked="inSelectedItems(item)" @change="onChangeItem(item,index,$event)"></td>
-          <td class="ash-table-fix" v-if="numberVisible">{{index+1}}</td>
-          <td :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
-        </tr>
+        <template v-for="(item,index) in dataSource">
+          <tr :key="item.id">
+            <td class="ash-table-center ash-table-icon" v-if="expendField" @click="expendItem(item.id)">
+              <ash-icon name="right"></ash-icon>
+            </td>
+            <td class="ash-table-center" v-if="checkAble"><input type="checkbox" :checked="inSelectedItems(item)" @change="onChangeItem(item,index,$event)"></td>
+            <td class="ash-table-center" v-if="numberVisible">{{index+1}}</td>
+            <td :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
+          </tr>
+          <tr v-show="inExpendIdList(item.id)" :key="`${item.id}-expend`">
+            <td :colspan="columns.length+expendCellColSpan">{{item[expendField]||'空'}}</td>
+          </tr>
+        </template>
         </tbody>
       </table>
       <div class="ash-table-loading" v-if="loading">
@@ -84,10 +93,19 @@
       },
       height: {  //固定表头-高度
         type: Number
+      },
+      checkAble: {
+        type: Boolean,
+        default: false
+      },
+      expendField: {
+        type: String  //展开列的 data 描述的 key
       }
     },
     data() {
-      return {}
+      return {
+        expendIdList: []
+      }
     },
     created() {
     },
@@ -112,6 +130,13 @@
           }
         }
         return equal
+      },
+      expendCellColSpan() {
+        let result = 0
+        if (this.checkAble) {result += 1}
+        if (this.expendField) {result += 1}
+        if (this.numberVisible) {result += 1}
+        return result
       }
     },
     watch: {
@@ -120,6 +145,16 @@
       }
     },
     methods: {
+      expendItem(id) {
+        if (this.inExpendIdList(id)) {
+          this.expendIdList.splice(this.expendIdList.indexOf(id), 1)
+        } else {
+          this.expendIdList.push(id)
+        }
+      },
+      inExpendIdList(id) {
+        return this.expendIdList.includes(id)
+      },
       moveTheadAndComputeHeight() {
         let table = this.$refs.table
         let tableCopy = table.cloneNode(false)
@@ -242,7 +277,7 @@
         @include spin
       }
     }
-    & &-fix {
+    & &-center {
       width: 50px;
       text-align: center;
     }
@@ -254,5 +289,12 @@
     left: 0;
     width: 100%;
     background: $white;
+  }
+
+  .ash-table-icon {
+    width: 10px;
+    height: 10px;
+    fill: $grey-lv4;
+    cursor: pointer;
   }
 </style>

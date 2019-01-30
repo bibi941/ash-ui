@@ -6,7 +6,10 @@
       :selectedItems.sync="selectedItems"
       :orderBy.sync="orderBy"
       :height="400"
-      bordered>
+      expend-field="description"
+      checkAble
+      bordered
+    >
     </ash-table>
   </div>
 </template>
@@ -27,8 +30,8 @@
           {text: '分数', field: 'score'}
         ],
         dataSource: [
-          {id: 1, name: 'bibi', score: 99},
-          {id: 2, name: '小张', score: 23},
+          {id: 1, name: 'bibi', score: 99,description:'行吧，那是是真的牛批'},
+          {id: 2, name: '小张', score: 23,description:'你吼那么大声干什么嘛'},
           {id: 3, name: '小王', score: 44},
           {id: 4, name: '孙哥', score: 43},
           {id: 5, name: '卡哥', score: 64},
