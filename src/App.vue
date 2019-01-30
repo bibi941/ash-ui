@@ -7,9 +7,11 @@
       :orderBy.sync="orderBy"
       :height="400"
       expend-field="description"
-      checkAble
-      bordered
-    >
+      bordered>
+      <template slot-scope="xxx">
+        <button>加钱</button>
+        <button>剑来</button>
+      </template>
     </ash-table>
   </div>
 </template>

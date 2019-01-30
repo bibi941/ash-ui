@@ -20,17 +20,23 @@
             </span>
             </div>
           </th>
+          <th v-if="$scopedSlots.default" ref="actionsHeader"></th>
         </tr>
         </thead>
         <tbody>
         <template v-for="(item,index) in dataSource">
           <tr :key="item.id">
-            <td class="ash-table-center ash-table-icon" v-if="expendField" @click="expendItem(item.id)">
+            <td class="ash-table-center ash-table-icon" :class="{active:inExpendIdList(item.id)}" v-if="expendField" @click="expendItem(item.id)">
               <ash-icon name="right"></ash-icon>
             </td>
             <td class="ash-table-center" v-if="checkAble"><input type="checkbox" :checked="inSelectedItems(item)" @change="onChangeItem(item,index,$event)"></td>
             <td class="ash-table-center" v-if="numberVisible">{{index+1}}</td>
             <td :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
+            <td v-if="$scopedSlots.default">
+              <div ref="actions" style="display: inline-block">
+                <slot :item="item"></slot>
+              </div>
+            </td>
           </tr>
           <tr v-show="inExpendIdList(item.id)" :key="`${item.id}-expend`">
             <td :colspan="columns.length+expendCellColSpan">{{item[expendField]||'空'}}</td>
@@ -110,7 +116,8 @@
     created() {
     },
     mounted() {
-      this.height && this.moveTheadAndComputeHeight()  //固定表头
+      this.height && this.moveTheadToOtherTableAndComputeHeight()  //固定表头
+      this.$scopedSlots && this.computeActionsRelatedWidth()  //计算 action 的宽度
     },
     beforeDestroy() {
       this.tableCopy.remove()
@@ -133,9 +140,15 @@
       },
       expendCellColSpan() {
         let result = 0
-        if (this.checkAble) {result += 1}
-        if (this.expendField) {result += 1}
-        if (this.numberVisible) {result += 1}
+        if (this.checkAble) {
+          result += 1
+        }
+        if (this.expendField) {
+          result += 1
+        }
+        if (this.numberVisible) {
+          result += 1
+        }
         return result
       }
     },
@@ -145,6 +158,21 @@
       }
     },
     methods: {
+      computeActionsRelatedWidth() {
+        let div = this.$refs.actions[0]
+        let styleList = getComputedStyle(div.parentNode)
+        let paddingLeft = styleList.getPropertyValue('padding-left')
+        let paddingRight = styleList.getPropertyValue('padding-right')
+        let borderLeft = styleList.getPropertyValue('border-left')
+        let borderRight = styleList.getPropertyValue('border-right')
+        let {width} = div.getBoundingClientRect()
+        let width2 = width + parseInt(paddingLeft) + parseInt(paddingRight) + parseInt(borderLeft) + parseInt(borderLeft) + 'px'
+        // todo 滚动条宽度无法计算
+        this.$refs.actionsHeader.style.width = parseInt(width2) + 15 + 'px'
+        this.$refs.actions.map(div => {
+          div.parentNode.style.width = width2
+        })
+      },
       expendItem(id) {
         if (this.inExpendIdList(id)) {
           this.expendIdList.splice(this.expendIdList.indexOf(id), 1)
@@ -155,7 +183,7 @@
       inExpendIdList(id) {
         return this.expendIdList.includes(id)
       },
-      moveTheadAndComputeHeight() {
+      moveTheadToOtherTableAndComputeHeight() {
         let table = this.$refs.table
         let tableCopy = table.cloneNode(false)
         let tableHead = table.querySelector('thead')
@@ -292,6 +320,10 @@
   }
 
   .ash-table-icon {
+    &.active {
+      transform: rotate(90deg);
+    }
+    transition: transform .3s;
     width: 10px;
     height: 10px;
     fill: $grey-lv4;
