@@ -4,18 +4,13 @@
 */
 <template>
   <div class="ash-table-wrapper" ref="wrapper">
-    <div :style="{height:height+'px',overflow:'auto'}">
+    <div :style="{height:height+'px',overflow:'auto'}" ref="tableWrapper">
       <table class="ash-table" :class="{bordered,compact,striped}" ref="table">
         <thead>
         <tr>
-          <th>
-            <input type="checkbox"
-              :checked="areAllItemsSelected"
-              @change="onchangeAllItems"
-              ref="allChecked">
-          </th>
-          <th v-if="numberVisible">Order</th>
-          <th v-for="column in columns" :key="column.field">
+          <th class="ash-table-fix"><input type="checkbox" :checked="areAllItemsSelected" @change="onchangeAllItems" ref="allChecked"></th>
+          <th class="ash-table-fix" v-if="numberVisible">Order</th>
+          <th :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field">
             <div class="ash-table-header">
               {{column.text}}
               <span class="ash-table-sort" v-if="column.field in orderBy" @click="changeOrderBy(column.field)">
@@ -28,13 +23,9 @@
         </thead>
         <tbody>
         <tr v-for="(item,index) in dataSource" :key="item.id">
-          <td>
-            <input type="checkbox"
-              :checked="inSelectedItems(item)"
-              @change="onChangeItem(item,index,$event)">
-          </td>
-          <td v-if="numberVisible">{{index+1}}</td>
-          <td v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
+          <td class="ash-table-fix"><input type="checkbox" :checked="inSelectedItems(item)" @change="onChangeItem(item,index,$event)"></td>
+          <td class="ash-table-fix" v-if="numberVisible">{{index+1}}</td>
+          <td :style="{width:column.width+'px'}" v-for="column in columns" :key="column.field"> {{item[column.field]}}</td>
         </tr>
         </tbody>
       </table>
@@ -101,17 +92,10 @@
     created() {
     },
     mounted() {
-      let tableCopy = this.$refs.table.cloneNode(true)
-      tableCopy.classList.add('ash-table-copy')
-      this.tableCopy = tableCopy
-      this.$refs.wrapper.appendChild(tableCopy)
-      this.updateHeaderWidth()
-      this.onWindowResize = () => this.updateHeaderWidth()
-      addEventListener('resize', this.onWindowResize)
+      this.height && this.moveTheadAndComputeHeight()  //固定表头
     },
     beforeDestroy() {
-      removeEventListener('resize', this.onWindowResize)
-      tthis.tableCopy.remove()
+      this.tableCopy.remove()
     },
     computed: {
       areAllItemsSelected() {
@@ -136,20 +120,17 @@
       }
     },
     methods: {
-      updateHeaderWidth() {
-        let tableHeader = this.$refs.table.querySelector('thead')
-        let tableHeaderCopy
-        Array.from(this.tableCopy.children).map(node => {
-          if (node.tagName.toLowerCase() !== 'thead') {
-            node.remove()
-          } else {
-            tableHeaderCopy = node
-          }
-        })
-        Array.from(tableHeader.children[0].children).map((th, i) => {
-          let {width} = th.getBoundingClientRect()
-          tableHeaderCopy.children[0].children[i].style.width = width + 'px'
-        })
+      moveTheadAndComputeHeight() {
+        let table = this.$refs.table
+        let tableCopy = table.cloneNode(false)
+        let tableHead = table.querySelector('thead')
+        let {height} = tableHead.getBoundingClientRect()
+        this.tableCopy = tableCopy
+        tableCopy.classList.add('ash-table-copy')
+        this.$refs.tableWrapper.style.marginTop = height + 'px'
+        this.$refs.tableWrapper.style.height = this.height - height + 'px'
+        tableCopy.appendChild(tableHead)
+        this.$refs.wrapper.appendChild(tableCopy)
       },
       changeOrderBy(key) {
         let copy = JSON.parse(JSON.stringify(this.orderBy))
@@ -189,6 +170,7 @@
 
   .ash-table-wrapper {
     position: relative;
+    overflow: hidden;
   }
 
   .ash-table {
@@ -259,6 +241,10 @@
         fill: $grey-lv5;
         @include spin
       }
+    }
+    & &-fix {
+      width: 50px;
+      text-align: center;
     }
   }
 

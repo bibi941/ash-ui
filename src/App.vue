@@ -23,7 +23,7 @@
     data() {
       return {
         columns: [
-          {text: '姓名', field: 'name'},
+          {text: '姓名', field: 'name',width:100},
           {text: '分数', field: 'score'}
         ],
         dataSource: [
