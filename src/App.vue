@@ -1,65 +1,77 @@
 <template>
   <div style="padding: 100px">
-    <ash-table
-      :columns="columns"
-      :dataSource="dataSource"
-      :selectedItems.sync="selectedItems"
-      :orderBy.sync="orderBy"
-      :height="400"
-      expend-field="description"
-      bordered>
-      <template slot-scope="xxx">
-        <button>加钱</button>
-        <button>剑来</button>
-      </template>
-    </ash-table>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <ash-sticky >
+      <div style="border: 1px solid red">我就是 sticky</div>
+    </ash-sticky>
+    <p>段落1</p>
+    <p>段落2</p>
+    <p>段落3</p>
+    <p>段落4</p>
+    <p>段落5</p>
+    <p>段落6</p>
+    <p>段落7</p>
+    <p>段落8</p>
+    <p>段落9</p>
+    <p>段落10</p>
+    <p>段落11</p>
+    <p>段落12</p>
+    <p>段落13</p>
+    <p>段落14</p>
+    <p>段落15</p>
+    <p>段落16</p>
+    <p>段落17</p>
+    <p>段落18</p>
+    <p>段落19</p>
+    <p>段落20</p>
+    <p>段落21</p>
+    <p>段落22</p>
+    <p>段落23</p>
+    <p>段落24</p>
+    <p>段落25</p>
+    <p>段落26</p>
+    <p>段落27</p>
+    <p>段落28</p>
+    <p>段落29</p>
+    <p>段落30</p>
+    <p>段落31</p>
+    <p>段落32</p>
+    <p>段落33</p>
+    <p>段落34</p>
+    <p>段落35</p>
+    <p>段落36</p>
+    <p>段落37</p>
+    <p>段落38</p>
+    <p>段落39</p>
+    <p>段落40</p>
+    <p>段落41</p>
+    <p>段落42</p>
+    <p>段落43</p>
+    <p>段落44</p>
+    <p>段落45</p>
+    <p>段落46</p>
+    <p>段落47</p>
+    <p>段落48</p>
+    <p>段落49</p>
+    <p>段落50</p>
   </div>
 </template>
 
 <script>
-  import table from './table'
+  import sticky from './sticky'
 
   export default {
     name: 'app',
     components: {
-      'ash-table': table
+      'ash-sticky': sticky
 
     },
     data() {
-      return {
-        columns: [
-          {text: '姓名', field: 'name',width:100},
-          {text: '分数', field: 'score'}
-        ],
-        dataSource: [
-          {id: 1, name: 'bibi', score: 99,description:'行吧，那是是真的牛批'},
-          {id: 2, name: '小张', score: 23,description:'你吼那么大声干什么嘛'},
-          {id: 3, name: '小王', score: 44},
-          {id: 4, name: '孙哥', score: 43},
-          {id: 5, name: '卡哥', score: 64},
-          {id: 6, name: '牛哥', score: 83},
-          {id: 7, name: '屁屁', score: 100},
-          {id: 8, name: '卡哥', score: 64},
-          {id: 9, name: '牛哥', score: 83},
-          {id: 10,name: '屁屁', score: 100},
-          {id: 11,name: '卡哥', score: 64},
-          {id: 12,name: '牛哥', score: 83},
-          {id: 13,name: '屁屁', score: 100},
-          {id: 14,name: '卡哥', score: 64},
-          {id: 15,name: '牛哥', score: 83},
-          {id: 16,name: '牛哥', score: 83},
-          {id: 17,name: '牛哥', score: 83},
-          {id: 18,name: '牛哥', score: 83},
-          {id: 19,name: '牛哥', score: 83},
-          {id: 20,name: '牛哥', score: 83},
-          {id: 21,name: '屁屁', score: 100}
-        ],
-        selectedItems: [],
-        orderBy: {
-          score: 'desc',
-          name: true
-        }
-      }
+      return {}
     },
     methods: {},
     created() {
