@@ -1,5 +1,5 @@
 <template>
-  <ash-scroll :height="400">
+  <ash-scroll :height="400" style="width: 400px;">
     <P>1</P>
     <P>2</P>
     <P>3</P>
