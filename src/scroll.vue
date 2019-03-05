@@ -57,9 +57,7 @@
     },
     mounted() {
       this.listenToDocument()
-      if (this.scrollVisibleWhenMouseEnter) {
-        this.onScrollBarVisible()
-      }
+      this.scrollVisibleWhenMouseEnter && this.onScrollBarVisible()
       this.parentHeight = this.$refs.parent.getBoundingClientRect().height
       this.childHeight = this.$refs.child.getBoundingClientRect().height
       this.updateScrollBar()
@@ -158,7 +156,7 @@
       },
       onMouseUpScrollbar() {
         this.isScrolling = false
-        if (!this.mouseIn) {
+        if (!this.mouseIn && this.scrollVisibleWhenMouseEnter) {
           this.scrollBarVisible = false
         }
       },
