@@ -11,25 +11,29 @@
         <div class="ash-date-piker-pop">
           <!--年月导航-->
           <div class="ash-date-piker-nav">
-            <span> <ash-icon name="settings"></ash-icon></span>
-            <span><ash-icon name="settings"></ash-icon></span>
+            <span> <ash-icon name="leftleft"></ash-icon></span>
+            <span><ash-icon name="left"></ash-icon></span>
             <span @click="onclickYear">2012年</span>
             <span @click="onclickMonth">8月</span>
-            <span><ash-icon name="settings"></ash-icon></span>
-            <span><ash-icon name="settings"></ash-icon></span>
+            <span><ash-icon name="right"></ash-icon></span>
+            <span><ash-icon name="rightright"></ash-icon></span>
           </div>
           <!--day面板-->
           <div class="ash-date-piker-panels">
             <div class="ash-date-piker-content" v-if="mode === 'years'">年</div>
             <div class="ash-date-piker-content" v-else-if="mode === 'months'">月</div>
             <div class="ash-date-piker-content" v-else>
-              <div v-for="i in helper.range(1,7)">
-                <span v-for="j in helper.range(1,8)">
+              <div class="ash-date-piker-weekDays">
+                <span v-for="i in [1,2,3,4,5,6,0]">{{weekdays[i]}}</span>
+              </div>
+              <div class="ash-date-piker-row" v-for="i in helper.range(1,7)">
+                <span class="ash-date-piker-cell" v-for="j in helper.range(1,8)">
                   {{visibleDays[(i-1)*7+(j-1)].getDate()}}
                 </span>
               </div>
             </div>
             <div class="ash-date-piker-actions"></div>
+            <button>清除</button>
           </div>
         </div>
       </template>
@@ -46,12 +50,15 @@
   export default {
     name: 'ash-date-piker',
     components: {AshInput, AshPopover, AshIcon},
-    props: {},
+    props: {
+      // todo 周日 star or 周一 star
+    },
     data() {
       return {
         helper,
         mode: 'days', //模式
-        value: new Date()
+        value: new Date(),
+        weekdays: ['日', '一', '二', '三', '四', '五', '六']
       }
     },
     computed: {
@@ -94,5 +101,17 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  .ash-date-piker{
+    &-nav{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      >span{
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
 
 </style>
