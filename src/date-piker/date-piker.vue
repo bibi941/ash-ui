@@ -22,7 +22,13 @@
           <div class="ash-date-piker-panels">
             <div class="ash-date-piker-content" v-if="mode === 'years'">年</div>
             <div class="ash-date-piker-content" v-else-if="mode === 'months'">月</div>
-            <div class="ash-date-piker-content" v-else>日</div>
+            <div class="ash-date-piker-content" v-else>
+              <div v-for="i in helper.range(1,7)">
+                <span v-for="j in helper.range(1,8)">
+                  {{visibleDays[(i-1)*7+(j-1)].getDate()}}
+                </span>
+              </div>
+            </div>
             <div class="ash-date-piker-actions"></div>
           </div>
         </div>
@@ -35,6 +41,7 @@
   import AshInput from '../input'
   import AshPopover from '../popover'
   import AshIcon from '../icon'
+  import helper from './data-helper'
 
   export default {
     name: 'ash-date-piker',
@@ -42,17 +49,46 @@
     props: {},
     data() {
       return {
-        mode: 'days' //模式
+        helper,
+        mode: 'days', //模式
+        value: new Date()
       }
     },
-    computed: {},
-    created() {
+    computed: {
+      //面板可见日期
+      visibleDays() {
+        let date = new Date(2019, 2, 1)
+        let first = this.helper.firstDayOfMonth(date)
+        let last = this.helper.lastDayOfMonth(date)
+        let [year, month, day] = this.helper.getYearMonthDate(date)
+        let arr = []
+        for (let i = first.getDate(); i <= last.getDate(); i++) {
+          arr.push(new Date(year, month, i))
+        }
+        let n = first.getDay() === 0 ? 6 : first.getDay() - 1 //前面补充几个
+        let arr2 = []
+        for (let i = 0; i < n; i++) {
+          arr2.push(new Date(year, month, -i))
+        }
+        arr2.reverse()
+        let arr3 = []
+        let m = 42 - arr.length - arr2.length //后面补几个
+        console.log(m)
+        for (let i = 1; i <= m; i++) {  //i =1号
+          arr3.push(new Date(year, month + 1, i))
+        }
+        return [...arr2, ...arr, ...arr3]
+      }
     },
     mounted() {
     },
     methods: {
-      onclickYear(){},
-      onclickMonth(){},
+      onclickYear() {
+        this.mode = 'years'
+      },
+      onclickMonth() {
+        this.mode = 'months'
+      }
     }
   }
 </script>
