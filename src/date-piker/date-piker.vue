@@ -4,7 +4,7 @@
 */
 <template>
   <div ref="wrapper">
-    <ash-popover position="bottom" :container="substitute">
+    <ash-popover position="bottom" :container="popoverSubstitute">
       <ash-input></ash-input>
       <!--日期选择器-->
       <template slot="content">
@@ -59,36 +59,28 @@
         mode: 'days', //模式
         value: new Date(),
         weekdays: ['日', '一', '二', '三', '四', '五', '六'],
-        substitute: null
+        popoverSubstitute: null
       }
     },
     computed: {
       //面板可见日期
       visibleDays() {
+        let arr = []
         let date = new Date(2019, 2, 1)
         let first = this.helper.firstDayOfMonth(date)
         let last = this.helper.lastDayOfMonth(date)
         let [year, month, day] = this.helper.getYearMonthDate(date)
-        let arr = []
-        for (let i = first.getDate(); i <= last.getDate(); i++) {
-          arr.push(new Date(year, month, i))
+        let weekdayOfFirst = first.getDay() //本月一号是星期几
+        let x = first - (weekdayOfFirst === 0 ? 6 : weekdayOfFirst - 1) * 86400 * 1000
+        for (let i = 0; i < 42; i++) {
+          arr.push(new Date(x + i * 86400 * 1000))
         }
-        let n = first.getDay() === 0 ? 6 : first.getDay() - 1 //前面补充几个
-        let arr2 = []
-        for (let i = 0; i < n; i++) {
-          arr2.push(new Date(year, month, -i))
-        }
-        arr2.reverse()
-        let arr3 = []
-        let m = 42 - arr.length - arr2.length //后面补几个
-        for (let i = 1; i <= m; i++) {  //i =1号
-          arr3.push(new Date(year, month + 1, i))
-        }
-        return [...arr2, ...arr, ...arr3]
+        return arr
+
       }
     },
     mounted() {
-      this.substitute = this.$refs.wrapper
+      this.popoverSubstitute = this.$refs.wrapper
     },
     methods: {
       onclickYear() {
@@ -127,7 +119,8 @@
       }
     }
   }
-  /deep/ .ash-popover-content-wrapper{
+
+  /deep/ .ash-popover-content-wrapper {
     padding: 0;
   }
 
