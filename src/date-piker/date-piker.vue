@@ -5,7 +5,7 @@
 <template>
   <div ref="wrapper">
     <ash-popover position="bottom" :container="popoverSubstitute">
-      <ash-input></ash-input>
+      <ash-input :value="formattedValue"></ash-input>
       <!--日期选择器-->
       <template slot="content">
         <div class="ash-date-piker">
@@ -29,8 +29,8 @@
                 <span class="ash-date-piker-weekDay" v-for="i in [1,2,3,4,5,6,0]">{{weekdays[i]}}</span>
               </div>
               <div class="ash-date-piker-row" v-for="i in helper.range(1,7)">
-                <span class="ash-date-piker-cell" v-for="j in helper.range(1,8)">
-                  {{visibleDays[(i-1)*7+(j-1)].getDate()}}
+                <span class="ash-date-piker-cell" @click="onClickCell(getVisibleDay(i,j))" v-for="j in helper.range(1,8)">
+                  {{getVisibleDay(i,j).getDate()}}
                 </span>
               </div>
             </div>
@@ -54,12 +54,19 @@
     components: {AshInput, AshPopover, AshIcon},
     props: {
       // todo 周日 star or 周一 star
+      firstDayOfWeek:{
+        type:Number,
+        default:1
+      },
+      value:{
+        type:Date,
+        default: ()=> new Date()
+      }
     },
     data() {
       return {
         helper,
         mode: 'days', //模式
-        value: new Date(),
         weekdays: ['日', '一', '二', '三', '四', '五', '六'],
         popoverSubstitute: null
       }
@@ -68,7 +75,7 @@
       //面板可见日期
       visibleDays() {
         let arr = []
-        let date = new Date(2019, 2, 1)
+        let date = this.value
         let first = this.helper.firstDayOfMonth(date)
         let last = this.helper.lastDayOfMonth(date)
         let [year, month, day] = this.helper.getYearMonthDate(date)
@@ -78,6 +85,10 @@
           arr.push(new Date(x + i * 86400 * 1000))
         }
         return arr
+      },
+      formattedValue(){
+        let [year,month,day]=helper.getYearMonthDate(this.value)
+        return `${year}-${month+1}-${day}`
       }
     },
     mounted() {
@@ -89,6 +100,12 @@
       },
       onclickMonth() {
         this.mode = 'months'
+      },
+      onClickCell(date){
+        this.$emit('update:value',date)
+      },
+      getVisibleDay(i,j){
+        return this.visibleDays[(i-1)*7+(j-1)]
       }
     }
   }
@@ -99,12 +116,16 @@
 
   .ash-date-piker {
     color: $grey-lv6;
+    font-weight: 400;
+    font-size: 12px;
+
     &-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       &-year, &-month {
         font-weight: 500;
+        font-size: 14px;
       }
       > span {
         cursor: pointer;
@@ -122,6 +143,14 @@
         justify-content: center;
       }
     }
+    &-cell:hover{
+      color: $purple-lv1;
+      cursor: pointer;
+    }
+    &-weekDay{
+      border-bottom: 1px solid $grey-lv1;
+      cursor: default;
+    }
     &-cell, &-weekDay, &-nav-item {
       width: 32px;
       height: 32px;
@@ -132,7 +161,7 @@
   }
 
   /deep/ .ash-popover-content-wrapper {
-    padding: 0;
+    padding: 0 8px;
   }
 
 </style>

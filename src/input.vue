@@ -20,7 +20,7 @@
     name: 'ash-input',
     components: {Icon},
     props: {
-      value: {type: String},
+      value: {type: [String,Date]},
       disabled: {type: Boolean, default: false},
       readonly: {type: Boolean, default: false},
       error: {type: String}

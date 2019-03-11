@@ -1,5 +1,5 @@
 <template>
-  <date-piker style="margin: 100px"></date-piker>
+  <date-piker style="margin: 100px" :value.sync="date" ></date-piker>
 </template>
 
 <script>
@@ -11,7 +11,9 @@
       datePiker
     },
     data() {
-      return {}
+      return {
+        date: new Date()
+      }
     },
     methods: {},
     created() {
