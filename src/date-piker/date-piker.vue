@@ -14,7 +14,7 @@
             <span class="ash-date-piker-nav-item"> <ash-icon name="leftleft"></ash-icon></span>
             <span class="ash-date-piker-nav-item"><ash-icon name="left"></ash-icon></span>
             <span style="margin:auto">
-              <span  @click="onclickYear" class="ash-date-piker-nav-year">2012年</span>
+              <span @click="onclickYear" class="ash-date-piker-nav-year">2012年</span>
               <span @click="onclickMonth" class="ash-date-piker-nav-month">8月</span>
             </span>
             <span class="ash-date-piker-nav-item"><ash-icon name="right"></ash-icon></span>
@@ -29,7 +29,10 @@
                 <span class="ash-date-piker-weekDay" v-for="i in [1,2,3,4,5,6,0]">{{weekdays[i]}}</span>
               </div>
               <div class="ash-date-piker-row" v-for="i in helper.range(1,7)">
-                <span class="ash-date-piker-cell" @click="onClickCell(getVisibleDay(i,j))" v-for="j in helper.range(1,8)">
+                <span class="ash-date-piker-cell"
+                  :class="{currentMonth:isCurrentMonth(getVisibleDay(i,j))}"
+                  @click="onClickCell(getVisibleDay(i,j))"
+                  v-for="j in helper.range(1,8)">
                   {{getVisibleDay(i,j).getDate()}}
                 </span>
               </div>
@@ -54,13 +57,13 @@
     components: {AshInput, AshPopover, AshIcon},
     props: {
       // todo 周日 star or 周一 star
-      firstDayOfWeek:{
-        type:Number,
-        default:1
+      firstDayOfWeek: {
+        type: Number,
+        default: 1
       },
-      value:{
-        type:Date,
-        default: ()=> new Date()
+      today: {
+        type: Date,
+        default: () => new Date()
       }
     },
     data() {
@@ -68,14 +71,15 @@
         helper,
         mode: 'days', //模式
         weekdays: ['日', '一', '二', '三', '四', '五', '六'],
-        popoverSubstitute: null
+        popoverSubstitute: null,
+        selectedValue: this.today
       }
     },
     computed: {
       //面板可见日期
       visibleDays() {
         let arr = []
-        let date = this.value
+        let date = this.today
         let first = this.helper.firstDayOfMonth(date)
         let last = this.helper.lastDayOfMonth(date)
         let [year, month, day] = this.helper.getYearMonthDate(date)
@@ -86,9 +90,9 @@
         }
         return arr
       },
-      formattedValue(){
-        let [year,month,day]=helper.getYearMonthDate(this.value)
-        return `${year}-${month+1}-${day}`
+      formattedValue() {
+        let [year, month, day] = helper.getYearMonthDate(this.selectedValue)
+        return `${year}-${month + 1}-${day}`
       }
     },
     mounted() {
@@ -101,11 +105,18 @@
       onclickMonth() {
         this.mode = 'months'
       },
-      onClickCell(date){
-        this.$emit('update:value',date)
+      onClickCell(date) {
+        if (this.isCurrentMonth(date)) {
+          this.selectedValue = date
+        }
       },
-      getVisibleDay(i,j){
-        return this.visibleDays[(i-1)*7+(j-1)]
+      getVisibleDay(i, j) {
+        return this.visibleDays[(i - 1) * 7 + (j - 1)]
+      },
+      isCurrentMonth(date) {
+        let [year1, month1] = helper.getYearMonthDate(date)
+        let [year2, month2] = helper.getYearMonthDate(this.today)
+        return year1 === year2 && month1 === month2
       }
     }
   }
@@ -143,11 +154,19 @@
         justify-content: center;
       }
     }
-    &-cell:hover{
-      color: $purple-lv1;
-      cursor: pointer;
+    &-cell {
+      color: $grey-lv1;
+      cursor: not-allowed;
+      &.currentMonth {
+        color: $grey-lv6;
+        &:hover {
+          color: $purple-lv1;
+          cursor: pointer;
+        }
+      }
+
     }
-    &-weekDay{
+    &-weekDay {
       border-bottom: 1px solid $grey-lv1;
       cursor: default;
     }
