@@ -3,12 +3,12 @@
 * @author : fangXinRui
 */
 <template>
-  <div>
-    <ash-popover position="bottom">
+  <div ref="wrapper">
+    <ash-popover position="bottom" :container="substitute">
       <ash-input></ash-input>
       <!--日期选择器-->
       <template slot="content">
-        <div class="ash-date-piker-pop">
+        <div class="ash-date-piker">
           <!--年月导航-->
           <div class="ash-date-piker-nav">
             <span> <ash-icon name="leftleft"></ash-icon></span>
@@ -58,7 +58,8 @@
         helper,
         mode: 'days', //模式
         value: new Date(),
-        weekdays: ['日', '一', '二', '三', '四', '五', '六']
+        weekdays: ['日', '一', '二', '三', '四', '五', '六'],
+        substitute: null
       }
     },
     computed: {
@@ -80,7 +81,6 @@
         arr2.reverse()
         let arr3 = []
         let m = 42 - arr.length - arr2.length //后面补几个
-        console.log(m)
         for (let i = 1; i <= m; i++) {  //i =1号
           arr3.push(new Date(year, month + 1, i))
         }
@@ -88,6 +88,7 @@
       }
     },
     mounted() {
+      this.substitute = this.$refs.wrapper
     },
     methods: {
       onclickYear() {
@@ -101,17 +102,33 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  .ash-date-piker{
-    &-nav{
+  @import "var";
+
+  .ash-date-piker {
+    color: $grey-lv6;
+    &-nav {
       display: flex;
       align-items: center;
-      justify-content: center;
-      >span{
+      justify-content: space-between;
+      > span {
+        cursor: pointer;
+        &:hover {
+          color: $purple-lv4;
+        }
+        > svg {
+          &:hover {
+            fill: $purple-lv4;
+          }
+          fill: $grey-lv4;
+        }
         display: inline-flex;
         align-items: center;
         justify-content: center;
       }
     }
+  }
+  /deep/ .ash-popover-content-wrapper{
+    padding: 0;
   }
 
 </style>
