@@ -1,5 +1,5 @@
 <template>
-  <date-piker style="margin: 100px" :value="date" ></date-piker>
+  <date-piker style="margin: 100px" :value.sync="date" :scope="scope"></date-piker>
 </template>
 
 <script>
@@ -12,7 +12,8 @@
     },
     data() {
       return {
-        date: new Date()
+        date:new Date(),
+        scope:[new Date(2001,0,1),new Date(2019,4,1)]
       }
     },
     methods: {},

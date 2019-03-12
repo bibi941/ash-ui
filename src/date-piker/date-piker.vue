@@ -13,31 +13,45 @@
           <div class="ash-date-piker-nav">
             <span @click="onClickPrevYear" class="ash-date-piker-nav-item"> <ash-icon name="leftleft"></ash-icon></span>
             <span @click="onClickPrevMonth" class="ash-date-piker-nav-item"><ash-icon name="left"></ash-icon></span>
+            <!--todo scope year-->
             <span style="margin:auto" @click="onclickMonth">
               <span class="ash-date-piker-nav-year">{{display.year}}年</span>
-              <span class="ash-date-piker-nav-month">{{display.month}}月</span>
+              <span class="ash-date-piker-nav-month">{{display.month+1}}月</span>
             </span>
             <span @click="onClickNextMonth" class="ash-date-piker-nav-item"><ash-icon name="right"></ash-icon></span>
             <span @click="onClickNextYear" class="ash-date-piker-nav-item"><ash-icon name="rightright"></ash-icon></span>
           </div>
           <!--day面板-->
           <div class="ash-date-piker-panels">
-            <div class="ash-date-piker-content" v-if="mode === 'month'">月</div>
-            <div class="ash-date-piker-content" v-else>
+            <div class="ash-date-piker-content-month" v-if="mode === 'month'">
+              <select name="" @change="onSelectYear" :value="display.year">
+                <option v-for="year in selectLimitYears" :value="year">{{year}}</option>
+              </select>
+              <span>年</span>
+              <select name="" @change="onSelectMonth" :value="display.month">
+                <option v-for="month in helper.range(0,12)" :value="month">{{month+1}}</option>
+              </select>
+              <div>月</div>
+            </div>
+            <div class="ash-date-piker-content-day" v-else>
               <div class="ash-date-piker-weekDays">
                 <span class="ash-date-piker-weekDay" v-for="i in [1,2,3,4,5,6,0]">{{weekdays[i]}}</span>
               </div>
               <div class="ash-date-piker-row" v-for="i in helper.range(1,7)">
                 <span class="ash-date-piker-cell"
-                  :class="{currentMonth:isCurrentMonth(getVisibleDay(i,j))}"
+                  :class="{currentMonth:isCurrentMonth(getVisibleDay(i,j)),
+                  selected:isSelected(getVisibleDay(i,j)),
+                  today: isToday(getVisibleDay(i,j))}"
                   @click="onClickCell(getVisibleDay(i,j))"
                   v-for="j in helper.range(1,8)">
                   {{getVisibleDay(i,j).getDate()}}
                 </span>
               </div>
             </div>
-            <div class="ash-date-piker-actions"></div>
-            <button>清除</button>
+            <div class="ash-date-piker-actions">
+              <ash-button @click="onClickToday">今天</ash-button>
+              <ash-button @click="onClickClear">清除</ash-button>
+            </div>
           </div>
         </div>
       </template>
@@ -49,11 +63,12 @@
   import AshInput from '../input'
   import AshPopover from '../popover'
   import AshIcon from '../icon'
+  import AshButton from '../button/button'
   import helper from './data-helper'
 
   export default {
     name: 'ash-date-piker',
-    components: {AshInput, AshPopover, AshIcon},
+    components: {AshInput, AshPopover, AshIcon, AshButton},
     props: {
       // todo 周日 star or 周一 star
       firstDayOfWeek: {
@@ -61,18 +76,22 @@
         default: 1
       },
       value: {
-        type: Date,
-        default: () => new Date()
+        type: [Date]//input 内日期
+      },
+      scope: {
+        type: Array,
+        default: () => [new Date(1900, 0, 1), helper.addYear(new Date(), 100)]
       }
     },
     data() {
-      let [year, month] = helper.getYearMonthDate(this.value)
+      let [year, month] = helper.getYearMonthDate(this.value || new Date())
       return {
         helper,
         mode: 'day', //模式
         weekdays: ['日', '一', '二', '三', '四', '五', '六'],
         popoverSubstitute: null,
-        display: {year, month} //展示的日期
+        today: new Date(),
+        display: {year, month} //展示的日期(42个 span)
       }
     },
     computed: {
@@ -91,9 +110,14 @@
         return arr
       },
       formattedValue() {
+        if(!this.value){return ''}
         let [year, month, day] = helper.getYearMonthDate(this.value)
         return `${year}-${month + 1}-${day}`
+      },
+      selectLimitYears() {
+        return helper.range(this.scope[0].getFullYear(), this.scope[1].getFullYear() + 1)
       }
+
     },
     mounted() {
       this.popoverSubstitute = this.$refs.wrapper
@@ -108,7 +132,7 @@
       },
       onClickCell(date) {
         if (this.isCurrentMonth(date)) {
-          // this.value = date
+          this.$emit('update:value', date)
         }
       },
       onClickPrevYear() {
@@ -137,12 +161,52 @@
         this.display = {year, month}
 
       },
+      onSelectYear(e) {
+        let year = +e.target.value
+        let date = new Date(year, this.display.month)
+        if (date >= this.scope[0] && date <= this.scope[1]) {
+          this.display.year = year
+        } else {
+          e.target.value = this.display.year
+
+        }
+
+      },
+      onSelectMonth(e) {
+        let month = +e.target.value
+        let date = new Date(this.display.year, month)
+        if (date >= this.scope[0] && date <= this.scope[1]) {
+          this.display.month = month
+        } else {
+          e.target.value = this.display.month
+        }
+
+      },
+      onClickToday() {
+        let [year, month, day] = helper.getYearMonthDate(this.today)
+        this.display = {year, month}
+        this.$emit('update:value', new Date(year, month, day))
+      },
+      onClickClear() {
+        this.$emit('update:value', null)
+      },
       getVisibleDay(i, j) {
         return this.visibleDays[(i - 1) * 7 + (j - 1)]
       },
       isCurrentMonth(date) {
         let [year, month] = helper.getYearMonthDate(date)
         return year === this.display.year && month === this.display.month
+      },
+      isSelected(date) {
+        if(!this.value) {return false}
+        let [year, month, day] = helper.getYearMonthDate(date)
+        let [year2, month2, day2] = helper.getYearMonthDate(this.value)
+        return year === year2 && month === month2 && day === day2
+      },
+      isToday(date) {
+        let [year, month, day] = helper.getYearMonthDate(date)
+        let [year2, month2, day2] = helper.getYearMonthDate(this.today)
+        return year === year2 && month === month2 && day === day2
       }
     }
   }
@@ -190,6 +254,18 @@
           cursor: pointer;
         }
       }
+      &.currentMonth.selected,
+      &.currentMonth.selected.today {
+        background: $purple-lv1;
+        color: white;
+        border-radius: 4px;
+      }
+      &.currentMonth.today {
+        background: white;
+        color: $purple-lv1;
+        font-weight: 500;
+        border-radius: 0;
+      }
 
     }
     &-weekDay {
@@ -202,6 +278,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+    }
+    &-content-month {
+      width: 224px;
+      height: 224px;
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &-actions {
+      padding: 8px 0;
+      text-align: right;
+      > button {
+        margin-left: 4px;
+      }
     }
   }
 
