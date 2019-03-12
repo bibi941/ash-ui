@@ -8,22 +8,21 @@
       <ash-input :value="formattedValue"></ash-input>
       <!--日期选择器-->
       <template slot="content">
-        <div class="ash-date-piker">
+        <div class="ash-date-piker" @selectstart.prevent>
           <!--年月导航-->
           <div class="ash-date-piker-nav">
-            <span class="ash-date-piker-nav-item"> <ash-icon name="leftleft"></ash-icon></span>
-            <span class="ash-date-piker-nav-item"><ash-icon name="left"></ash-icon></span>
-            <span style="margin:auto">
-              <span @click="onclickYear" class="ash-date-piker-nav-year">2012年</span>
-              <span @click="onclickMonth" class="ash-date-piker-nav-month">8月</span>
+            <span @click="onClickPrevYear" class="ash-date-piker-nav-item"> <ash-icon name="leftleft"></ash-icon></span>
+            <span @click="onClickPrevMonth" class="ash-date-piker-nav-item"><ash-icon name="left"></ash-icon></span>
+            <span style="margin:auto" @click="onclickMonth">
+              <span class="ash-date-piker-nav-year">{{display.year}}年</span>
+              <span class="ash-date-piker-nav-month">{{display.month}}月</span>
             </span>
-            <span class="ash-date-piker-nav-item"><ash-icon name="right"></ash-icon></span>
-            <span class="ash-date-piker-nav-item"><ash-icon name="rightright"></ash-icon></span>
+            <span @click="onClickNextMonth" class="ash-date-piker-nav-item"><ash-icon name="right"></ash-icon></span>
+            <span @click="onClickNextYear" class="ash-date-piker-nav-item"><ash-icon name="rightright"></ash-icon></span>
           </div>
           <!--day面板-->
           <div class="ash-date-piker-panels">
-            <div class="ash-date-piker-content" v-if="mode === 'years'">年</div>
-            <div class="ash-date-piker-content" v-else-if="mode === 'months'">月</div>
+            <div class="ash-date-piker-content" v-if="mode === 'month'">月</div>
             <div class="ash-date-piker-content" v-else>
               <div class="ash-date-piker-weekDays">
                 <span class="ash-date-piker-weekDay" v-for="i in [1,2,3,4,5,6,0]">{{weekdays[i]}}</span>
@@ -61,25 +60,26 @@
         type: Number,
         default: 1
       },
-      today: {
+      value: {
         type: Date,
         default: () => new Date()
       }
     },
     data() {
+      let [year, month] = helper.getYearMonthDate(this.value)
       return {
         helper,
-        mode: 'days', //模式
+        mode: 'day', //模式
         weekdays: ['日', '一', '二', '三', '四', '五', '六'],
         popoverSubstitute: null,
-        selectedValue: this.today
+        display: {year, month} //展示的日期
       }
     },
     computed: {
       //面板可见日期
       visibleDays() {
         let arr = []
-        let date = this.today
+        let date = new Date(this.display.year, this.display.month, 1)
         let first = this.helper.firstDayOfMonth(date)
         let last = this.helper.lastDayOfMonth(date)
         let [year, month, day] = this.helper.getYearMonthDate(date)
@@ -91,7 +91,7 @@
         return arr
       },
       formattedValue() {
-        let [year, month, day] = helper.getYearMonthDate(this.selectedValue)
+        let [year, month, day] = helper.getYearMonthDate(this.value)
         return `${year}-${month + 1}-${day}`
       }
     },
@@ -99,24 +99,50 @@
       this.popoverSubstitute = this.$refs.wrapper
     },
     methods: {
-      onclickYear() {
-        this.mode = 'years'
-      },
       onclickMonth() {
-        this.mode = 'months'
+        if (this.mode !== 'month') {
+          this.mode = 'month'
+        } else {
+          this.mode = 'days'
+        }
       },
       onClickCell(date) {
         if (this.isCurrentMonth(date)) {
-          this.selectedValue = date
+          // this.value = date
         }
+      },
+      onClickPrevYear() {
+        let oldDate = new Date(this.display.year, this.display.month)
+        let newDate = helper.addYear(oldDate, -1)
+        let [year, month] = helper.getYearMonthDate(newDate)
+        this.display = {year, month}
+
+      },
+      onClickPrevMonth() {
+        let oldDate = new Date(this.display.year, this.display.month)
+        let newDate = helper.addMonth(oldDate, -1)
+        let [year, month] = helper.getYearMonthDate(newDate)
+        this.display = {year, month}
+      },
+      onClickNextMonth() {
+        let oldDate = new Date(this.display.year, this.display.month)
+        let newDate = helper.addMonth(oldDate, 1)
+        let [year, month] = helper.getYearMonthDate(newDate)
+        this.display = {year, month}
+      },
+      onClickNextYear() {
+        let oldDate = new Date(this.display.year, this.display.month)
+        let newDate = helper.addYear(oldDate, 1)
+        let [year, month] = helper.getYearMonthDate(newDate)
+        this.display = {year, month}
+
       },
       getVisibleDay(i, j) {
         return this.visibleDays[(i - 1) * 7 + (j - 1)]
       },
       isCurrentMonth(date) {
-        let [year1, month1] = helper.getYearMonthDate(date)
-        let [year2, month2] = helper.getYearMonthDate(this.today)
-        return year1 === year2 && month1 === month2
+        let [year, month] = helper.getYearMonthDate(date)
+        return year === this.display.year && month === this.display.month
       }
     }
   }

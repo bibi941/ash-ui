@@ -21,6 +21,20 @@ export default {
       array.push(i)
     }
     return array
+  },
+  addMonth(date, n) {
+    let [year, month, day] = getYearMonthDate(date)
+    let copy = new Date(date)
+    let newMonth = month + n
+    copy.setMonth(newMonth)
+    return copy
+  },
+  addYear(date, n) {
+    let [year, month, day] = getYearMonthDate(date)
+    let copy = new Date(date)
+    let newYear = year + n
+    copy.setFullYear(newYear)
+    return copy
   }
 }
 

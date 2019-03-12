@@ -1,5 +1,5 @@
 <template>
-  <date-piker style="margin: 100px" :today="date" ></date-piker>
+  <date-piker style="margin: 100px" :value="date" ></date-piker>
 </template>
 
 <script>
