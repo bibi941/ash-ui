@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <input type="text" :class="{error}"
+      ref="input"
       :value="value" :disabled="disabled" :readonly="readonly"
       @change="$emit('change',$event.target.value)"
       @input="$emit('input',$event.target.value)"
@@ -24,6 +25,11 @@
       disabled: {type: Boolean, default: false},
       readonly: {type: Boolean, default: false},
       error: {type: String}
+    },
+    methods:{
+      setRawValue(value){
+        this.$refs.input.value = value
+      }
     }
   }
 </script>
