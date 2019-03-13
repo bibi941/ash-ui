@@ -4,7 +4,7 @@
 */
 <template>
   <div ref="wrapper">
-    <ash-popover position="bottom" :container="popoverSubstitute">
+    <ash-popover position="bottom" ref="popover" :container="popoverSubstitute" @close="onClosePopover">
       <ash-input :value="formattedValue"></ash-input>
       <!--日期选择器-->
       <template slot="content">
@@ -24,14 +24,19 @@
           <!--day面板-->
           <div class="ash-date-piker-panels">
             <div class="ash-date-piker-content-month" v-if="mode === 'month'">
-              <select name="" @change="onSelectYear" :value="display.year">
-                <option v-for="year in selectLimitYears" :value="year">{{year}}</option>
-              </select>
-              <span>年</span>
-              <select name="" @change="onSelectMonth" :value="display.month">
-                <option v-for="month in helper.range(0,12)" :value="month">{{month+1}}</option>
-              </select>
-              <div>月</div>
+              <div class="ash-date-piker-content-month-selects">
+                <select name="" @change="onSelectYear" :value="display.year">
+                  <option v-for="year in selectLimitYears" :value="year">{{year}}</option>
+                </select>
+                <span>年</span>
+                <select name="" @change="onSelectMonth" :value="display.month">
+                  <option v-for="month in helper.range(0,12)" :value="month">{{month+1}}</option>
+                </select>
+                <div>月</div>
+              </div>
+              <div class="ash-date-piker-content-month-modeToDay">
+                <ash-button @click="mode='day'">返回</ash-button>
+              </div>
             </div>
             <div class="ash-date-piker-content-day" v-else>
               <div class="ash-date-piker-weekDays">
@@ -110,9 +115,11 @@
         return arr
       },
       formattedValue() {
-        if(!this.value){return ''}
+        if (!this.value) {
+          return ''
+        }
         let [year, month, day] = helper.getYearMonthDate(this.value)
-        return `${year}-${month + 1}-${day}`
+        return `${year}-${helper.padLeft(month + 1)}-${helper.padLeft(day)}`
       },
       selectLimitYears() {
         return helper.range(this.scope[0].getFullYear(), this.scope[1].getFullYear() + 1)
@@ -133,6 +140,7 @@
       onClickCell(date) {
         if (this.isCurrentMonth(date)) {
           this.$emit('update:value', date)
+          this.$refs.popover.close()
         }
       },
       onClickPrevYear() {
@@ -189,6 +197,10 @@
       },
       onClickClear() {
         this.$emit('update:value', null)
+        this.$refs.popover.close()
+      },
+      onClosePopover(){
+        this.mode = 'day'
       },
       getVisibleDay(i, j) {
         return this.visibleDays[(i - 1) * 7 + (j - 1)]
@@ -198,7 +210,9 @@
         return year === this.display.year && month === this.display.month
       },
       isSelected(date) {
-        if(!this.value) {return false}
+        if (!this.value) {
+          return false
+        }
         let [year, month, day] = helper.getYearMonthDate(date)
         let [year2, month2, day2] = helper.getYearMonthDate(this.value)
         return year === year2 && month === month2 && day === day2
@@ -219,7 +233,6 @@
     color: $grey-lv6;
     font-weight: 400;
     font-size: 12px;
-
     &-nav {
       display: flex;
       align-items: center;
@@ -266,7 +279,6 @@
         font-weight: 500;
         border-radius: 0;
       }
-
     }
     &-weekDay {
       border-bottom: 1px solid $grey-lv1;
@@ -286,6 +298,15 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      &-selects {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &-modeToDay {
+        margin-top: 8px;
+      }
     }
     &-actions {
       padding: 8px 0;

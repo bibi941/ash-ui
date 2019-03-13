@@ -35,6 +35,13 @@ export default {
     let newYear = year + n
     copy.setFullYear(newYear)
     return copy
+  },
+  padLeft(number) {
+    if (typeof  number !== 'number') {
+      throw new Error('Wrong param')
+    } else {
+      return (number >= 10 ? '' : '0') + number
+    }
   }
 }
 
