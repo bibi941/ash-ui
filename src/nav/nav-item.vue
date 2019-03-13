@@ -71,7 +71,7 @@
     }
   }
 
-  .ash-suash-nav .ash-nav-item.selected {
+  .ash-sub-nav .ash-nav-item.selected {
     &.vertical{
         background:$white;
         color: $purple-lv1;

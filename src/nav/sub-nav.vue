@@ -3,23 +3,23 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="ash-suash-nav" :class="{active,vertical}" v-click-outside="close">
-    <span class="ash-suash-nav-label" @click="onClick">
+  <div class="ash-sub-nav" :class="{active,vertical}" v-click-outside="close">
+    <span class="ash-sub-nav-label" @click="onClick">
       <slot name="title"></slot>
-      <span class="ash-suash-nav-icon" :class="{open,vertical}">
+      <span class="ash-sub-nav-icon" :class="{open,vertical}">
         <icon name="left"></icon>
       </span>
     </span>
     <template v-if="vertical">
       <transition @enter="enter" @after-enter="afterEnter" @leave="leave">
-        <div class="ash-suash-nav-popover" :class="{vertical}" v-show="open">
+        <div class="ash-sub-nav-popover" :class="{vertical}" v-show="open">
           <slot></slot>
         </div>
       </transition>
     </template>
     <template v-else>
       <transition name="slide-fade">
-        <div class="ash-suash-nav-popover" v-show="open">
+        <div class="ash-sub-nav-popover" v-show="open">
           <slot></slot>
         </div>
       </transition>
@@ -32,7 +32,7 @@
   import ClickOutside from '../click-outside'
 
   export default {
-    name: 'ash-suash-nav',
+    name: 'ash-sub-nav',
     inject: ['root', 'vertical'],
     components: {Icon},
     directives: {ClickOutside},
@@ -110,12 +110,12 @@
     transform: translateX(-10px);
     opacity: 0;
   }
-  .ash-suash-nav {
+  .ash-sub-nav {
     position: relative;
     color: $grey-lv3;
     &.vertical {
       color: $grey-lv6;
-      .ash-suash-nav-label {
+      .ash-sub-nav-label {
         &:hover {
           background: $purple-lv0;
         }
@@ -171,18 +171,18 @@
   }
 
   //非第一层
-  .ash-suash-nav .ash-suash-nav {
+  .ash-sub-nav .ash-sub-nav {
     &.active {
       &::after {
         display: none;
       }
     }
-    .ash-suash-nav-label {
+    .ash-sub-nav-label {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .ash-suash-nav-popover {
+    .ash-sub-nav-popover {
       top: 0;
       left: 100%;
       margin-left: 8px;
@@ -190,7 +190,7 @@
         margin-left: 0;
       }
     }
-    .ash-suash-nav-icon {
+    .ash-sub-nav-icon {
       transition: all 300ms;
       display: inline-flex;
       &.vertical{
