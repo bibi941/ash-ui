@@ -65,6 +65,7 @@
       },
       open() {
         this.visible = true
+        this.$emit('open')
         this.$nextTick(() => {
           this.setPopoverPosition()
           document.addEventListener('click', this.onclickContent)
@@ -72,6 +73,7 @@
       },
       close() {
         this.visible = false
+        this.$emit('close')
         document.removeEventListener('click', this.onclickContent)
       },
       onclickContent(e) {
