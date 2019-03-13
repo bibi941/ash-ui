@@ -5,7 +5,7 @@
 <template>
   <div ref="wrapper">
     <ash-popover position="bottom" ref="popover" :container="popoverSubstitute" @close="onClosePopover">
-      <ash-input :value="formattedValue"></ash-input>
+      <ash-input :value="formattedValue" @input="onInput" @change="onChange" ref="input"></ash-input>
       <!--日期选择器-->
       <template slot="content">
         <div class="ash-date-piker" @selectstart.prevent>
@@ -199,8 +199,21 @@
         this.$emit('update:value', null)
         this.$refs.popover.close()
       },
-      onClosePopover(){
+      onClosePopover() {
         this.mode = 'day'
+      },
+      onInput(value) {
+        let regex = /^\d{4}-\d{2}-\d{2}$/g
+        if (value.match(regex)) {
+          let [year, month, day] = value.split('-')
+          month = month - 1
+          year = +year
+          this.display = {year, month}
+          this.$emit('update:value', new Date(year, month, day))
+        }
+      },
+      onChange() {
+        this.$refs.input.setRawValue(this.formattedValue)
       },
       getVisibleDay(i, j) {
         return this.visibleDays[(i - 1) * 7 + (j - 1)]
