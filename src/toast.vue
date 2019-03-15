@@ -32,7 +32,8 @@
         type: Object,
         default () {
           return {
-            text: '确定', callback: null
+            text: '确定',
+            callback: null
           }
         }
       },
@@ -61,14 +62,12 @@
       },
       exeaAutoClose () {
         if (this.autoClose) {
-          setTimeout(() => {
-            this.close()
-          }, this.autoClose * 1000)
+          setTimeout(() => {this.close()}, this.autoClose * 1000)
         }
       },
       onClickClose () {
         this.close()
-        if (this.closeButton && typeof this.closeButton.callback() === 'function') {
+        if (this.closeButton && typeof this.closeButton.callback === 'function') {
           this.closeButton.callback(this)
         }
       },
