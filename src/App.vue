@@ -1,39 +1,37 @@
 <template>
   <div style="padding: 100px">
     <div class="ddd">
-    <ash-button @click="click">默认</ash-button>
-    <ash-button type="primary">主要</ash-button>
-    <ash-button type="success">成功</ash-button>
-    <ash-button type="warning">警告</ash-button>
-    <ash-button type="danger">危险</ash-button>
-  </div>
-    <div class="ddd">
-      <ash-button disabled @click="click">默认</ash-button>
-      <ash-button type="primary" disabled>主要</ash-button>
-      <ash-button type="success" disabled>成功</ash-button>
-      <ash-button type="warning" disabled>警告</ash-button>
-      <ash-button type="danger" disabled>危险</ash-button>
+      <ash-input v-model="value1" clearable></ash-input>
     </div>
     <div class="ddd">
-      <ash-button>默认按钮</ash-button>
-      <ash-button size="medium">中等按钮</ash-button>
-      <ash-button size="small">小型按钮</ash-button>
-      <ash-button size="mini">超小按钮</ash-button>
+      <ash-input disabled clearable></ash-input>
+    </div>
+    <div class="ddd">
+      <ash-input v-model="value2" readonly clearable></ash-input>
+    </div>
+    <div class="ddd">
+      <ash-input error="丢你老母"></ash-input>
+    </div>
+
+    <div style="width: 200px;height: 200px;background: green;padding: 20px;position: relative" @mouseenter="aaa=true"  @mouseleave="aaa= false">
+      <div v-if="aaa" style="width: 5px;height: 5px;background: red;position: absolute;top:50px;right: 50px;"></div>
     </div>
   </div>
 </template>
 
 <script>
-  import ashButton from './button/button'
+  import ashInput from './input'
 
   export default {
     name: 'app',
     components: {
-      ashButton
+      ashInput
     },
     data() {
       return {
-        type1: ''
+        value1: '牛批',
+        value2: '啊啊啊啊',
+        aaa:false,
       }
     },
     methods: {
@@ -54,8 +52,6 @@
   }
 
   .ddd {
-    > button {
-      margin: 8px;
-    }
+    margin: 18px;
   }
 </style>
