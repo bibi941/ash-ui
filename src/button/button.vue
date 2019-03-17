@@ -73,7 +73,7 @@
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-    color: $grey-lv3;
+    color: $grey-lv4;
     &:hover {
       border-color: $purple-lv1;
       color: $purple-lv1
