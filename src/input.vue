@@ -86,7 +86,7 @@
 </script>
 
 <style lang="scss" type="text/scss" scoped>
-  @import "_var";
+  @import "var";
 
   .wrapper {
     .input-wrapper {

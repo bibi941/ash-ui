@@ -60,6 +60,8 @@
 </script>
 <style lang="scss" type="text/scss" scoped>
   @import "var";
+  /*@import "../../styles/var";*/
+
 
   .ash-button {
     font-size: $font-size;

@@ -1,3 +1,5 @@
 # 安装
 
-sadasd
+``` js
+npm install ash-ui
+```

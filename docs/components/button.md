@@ -5,3 +5,13 @@
 <ClientOnly>
   <button-demos></button-demos>
 </ClientOnly>
+
+``` js{4}
+export default {
+  data () {
+    return {
+      msg: 'Highlighted!'
+    }
+  }
+}
+```

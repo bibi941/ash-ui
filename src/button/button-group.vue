@@ -17,7 +17,7 @@
   }
 </script>
 <style lang="scss" type="text/scss" scoped>
-  @import "_var";
+  @import "var";
 
   .ash-button-group {
     display: inline-flex;

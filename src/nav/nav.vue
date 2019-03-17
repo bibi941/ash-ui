@@ -62,7 +62,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "_var";
+  @import "var";
 
   .ash-nav {
     &.vertical {

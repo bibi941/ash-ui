@@ -2,6 +2,7 @@
 dist/
 .idea/
 /Icon
+coverage
 
 .DS_Store
 node_modules

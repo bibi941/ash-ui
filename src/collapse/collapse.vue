@@ -63,7 +63,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-  @import "_var";
+  @import "var";
   .collapse {
     border: 1px solid $grey-lv4;
     border-radius: 4px;
