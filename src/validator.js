@@ -4,7 +4,6 @@ function ensureObject(obj, key) {
   }
 }
 
-
 class Validator {
   constructor() {
   }
