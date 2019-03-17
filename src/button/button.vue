@@ -62,7 +62,6 @@
   @import "var";
   /*@import "../../styles/var";*/
 
-
   .ash-button {
     font-size: $font-size;
     height: $button-height;
@@ -93,7 +92,8 @@
       background: $white;
       &.disabled {
         border: 1px solid $grey-lv3;
-        color: $grey-lv3
+        color: $grey-lv3;
+        background: $grey-lv1;
       }
     }
     &.medium {
@@ -114,8 +114,11 @@
     }
     &.primary {
       background: $purple-lv1;
-      &:hover, &.disabled {
+      &:hover {
         background: lighten($purple-lv1, 5%);
+      }
+      &.disabled {
+        background: lighten($purple-lv1, 10%);
       }
       &:active:not(.disabled) {
         background: darken($purple-lv1, 10%);
@@ -123,8 +126,12 @@
     }
     &.success {
       background: $green;
-      &:hover, &.disabled {
+      &:hover {
         background: lighten($green, 5%);
+      }
+      &.disabled {
+        background: lighten($green, 40%);
+
       }
       &:active:not(.disabled) {
         background: darken($green, 10%);
@@ -132,8 +139,12 @@
     }
     &.warning {
       background: $orange;
-      &:hover, &.disabled {
+      &:hover {
         background: lighten($orange, 5%);
+      }
+      &.disabled {
+        background: lighten($orange, 30%);
+
       }
       &:active:not(.disabled) {
         background: darken($orange, 10%);
@@ -141,8 +152,11 @@
     }
     &.danger {
       background: $red-error;
-      &:hover, &.disabled {
+      &:hover {
         background: lighten($red-error, 5%);
+      }
+      &.disabled {
+        background: lighten($red-error, 30%);
       }
       &:active:not(.disabled) {
         background: darken($red-error, 10%);
