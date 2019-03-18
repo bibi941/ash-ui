@@ -10,5 +10,5 @@ features:
   details: 采用material design配色,组件设计优美
 - title: 持续集成+单元测试
   details: 基于Vue Test Utils,使用Mocha+Karma+chai 进行单元测试,测试覆盖率90%+,Travis CI 持续集成
-footer: MIT Licensed | provide form bibi
+footer: MIT Licensed | provide form bibi,contact:sssrrr@vip.qq.com
 ---

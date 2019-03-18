@@ -122,7 +122,7 @@
       ifScopedSlots > 0 && this.computeActionsRelatedWidth()  //计算 action 的宽度
     },
     beforeDestroy() {
-      this.tableCopy.remove()
+      if(this.height){this.tableCopy.remove()}  //固定表头
     },
     computed: {
       areAllItemsSelected() {
