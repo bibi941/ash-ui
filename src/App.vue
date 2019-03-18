@@ -1,58 +1,39 @@
+/**
+* @create-date :2019-Mar-Monday-11:02 PM
+* @author : fangXinRui
+*/
 <template>
-  <div style="padding: 100px">
-    <div class="ddd">
-      <ash-input v-model="value1" clearable></ash-input>
-      <ash-input v-model="value1" ></ash-input>
-    </div>
-    <div class="ddd">
-      <ash-input disabled clearable></ash-input>
-    </div>
-    <div class="ddd">
-      <ash-input v-model="value2" readonly clearable></ash-input>
-    </div>
-    <div class="ddd">
-      <ash-input error="丢你老母"></ash-input>
-    </div>
-
-    <div style="width: 200px;height: 200px;background: green;padding: 20px;position: relative" @mouseenter="aaa=true"  @mouseleave="aaa= false">
-      <div v-if="aaa" style="width: 5px;height: 5px;background: red;position: absolute;top:50px;right: 50px;"></div>
-    </div>
-  </div>
+  <ash-layout style="color: white; margin-bottom:50px;">
+    <ash-header style="height: 50px; background:lightskyblue;">
+      header
+    </ash-header>
+    <ash-content style="height: 100px; background:deepskyblue;">
+      content
+    </ash-content>
+    <ash-footer style="height: 50px; background:lightskyblue;">
+      footer
+    </ash-footer>
+  </ash-layout>
 </template>
 
 <script>
-  import ashInput from './input'
-
+  import layout from './layout/layout'
+  import header from './layout/hearder'
+  import footer from './layout/footer'
+  import sider from './layout/sider'
+  import content from './layout/content'
   export default {
-    name: 'app',
-    components: {
-      ashInput
-    },
-    data() {
-      return {
-        value1: '牛批',
-        value2: '啊啊啊啊',
-        aaa:false,
-      }
-    },
-    methods: {
-      click() {
-        console.log(1)
-      }
-    },
-    created() {
+    name: 'layout-demos-1',
+    components:{
+      'ash-layout':layout,
+      'ash-header':header,
+      'ash-footer':footer,
+      'ash-sider':sider,
+      'ash-content':content,
     }
   }
 </script>
 
-<style lang="scss" type="text/scss">
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+<style scoped lang='scss' type="text/scss">
 
-  .ddd {
-    margin: 18px;
-  }
 </style>

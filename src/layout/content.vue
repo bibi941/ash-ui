@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="ash-content">
     <slot></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-.contents{
+.ash-contents{
   flex-grow: 1;
 }
 </style>
