@@ -46,7 +46,8 @@
         default: false
       },
       error: {
-        type: String
+        type: String,
+        default: ''
       }
     },
     data() {
@@ -57,7 +58,7 @@
     },
     computed: {
       clearVisible() {
-        return (this.clearable && this.clearVisibleWhenMouseEnter) || this.onInput
+        return (this.clearable && this.clearVisibleWhenMouseEnter) || (this.clearable && this.onInput)
       }
     },
     methods: {
@@ -76,10 +77,14 @@
         this.$emit('input', '')
       },
       onMouseEnter() {
-        if (this.clearable) this.clearVisibleWhenMouseEnter = true
+        if (this.clearable) {
+          this.clearVisibleWhenMouseEnter = true
+        }
       },
       onMouseLeave() {
-        if (this.clearable) this.clearVisibleWhenMouseEnter = false
+        if (this.clearable) {
+          this.clearVisibleWhenMouseEnter = false
+        }
       }
     }
   }
