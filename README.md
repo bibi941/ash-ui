@@ -5,7 +5,7 @@
 ![license](https://img.shields.io/badge/license-MIT-green.svg)
 ![node](https://img.shields.io/badge/node-%3E%3D8.0.0-green.svg)
 ![coverage](https://img.shields.io/badge/coverage-86%25-green.svg)
-![jetbrains](![coverage](https://img.shields.io/badge/coverage-86%25-green.svg))
+![jetbrains](https://img.shields.io/badge/jetbrains-licensed-blue.svg)
 
 ## 开始使用
 
