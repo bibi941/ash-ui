@@ -1,61 +1,59 @@
 <template>
   <div style="padding: 100px">
-    <div class="ddd">
-      <ash-button @click="click">默认</ash-button>
-      <ash-button type="primary">主要</ash-button>
-      <ash-button type="success">成功</ash-button>
-      <ash-button type="warning">警告</ash-button>
-      <ash-button type="danger">危险</ash-button>
-    </div>
-    <div class="ddd">
-      <ash-button disabled @click="click">默认</ash-button>
-      <ash-button type="primary" disabled>主要</ash-button>
-      <ash-button type="success" disabled>成功</ash-button>
-      <ash-button type="warning" disabled>警告</ash-button>
-      <ash-button type="danger" disabled>危险</ash-button>
-    </div>
-    <div class="ddd">
-      <ash-button>默认按钮</ash-button>
-      <ash-button size="medium">中等按钮</ash-button>
-      <ash-button size="small">小型按钮</ash-button>
-      <ash-button size="mini">超小按钮</ash-button>
-    </div>
+    <ash-table
+      :columns="columns"
+      :dataSource="dataSource"
+      :height="800">
+    </ash-table>
   </div>
 </template>
 
 <script>
-  import ashButton from './button/button'
+  import table from './table'
 
   export default {
     name: 'app',
     components: {
-      ashButton
+      'ash-table': table
+
     },
     data() {
       return {
-        type1: ''
+        columns: [
+          {text: '参数', field: 'param'},
+          {text: '说明', field: 'description'},
+          {text: '类型', field: 'type'},
+          {text: '可选值', field: 'optional'},
+          {text: '默认值', field: 'default'}
+        ],
+        dataSource: [
+          {id: 1, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+          {id: 2, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+          {id: 3, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+          {id: 4, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+          {id: 5, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+          {id: 6, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+          {id: 7, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+          {id: 8, param: 'size', description: '尺寸', type: 'String', optional: 'medium/small/mini', default: '—'},
+        ],
+        selectedItems: [],
+        orderBy: {
+          score: 'desc',
+          name: true
+        }
       }
     },
-    methods: {
-      click() {
-        console.log(1)
-      }
-    },
+    methods: {},
     created() {
     }
   }
 </script>
 
-<style lang="scss" type="text/scss">
+<style lang="scss">
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  .ddd {
-    > button {
-      margin: 8px;
-    }
-  }
 </style>

@@ -116,8 +116,10 @@
     created() {
     },
     mounted() {
+      // fixme 固定表头高度计算有误
       this.height && this.moveTheadToOtherTableAndComputeHeight()  //固定表头
-      this.$scopedSlots && this.computeActionsRelatedWidth()  //计算 action 的宽度
+      let ifScopedSlots = Object.keys(this.$scopedSlots).length
+      ifScopedSlots > 0 && this.computeActionsRelatedWidth()  //计算 action 的宽度
     },
     beforeDestroy() {
       this.tableCopy.remove()

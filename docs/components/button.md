@@ -1,6 +1,6 @@
 # Button(按钮)
 
- 基础用法
+###  基础用法
  <br/>
  
 <ClientOnly>
@@ -16,7 +16,7 @@
 ```
 </br>
 
- 禁用状态
+### 禁用状态
 <br/>
 
 <ClientOnly>
@@ -32,7 +32,7 @@
 ```
 </br>
 
-带图标
+### 带图标
 <br/>
 
 <ClientOnly>
@@ -47,7 +47,7 @@
 ```
 </br>
 
-不同大小
+### 不同大小
 <br/>
 
 <ClientOnly>
@@ -60,7 +60,9 @@
 <ash-button type="warning" size="small">小型按钮</ash-button>
 <ash-button type="danger" size="mini">超小按钮</ash-button>
 ```
+### Attributes
+<br/>
+<ClientOnly>
+  <button-demos-description></button-demos-description>
+</ClientOnly>
 
-<style>
-theah{width:100%}
-</style>
