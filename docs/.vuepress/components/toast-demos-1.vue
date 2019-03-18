@@ -1,29 +1,21 @@
-/**
-* @create-date :2019-Mar-Monday-11:02 PM
-* @author : fangXinRui
-*/
 <template>
   <div>
-    <ash-button @click="aaaa" :autoClose="1000">上方弹出</ash-button>
+    <ash-button @click="$toast('这是我的提示')">上方弹出</ash-button>
     <ash-button @click="$toast('这是我的提示', {position:'middle'})">中间弹出</ash-button>
     <ash-button @click="$toast('这是我的提示', {position:'bottom'})">下方弹出</ash-button>
   </div>
 </template>
 
 <script>
-  import button from './button/button'
+  import Button from '../../../src/button/button'
+  import plugin from '../../../src/toastPlugin'
+  import Vue from 'vue'
+
+  Vue.use(plugin)
 
   export default {
-    name: 'ash',
     components: {
-      'ash-button': button
-    },
-    methods:{
-      aaaa(){
-        this.$toast('这个可以关闭噢', {
-          autoClose:false,
-        })
-      }
+      'ash-button': Button
     }
   }
 </script>
