@@ -30,6 +30,7 @@ module.exports = {
           '/components/collapse',
           '/components/cascader',
           '/components/slides',
+          '/components/scroll',
         ],
       }
     ]

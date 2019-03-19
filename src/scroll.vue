@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="ash-scroll-parent" :class="{'ash-scroll-border':borderVisible}" ref="parent" :style="`height:${height}px`"
+  <div class="ash-scroll-parent" :class="{'ash-scroll-border':borderVisible}" ref="parent" :style="`height:${height}px;width:${width}px`"
     @mouseenter="onMouseEnterParent"
     @mouseleave="onMouseLeaveParent"
     @mousemove="onMouseMoveParent"
@@ -26,6 +26,10 @@
     name: 'ash-scroll',
     props: {
       height: {
+        type: Number,
+        required: true
+      },
+      width: {
         type: Number,
         required: true
       },
