@@ -1,40 +1,21 @@
 <template>
   <div>
-    <div style="padding: 100px;">
-      <ash-cascader :source.sync="source2" :selected.sync="selected2"></ash-cascader>
-
-      <ash-cascader :source.sync="source1" :selected.sync="selected1" :load-data="loadData"></ash-cascader>
-    </div>
+    <ash-cascader :source.sync="source" :selected.sync="selected"></ash-cascader>
   </div>
 </template>
 
 <script>
-  import db from '../tests/fixtures/db'
-  import ashCascader from '../src/cascader/cascader'
-
-  function ajax(parentId = 0) {
-    return new Promise((resolve, reject) => {
-      let result = db.filter(item => item.parent_id === parentId)
-      result.forEach(node => {
-        node.isLeaf = db.filter(item => item.parent_id === node.id).length <= 0
-      })
-      setTimeout(() => {
-        resolve(result)
-      }, 500)
-    })
-  }
+  import ashCascader from '../../../src/cascader/cascader'
 
   export default {
+    name: 'cascader-demos-1',
     components: {
       'ash-cascader': ashCascader
     },
     data() {
       return {
-        selected1: [],
-        source1: [],
-
-        selected2: [],
-        source2: [
+        selected: [],
+        source: [
           {
             name: '四川',
             children: [
@@ -59,7 +40,6 @@
           },
           {
             name: '安徽',
-            disabled: true,
             children: [
               {
                 name: '合肥',
@@ -71,16 +51,6 @@
           }
         ]
       }
-    },
-    methods: {
-      loadData({id}, upDateSource) {
-        ajax(id).then(result => upDateSource(result))
-      }
-    },
-    created() {
-      ajax(0).then(res => {
-        this.source1 = res
-      })
     }
   }
 </script>
