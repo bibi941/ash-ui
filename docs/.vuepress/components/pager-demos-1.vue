@@ -1,11 +1,11 @@
 <template>
-  <div style="padding: 100px">
+  <div style="display: flex;justify-content: center;align-items: center;">
     <ash-pager :total-page="20" :current-page.sync="currentPage"></ash-pager>
   </div>
 </template>
 
 <script>
-  import pager from './pager'
+  import pager from '../../../src/pager'
 
   export default {
     name: 'app',
@@ -15,7 +15,7 @@
     },
     data() {
       return {
-        currentPage: 4
+        currentPage: 10
       }
     },
     methods: {},
@@ -30,5 +30,4 @@
     padding: 0;
     box-sizing: border-box;
   }
-
 </style>

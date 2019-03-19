@@ -33,6 +33,7 @@ module.exports = {
           '/components/scroll',
           '/components/nav',
           '/components/table',
+          '/components/pager',
         ],
       }
     ]
