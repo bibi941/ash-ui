@@ -26,8 +26,8 @@
           {text: '默认值', field: 'default'}
         ],
         dataSource: [
-          {id: 1, param: 'span', description: '栅格占据的列数', type: 'Number \ String', optional: '—', default: '24'},
-          {id: 2, param: 'offset', description: '栅格左侧的间隔格数', type: 'Number \ String', optional: '—', default: '0'},
+          {id: 1, param: 'span', description: '栅格占据的列数', type: 'Number / String', optional: '—', default: '24'},
+          {id: 2, param: 'offset', description: '栅格左侧的间隔格数', type: 'Number / String', optional: '—', default: '0'},
           {id: 3, param: 'ipad', description: 'ipad响应式栅格数或者栅格属性对象', type: 'Object', optional: '—', default: '—'},
           {id: 4, param: 'notebook', description: 'notebook响应式栅格数或者栅格属性对象', type: 'Object', optional: '—', default: '—'},
           {id: 5, param: 'pc', description: 'pc响应式栅格数或者栅格属性对象', type: 'Object', optional: '—', default: '—'},

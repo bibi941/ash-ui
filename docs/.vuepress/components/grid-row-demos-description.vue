@@ -27,7 +27,7 @@
         ],
         dataSource: [
           {id: 1, param: 'gutter', description: '栅格间隔', type: 'String / Number', optional: '—', default: '0'},
-          {id: 2, param: 'align', description: 'flex 布局下的水平排列方式', type: 'Boolean', optional: 'left \ center \ right', default: '—'},
+          {id: 2, param: 'align', description: 'flex 布局下的水平排列方式', type: 'Boolean', optional: 'left / center / right', default: '—'},
         ],
         selectedItems: [],
         orderBy: {

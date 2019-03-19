@@ -17,13 +17,13 @@
     },
     methods:{
       onClickButton () {
-        this.$toast('这个可以关闭噢', {
+        this.$toast('这个可以关闭噢(带 callback)', {
           closeButton: {
             text: '关闭',
             callback: () => {
               console.log('you can do someThing in this')
             }
-          }
+          },
         })
       }
     }
