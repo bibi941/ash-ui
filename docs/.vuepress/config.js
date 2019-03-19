@@ -16,6 +16,8 @@ module.exports = {
           '/introduce/',
           '/install/',
           '/get-started/',
+          '/specification/',
+          '/colormatching/',
         ]
       },
       {

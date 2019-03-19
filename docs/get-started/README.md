@@ -1,13 +1,23 @@
 # 光速上手
 
-
-
 ::: warning
-使用本框架前，请务必在 CSS 中开启 border-box
+您需要使用border-box盒模型，否则会影响样式
 :::
 
 ```css
-*,*::after,
+*,
+*::after,
 *::before{box-sizing: border-box;}
 ```
+
+
+### 单独引入
+列如
+```js
+<script>
+import { Button as ashButton } from 'ash-ui'
+import 'ash-ui/dist/ash-ui.css'
+</script>
+```
+
 

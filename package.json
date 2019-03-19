@@ -1,6 +1,7 @@
 {
-  "name": "Ash-UI",
-  "version": "0.8.0",
+  "name": "ash-ui",
+  "version": "0.8.1",
+  "main":"dist/ash-ui.umd.min.js",
   "description": "这是一个UI框架",
   "scripts": {
     "serve": "vue-cli-service serve",

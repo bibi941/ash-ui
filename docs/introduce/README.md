@@ -2,7 +2,7 @@
 
 ash-ui 是一套基于Vue的 PC 端 Ui 组件库，色彩、样式的设计参考了其他成熟组件库(如 Element\Ant Design)。
 
-## 项目特点
+### 项目特点
 
 - 基于Vue Test Utils,使用Mocha+Karma+chai 进行单元测试,测试覆盖率90%+,Travis CI 持续集成
 - 使用TDD/BDD、设计模式、单向数据流等技术概念
