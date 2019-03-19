@@ -32,6 +32,7 @@ module.exports = {
           '/components/slides',
           '/components/scroll',
           '/components/nav',
+          '/components/table',
         ],
       }
     ]

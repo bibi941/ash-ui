@@ -11,7 +11,7 @@
   <input-demos-1></input-demos-1>
 </ClientOnly>
 
-``` html
+```html
 <ash-input value="请输入内容" ></ash-input>
 <ash-input value="请输入内容" disabled></ash-input>
 <ash-input value="请输入内容" readonly></ash-input>

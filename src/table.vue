@@ -38,7 +38,7 @@
               </div>
             </td>
           </tr>
-          <tr v-show="inExpendIdList(item.id)" :key="`${item.id}-expend`">
+          <tr v-if="inExpendIdList(item.id)" :key="`${item.id}-expend`">
             <td :colspan="columns.length+expendCellColSpan">{{item[expendField]||'空'}}</td>
           </tr>
         </template>
@@ -91,7 +91,7 @@
       },
       striped: {  //斑马纹
         type: Boolean,
-        default: true
+        default: false
       },
       loading: {  //加载中
         type: Boolean,
