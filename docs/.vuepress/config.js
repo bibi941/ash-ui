@@ -21,30 +21,71 @@ module.exports = {
         ]
       },
       {
-        title: '组件',
+        title: '通用',
         collapsable: false,
         children: [
           '/components/button',
+          '/components/buttonGroup',
           '/components/input',
+        ],
+      },
+      {
+        title: '布局',
+        collapsable: false,
+        children: [
           '/components/grid',
           '/components/layout',
-          '/components/toast',
-          '/components/tabs',
-          '/components/popover',
-          '/components/collapse',
-          '/components/cascader',
-          '/components/slides',
-          '/components/scroll',
+        ],
+      },
+      {
+        title: '导航',
+        collapsable: false,
+        children: [
           '/components/nav',
-          '/components/table',
           '/components/pager',
           '/components/sticky',
+        ],
+      },
+      {
+        title: '数据输入',
+        collapsable: false,
+        children: [
+          '/components/cascader',
           '/components/datePiker',
           '/components/switch',
-          '/components/icon',
-          '/components/buttonGroup',
+
         ],
-      }
+      },
+      {
+        title: '数据展示',
+        collapsable: false,
+        children: [
+          '/components/tabs',
+          '/components/table',
+          '/components/slides',
+          '/components/collapse',
+
+
+        ],
+      },
+      {
+        title: '信息提示',
+        collapsable: false,
+        children: [
+          '/components/toast',
+          '/components/popover',
+
+        ],
+      },
+      {
+        title: '其他',
+        collapsable: false,
+        children: [
+          '/components/scroll',
+          '/components/icon',
+
+        ],
+      },
     ]
   },
   scss:{
