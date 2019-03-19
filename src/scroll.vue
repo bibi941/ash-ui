@@ -3,7 +3,7 @@
 * @author : fangXinRui
 */
 <template>
-  <div class="ash-scroll-parent" ref="parent" :style="`height:${height}px`"
+  <div class="ash-scroll-parent" :class="{'ash-scroll-border':borderVisible}" ref="parent" :style="`height:${height}px`"
     @mouseenter="onMouseEnterParent"
     @mouseleave="onMouseLeaveParent"
     @mousemove="onMouseMoveParent"
@@ -32,6 +32,10 @@
       scrollVisibleWhenMouseEnter: {
         type: Boolean,
         default: false
+      },
+      borderVisible:{
+        type: Boolean,
+        default: true
       }
     },
     data() {
@@ -177,15 +181,18 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
+  @import "var";
   .ash-scroll {
     &-parent {
-      border: 1px solid red;
       margin: 0 auto;
       overflow: hidden;
       position: relative;
+      &.ash-scroll-border{
+        border: 1px solid $grey-lv1;
+      }
+
     }
     &-child {
-      border: 1px solid green;
       transition: transform 0.05s ease;
     }
     &-track {
