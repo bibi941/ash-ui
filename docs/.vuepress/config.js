@@ -34,6 +34,7 @@ module.exports = {
           '/components/nav',
           '/components/table',
           '/components/pager',
+          '/components/sticky',
         ],
       }
     ]
