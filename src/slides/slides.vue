@@ -29,11 +29,11 @@
 </template>
 
 <script>
-  import BIcon from '../icon'
+  import ashIcon from '../icon'
 
   export default {
     name: 'ash-slides',
-    components: {BIcon},
+    components: {ashIcon},
     props: {
       selected: {
         type: String

@@ -29,6 +29,7 @@ module.exports = {
           '/components/popover',
           '/components/collapse',
           '/components/cascader',
+          '/components/slides',
         ],
       }
     ]
