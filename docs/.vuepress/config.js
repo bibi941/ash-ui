@@ -13,8 +13,10 @@ module.exports = {
         title: '入门',
         collapsable: false,
         children: [
+          '/introduce/',
           '/install/',
-          '/get-started/']
+          '/get-started/',
+        ]
       },
       {
         title: '组件',
@@ -38,6 +40,7 @@ module.exports = {
           '/components/datePiker',
           '/components/switch',
           '/components/icon',
+          '/components/buttonGroup',
         ],
       }
     ]

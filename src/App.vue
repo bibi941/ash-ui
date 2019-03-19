@@ -1,23 +1,23 @@
 <template>
   <div>
-    <ash-switch v-model="type1"></ash-switch>
-    <ash-switch disabled ></ash-switch>
-    <ash-switch v-model="type2" false-color="mediumpurple" true-color="dodgerblue"></ash-switch>
-    <ash-switch false-text="按月付费" true-text="按年付费" v-model="type3"></ash-switch>
+    <ash-button-group>
+      <ash-button type="default">上一页</ash-button>
+      <ash-button type="default">确定</ash-button>
+      <ash-button type="default">下一页</ash-button>
+    </ash-button-group>
   </div>
 </template>
 
 <script>
-  import ashSwitch from './switch'
+  import ashButtonGroup from './button/button-group'
+  import ashButton from './button/button'
 
   export default {
     name: 'app',
-    components: {ashSwitch},
+    components: {ashButton,ashButtonGroup},
     data() {
       return {
-        type1:'',
-        type2:'',
-        type3:'',
+
       }
     },
     methods: {},
