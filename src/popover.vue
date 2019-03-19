@@ -118,6 +118,7 @@
       display: inline-block;
     }
     &-content-wrapper {
+      z-index: 15;
       position: absolute;
       border-radius: $border-radius;
       border: 1px solid $grey-lv2;

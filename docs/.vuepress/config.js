@@ -35,6 +35,7 @@ module.exports = {
           '/components/table',
           '/components/pager',
           '/components/sticky',
+          '/components/datePiker',
         ],
       }
     ]

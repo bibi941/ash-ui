@@ -1,9 +1,9 @@
 <template>
-  <date-piker style="margin: 100px" :value.sync="date" :scope="scope"></date-piker>
+  <date-piker :value.sync="date" :scope="scope"></date-piker>
 </template>
 
 <script>
-  import datePiker from './date-piker/date-piker'
+  import datePiker from '../../../src/date-piker/date-piker'
 
   export default {
     name: 'app',
