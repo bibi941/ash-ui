@@ -145,10 +145,12 @@
     &-label {
       padding: 10px 20px;
       display: block;
-      width: 100%;
+      /*fixme 文档现实错误暂时隐藏*/
+      /*width: 100%;*/
     }
     &-popover {
       transition: all 300ms;
+      z-index: 5;
       &.vertical {
         padding-left: 1em;
         overflow: hidden;
@@ -183,6 +185,7 @@
       justify-content: space-between;
     }
     .ash-sub-nav-popover {
+      z-index: 5;
       top: 0;
       left: 100%;
       margin-left: 8px;

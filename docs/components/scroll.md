@@ -13,7 +13,9 @@
 </br>
 
 ```html
-    <ash-scroll :height="400" style="width: 600px;">
+    <ash-scroll :height="400" :width="600">
+      <!--此处省略100行-->
+    </ash-scroll>
 ```
 </br>
 

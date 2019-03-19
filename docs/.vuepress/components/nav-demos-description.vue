@@ -22,10 +22,8 @@
           {text: '默认值', field: 'default'}
         ],
         dataSource: [
-          {id: 1, param: 'height', description: 'scroll组件高度', type: ' Number', optional: '—', default: '—'},
-          {id: 2, param: 'width', description: 'scroll组件宽度', type: 'Number', optional: '', default: '—'},
-          {id: 3, param: 'scrollVisibleWhenMouseEnter', description: '鼠标移开是否隐藏滚动条。', type: 'Boolean', optional: '—', default: 'false'},
-          {id: 4, param: 'borderVisible', description: '外边框是否可见', type: 'Boolean', optional: '—', default: 'true'},
+          {id: 1, param: 'selected', description: '默认选中的 item,使用.sync 绑定', type: 'String', optional: '—', default: '—'},
+          {id: 2, param: 'vertical', description: '是否垂直布局', type: 'Boolean', optional: '—', default: 'false'},
         ],
         selectedItems: [],
         orderBy: {
