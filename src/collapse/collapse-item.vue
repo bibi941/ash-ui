@@ -1,9 +1,9 @@
 <template>
-  <div class="collapse-item" ref="collapseItem">
-    <div class="title" @click="toggle">
+  <div class="ash-collapse-item" ref="collapseItem">
+    <div class="ash-collapse-title" @click="toggle">
       {{title}}
     </div>
-    <div class="contents" v-show="open">
+    <div class="ash-collapse-contents" v-show="open">
       <slot></slot>
     </div>
   </div>
@@ -42,7 +42,7 @@
         }
       },
       banContent() {//如果没有 content 则禁用collapse
-        if (!this.$refs.collapseItem.querySelector('.content').childNodes[0]) {
+        if (!this.$refs.collapseItem.querySelector('.ash-collapse-contents').childNodes[0]) {
           this.$refs.collapseItem.querySelector('.title').style.cursor = 'not-allowed'
         }
       }
@@ -52,9 +52,9 @@
 
 <style scoped lang='scss' type="text/scss">
   @import "var";
-  .collapse-item {
-    .title {
-      border: 1px solid $grey-lv3;
+  .ash-collapse-item {
+    .ash-collapse-title {
+      border: 1px solid $grey-lv2;
       margin-top: -1px;
       margin-left: -1px;
       margin-right: -1px;
@@ -63,16 +63,16 @@
       align-items: center;
       padding: 0 8px;
       cursor: pointer;
-      background: $grey-lv2;
+      background: $grey-lv0;
     }
     &:first-child {
-      .title {
+      .ash-collapse-title {
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
       }
     }
     &:last-child {
-      .title:last-child {
+      .ash-collapse-title:last-child {
         /*border-bottom: none;*/
         /*border-bottom-left-radius: 4px;*/
         /*border-bottom-right-radius: 4px;*/

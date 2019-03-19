@@ -2,21 +2,21 @@
   <div>
     <ash-collapse :selected.sync="select" >
       <ash-collapse-item title="财经" name="1">
-        <div>我是内容1的内容哈哈哈哈哈</div>
+        <div>我是财经内容</div>
       </ash-collapse-item>
-      <ash-collapse-item title="美女" name="2">
-        <div>我是内容2啊哈哈哈哈哈</div>
+      <ash-collapse-item title="科技" name="2">
+        <div>我是科技内容</div>
       </ash-collapse-item>
       <ash-collapse-item title="动画" name="3">
-        <div>我是内容3啊 jojo</div>
+        <div>我是动画内容</div>
       </ash-collapse-item>
     </ash-collapse>
   </div>
 </template>
 
 <script>
-  import collapse from './collapse/collapse'
-  import collapseItem from './collapse/collapse-item'
+  import collapse from '../../../src/collapse/collapse'
+  import collapseItem from '../../../src/collapse/collapse-item'
 
   export default {
     components: {

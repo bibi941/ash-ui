@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse">
+  <div class="ash-collapse">
     <slot></slot>
   </div>
 </template>
@@ -64,8 +64,8 @@
 
 <style scoped lang='scss' type="text/scss">
   @import "var";
-  .collapse {
-    border: 1px solid $grey-lv4;
+  .ash-collapse {
+    border: 1px solid $grey-lv2;
     border-radius: 4px;
   }
 </style>
