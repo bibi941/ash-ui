@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-body">
+  <div class="ash-tabs-body">
     <slot></slot>
   </div>
 </template>
@@ -12,7 +12,7 @@
 </script>
 
 <style scoped lang='scss' type="text/scss">
-.tabs-body{
+.ash-tabs-body{
   margin-top: .5em;
 }
 </style>

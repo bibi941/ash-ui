@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs-item" @click="onclick" :class="classes" :data-name="name">
+  <div class="ash-tabs-item" @click="onclick" :class="classes" :data-name="name">
     <slot></slot>
   </div>
 </template>
@@ -52,7 +52,7 @@
 
 <style scoped lang='scss' type="text/scss">
   @import "var";
-  .tabs-item {
+  .ash-tabs-item {
     cursor: pointer;
     height: 100%;
     display: flex;

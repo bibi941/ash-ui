@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs">
+  <div class="ash-tabs">
     <slot></slot>
   </div>
 </template>

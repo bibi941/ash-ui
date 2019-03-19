@@ -1,8 +1,8 @@
 <template>
-  <div class="tabs-head">
+  <div class="ash-tabs-head" ref="head">
     <slot></slot>
-    <div class="line" ref="line"></div>
-    <div class="button-wrapper">
+    <div class="ash-tabs-line" ref="line"></div>
+    <div class="ash-tabs-button-wrapper">
       <slot name="button"></slot>
     </div>
   </div>
@@ -15,10 +15,16 @@
     inject: ['eventBus'],
     mounted() {
       this.eventBus.$on('update:selected', (selected, vm) => {
-        let {width, left, height, top} = vm.$el.getBoundingClientRect()
-        this.$refs.line.style.width = `${width}px`
-        this.$refs.line.style.left = `${left}px`
+        this.updateLinePosition(vm)
       })
+    },
+    methods: {
+      updateLinePosition (selectedVm) {
+        let {width, left} = selectedVm.$el.getBoundingClientRect()
+        let {left: left2} = this.$refs.head.getBoundingClientRect()
+        this.$refs.line.style.width = `${width}px`
+        this.$refs.line.style.left = `${left - left2}px`
+      }
     }
   }
 </script>
@@ -26,21 +32,21 @@
 <style scoped lang='scss' type="text/scss">
   @import "var";
 
-  .tabs-head {
+  .ash-tabs-head {
     display: flex;
     height: 40px;
     justify-content: flex-start;
     align-items: center;
     position: relative;
     border-bottom: 1px solid $grey-lv1;
-    .button-wrapper {
+    .ash-tabs-button-wrapper {
       margin-left: auto;
       display: flex;
       justify-content: center;
       align-items: center;
       margin-right: 0.5em;
     }
-    .line {
+    .ash-tabs-line {
       position: absolute;
       bottom: 0;
       border-bottom: 2px solid $purple-lv4;
