@@ -36,6 +36,7 @@ module.exports = {
           '/components/pager',
           '/components/sticky',
           '/components/datePiker',
+          '/components/switch',
         ],
       }
     ]

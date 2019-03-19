@@ -1,19 +1,23 @@
 <template>
-  <date-piker style="margin: 100px" :value.sync="date" :scope="scope"></date-piker>
+  <div>
+    <ash-switch v-model="type1"></ash-switch>
+    <ash-switch disabled ></ash-switch>
+    <ash-switch v-model="type2" false-color="mediumpurple" true-color="dodgerblue"></ash-switch>
+    <ash-switch false-text="按月付费" true-text="按年付费" v-model="type3"></ash-switch>
+  </div>
 </template>
 
 <script>
-  import datePiker from './date-piker/date-piker'
+  import ashSwitch from './switch'
 
   export default {
     name: 'app',
-    components: {
-      datePiker
-    },
+    components: {ashSwitch},
     data() {
       return {
-        date:new Date(),
-        scope:[new Date(2001,0,1),new Date(2019,4,1)]
+        type1:'',
+        type2:'',
+        type3:'',
       }
     },
     methods: {},
@@ -26,7 +30,7 @@
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    boash-sizing: border-box;
   }
 
 </style>
