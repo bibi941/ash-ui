@@ -1,10 +1,10 @@
 {
   "name": "Ash-UI",
-  "version": "0.0.2",
+  "version": "0.8.0",
   "description": "这是一个UI框架",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --target lib --name ash-ui src/index.js",
     "test": "cross-env BABEL_ENV=test karma start --single-run",
     "test:unit": "cross-env BABEL_ENV=test karma start",
     "test:unit:old": "vue-cli-service test:unit",

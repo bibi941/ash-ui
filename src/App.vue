@@ -30,7 +30,7 @@
   * {
     margin: 0;
     padding: 0;
-    boash-sizing: border-box;
+    box-sizing: border-box;
   }
 
 </style>
