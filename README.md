@@ -45,8 +45,8 @@ npm install ash-ui
 
 yarn add ash-ui
 ```
-
-
+## LICENSE
+[MIT](https://github.com/bibi941/ash-ui/blob/master/LICENSE)
 
 ## 联系方式
 email:sssrrr@vip.qq.com  
